@@ -1,0 +1,2496 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>星の導き - タロット・星座・数秘術占い</title>
+  <meta name="description" content="タロット占い・星座占い・数秘術の3種類の本格占いが無料で楽しめます。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0e1a;
+      --surface: #121625;
+      --card: #1a1e2e;
+      --accent: #7ee8ff;
+      --gold: #e8c96a;
+      --text: #f0eede;
+      --muted: #b0aec8;
+      --border: #3a3a5a;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: #0a0e1a;
+      background-image: url('bg.jpg');
+      background-attachment: scroll;
+      background-size: cover;
+      background-position: center center;
+      color: var(--text);
+      font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+      min-height: 100vh;
+      line-height: 1.85;
+    }
+
+    @supports (-webkit-touch-callout: none) {
+      body {
+        background-attachment: scroll;
+      }
+    }
+
+    /* ===== ヘッダー ===== */
+    header {
+      text-align: center;
+      padding: 0 0 20px;
+      background: linear-gradient(180deg, #0a0a1a 0%, transparent 100%);
+    }
+
+    .hero-img-wrap {
+      display: flex;
+      justify-content: center;
+    }
+
+    .hero-img {
+      width: 100%;
+      max-width: 480px;
+      display: block;
+      object-fit: cover;
+      /* 横長画面では縦に詰める */
+      max-height: 60vh;
+      object-position: top;
+    }
+
+    header p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      padding-top: 14px;
+    }
+
+    /* ===== 広告エリア ===== */
+    .ad-banner {
+      max-width: 728px;
+      margin: 16px auto;
+      background: var(--surface);
+      border: 1px dashed var(--border);
+      border-radius: 8px;
+      height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 0.75rem;
+    }
+
+    /* ===== ナビ ===== */
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      padding: 20px;
+      flex-wrap: wrap;
+    }
+
+    .nav-btn {
+      padding: 12px 32px;
+      border-radius: 30px;
+      border: 2px solid rgba(180, 180, 220, 0.35);
+      background: rgba(8, 10, 24, 0.75);
+      color: #c8c4d8;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.25s;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+
+    .nav-btn.active, .nav-btn:hover {
+      border-color: var(--accent);
+      color: #fff;
+      background: rgba(20, 50, 70, 0.85);
+      box-shadow: 0 0 18px rgba(126, 232, 255, 0.45), inset 0 0 10px rgba(126, 232, 255, 0.1);
+    }
+
+    /* ===== メインコンテンツ ===== */
+    main {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px 60px;
+    }
+
+    .section { display: none; }
+    .section.active { display: block; }
+
+    .section-title {
+      text-align: center;
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+      color: var(--gold);
+    }
+
+    .section-desc {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-bottom: 30px;
+    }
+
+    /* ===== カード共通 ===== */
+    .card {
+      background: rgba(26, 30, 46, 0.8);
+      border: 1px solid rgba(77, 231, 255, 0.2);
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 20px;
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+    }
+
+    /* 結果カード・セクション背景も半透明化 */
+    .zr-body, .nr-body, .trc-body {
+      background: rgba(26, 30, 46, 0.85);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+    }
+
+    .zr-header, .nr-header, .trc-header {
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .zr-area-row, .nr-career, .nr-lucky-item, .zr-lucky-item {
+      background: rgba(18, 22, 37, 0.75);
+    }
+
+    .datepicker-popup {
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    /* ===== ボタン ===== */
+    .btn-primary {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #7b2d8b, #4a1a8a);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      margin-top: 16px;
+    }
+
+    .btn-primary:hover { opacity: 0.85; }
+
+    /* ===== 結果エリア ===== */
+    .result-box {
+      display: none;
+      background: var(--surface);
+      border: 1px solid var(--accent);
+      border-radius: 12px;
+      padding: 24px;
+      margin-top: 20px;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .result-box.show { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .result-title {
+      font-size: 1.2rem;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .result-text { line-height: 1.8; color: var(--text); }
+
+    /* ===== フォーム ===== */
+    label {
+      display: block;
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    input[type="text"], select {
+      width: 100%;
+      padding: 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    /* ===== カスタムカレンダーピッカー ===== */
+    .datepicker-wrap { position: relative; margin-bottom: 16px; }
+
+    .datepicker-btn {
+      width: 100%;
+      padding: 12px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 0.95rem;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: border-color 0.2s;
+    }
+    .datepicker-btn:hover, .datepicker-btn.open { border-color: var(--accent); }
+    .datepicker-btn .dp-placeholder { color: var(--muted); }
+
+    .datepicker-popup {
+      display: none;
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      z-index: 100;
+      background: #1e1e38;
+      border: 1px solid var(--accent);
+      border-radius: 14px;
+      padding: 16px;
+      width: 300px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+      animation: fadeIn 0.15s ease;
+    }
+    .datepicker-popup.show { display: block; }
+
+    .dp-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      gap: 6px;
+    }
+
+    .dp-nav {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--accent);
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.15s;
+    }
+    .dp-nav:hover { background: rgba(224,170,255,0.12); }
+
+    .dp-year-select, .dp-month-select {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      padding: 4px 6px;
+      font-size: 0.88rem;
+      cursor: pointer;
+    }
+    .dp-year-select { width: 90px; }
+    .dp-month-select { width: 80px; }
+
+    .dp-weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      text-align: center;
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .dp-days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 2px;
+    }
+
+    .dp-day {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .dp-day:hover { background: rgba(224,170,255,0.18); }
+    .dp-day.today { color: var(--gold); font-weight: bold; }
+    .dp-day.selected { background: var(--accent); color: #1a0a2e; font-weight: bold; }
+    .dp-day.empty { cursor: default; }
+    .dp-day.sun { color: #ff8888; }
+    .dp-day.sat { color: #88aaff; }
+    .dp-day.selected.sun, .dp-day.selected.sat { color: #1a0a2e; }
+
+    /* ===== タロット — テーマ選択 ===== */
+    .theme-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .theme-btn {
+      padding: 14px 8px;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 0.88rem;
+      text-align: center;
+      transition: all 0.2s;
+      line-height: 1.4;
+    }
+    .theme-btn .theme-icon { font-size: 1.5rem; display: block; margin-bottom: 4px; }
+    .theme-btn:hover, .theme-btn.selected {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(224,170,255,0.08);
+    }
+
+    /* ===== タロット — カードグリッド ===== */
+    .tarot-step { display: none; }
+    .tarot-step.active { display: block; }
+
+    .step-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    .step-num {
+      width: 22px; height: 22px;
+      background: var(--accent);
+      color: #1a0a2e;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(68px, 1fr));
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    /* 3D flip カード */
+    .tc-wrap {
+      perspective: 600px;
+      height: 110px;
+      cursor: pointer;
+    }
+    .tc-wrap.picked { cursor: default; }
+    .tc-wrap.other { opacity: 0.3; pointer-events: none; transition: opacity 0.4s; }
+
+    .tc-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .tc-wrap.picked .tc-inner { transform: rotateY(180deg); }
+
+    .tc-front, .tc-back {
+      position: absolute;
+      inset: 0;
+      border-radius: 8px;
+      backface-visibility: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+    }
+
+    /* 裏面（選択前） */
+    .tc-back {
+      background: linear-gradient(135deg, #1a0a2e 0%, #2d1060 50%, #1a0a2e 100%);
+      border: 1.5px solid #3a2a5e;
+      font-size: 1.4rem;
+    }
+    .tc-back::after {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border: 1px solid rgba(224,170,255,0.2);
+      border-radius: 5px;
+    }
+    .tc-wrap:not(.picked):not(.other):hover .tc-back {
+      border-color: var(--accent);
+      box-shadow: 0 0 12px rgba(224,170,255,0.3);
+    }
+
+    /* 表面（めくり後） */
+    .tc-front {
+      transform: rotateY(180deg);
+      background: linear-gradient(160deg, #1e0a38, #0d1a3a);
+      border: 1.5px solid var(--accent);
+      padding: 6px 4px;
+      text-align: center;
+    }
+    .tc-front .cf-icon { font-size: 1.6rem; }
+    .tc-front .cf-name { font-size: 0.6rem; color: var(--accent); line-height: 1.2; }
+    .tc-front .cf-pos  { font-size: 0.55rem; color: var(--muted); }
+
+    /* ===== タロット — 結果 ===== */
+    .tarot-result-card {
+      display: none;
+      background: linear-gradient(160deg, #130826, #0a1428);
+      border: 1px solid var(--accent);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-top: 24px;
+      animation: fadeIn 0.5s ease;
+    }
+    .tarot-result-card.show { display: block; }
+
+    .trc-header {
+      background: linear-gradient(135deg, rgba(224,170,255,0.12), rgba(100,80,200,0.1));
+      padding: 24px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .trc-theme-tag {
+      display: inline-block;
+      padding: 3px 12px;
+      background: rgba(224,170,255,0.15);
+      border: 1px solid var(--accent);
+      border-radius: 20px;
+      font-size: 0.75rem;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+    .trc-icon  { font-size: 3.5rem; margin-bottom: 10px; display: block; }
+    .trc-name  { font-size: 1.5rem; color: #fff; font-weight: bold; margin-bottom: 4px; }
+    .trc-pos   { font-size: 0.82rem; color: var(--muted); margin-bottom: 10px; }
+    .trc-keyword {
+      display: inline-block;
+      padding: 4px 14px;
+      background: rgba(255,215,0,0.12);
+      border-radius: 20px;
+      font-size: 0.78rem;
+      color: var(--gold);
+    }
+
+    .trc-body { padding: 24px; }
+    .trc-section-title {
+      font-size: 0.78rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+    }
+    .trc-message {
+      line-height: 1.9;
+      font-size: 0.92rem;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+    .trc-advice {
+      background: rgba(224,170,255,0.06);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 14px 16px;
+      font-size: 0.88rem;
+      line-height: 1.8;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    .trc-retry {
+      display: block;
+      width: 100%;
+      padding: 13px;
+      background: transparent;
+      border: 1.5px solid var(--accent);
+      border-radius: 10px;
+      color: var(--accent);
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .trc-retry:hover { background: rgba(224,170,255,0.08); }
+
+    /* ===== 星座アイコン ===== */
+    .zodiac-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .zodiac-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 6px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 0.8rem;
+    }
+
+    .zodiac-item:hover, .zodiac-item.selected {
+      border-color: var(--accent);
+      background: rgba(224,170,255,0.08);
+      color: var(--accent);
+    }
+
+    .zodiac-item .z-icon { font-size: 1.4rem; display: block; margin-bottom: 4px; }
+
+    /* ===== 数秘術 ===== */
+    .number-display {
+      font-size: 5rem;
+      text-align: center;
+      background: linear-gradient(135deg, var(--gold), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: bold;
+      margin: 16px 0;
+    }
+
+    /* ===== 星座占い結果 ===== */
+    .zr-card {
+      display: none;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--accent);
+      margin-bottom: 20px;
+      animation: fadeIn 0.5s ease;
+    }
+    .zr-card.show { display: block; }
+
+    .zr-header {
+      background: linear-gradient(135deg, #1a0838 0%, #0d1f40 100%);
+      padding: 28px 20px 20px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .zr-date-label { font-size: 0.75rem; color: var(--muted); margin-bottom: 10px; }
+    .zr-icon-wrap {
+      width: 72px; height: 72px;
+      margin: 0 auto 10px;
+      background: rgba(224,170,255,0.1);
+      border: 2px solid var(--accent);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+    }
+    .zr-name { font-size: 1.5rem; font-weight: bold; color: #fff; margin-bottom: 6px; }
+    .zr-keyword {
+      display: inline-block;
+      padding: 4px 14px;
+      background: rgba(255,215,0,0.1);
+      border-radius: 20px;
+      font-size: 0.78rem;
+      color: var(--gold);
+    }
+
+    .zr-body { padding: 22px; background: var(--card); }
+    .zr-section-title {
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+    }
+    .zr-message {
+      line-height: 1.9;
+      font-size: 0.92rem;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    .zr-areas { display: flex; flex-direction: column; gap: 12px; margin-bottom: 4px; }
+    .zr-area-row {
+      background: var(--surface);
+      border-radius: 10px;
+      padding: 12px 16px;
+    }
+    .zr-area-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+    .zr-area-name { font-size: 0.82rem; color: var(--accent); font-weight: bold; }
+    .zr-stars { font-size: 0.78rem; letter-spacing: 1px; }
+    .zr-area-msg { font-size: 0.82rem; color: var(--text); line-height: 1.7; }
+
+    .zr-lucky {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .zr-lucky-item {
+      background: var(--surface);
+      border-radius: 10px;
+      padding: 12px 8px;
+      text-align: center;
+    }
+    .zr-lucky-label { font-size: 0.68rem; color: var(--muted); margin-bottom: 6px; }
+    .zr-lucky-val { font-size: 0.88rem; color: var(--gold); font-weight: bold; }
+
+    /* ===== 数秘術結果 ===== */
+    .nr-card {
+      display: none;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--accent);
+      margin-bottom: 20px;
+      animation: fadeIn 0.5s ease;
+    }
+    .nr-card.show { display: block; }
+
+    .nr-header {
+      background: linear-gradient(135deg, #0d1a38 0%, #1a0838 100%);
+      padding: 28px 20px 22px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .nr-label { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 6px; }
+    .nr-number {
+      font-size: 5rem;
+      font-weight: bold;
+      background: linear-gradient(135deg, var(--gold), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+    .nr-title { font-size: 1.2rem; color: #fff; margin-bottom: 10px; }
+    .nr-calc {
+      font-size: 0.75rem;
+      color: var(--muted);
+      background: rgba(255,255,255,0.05);
+      border-radius: 8px;
+      padding: 6px 14px;
+      display: inline-block;
+      font-family: monospace;
+      letter-spacing: 0.05em;
+    }
+
+    .nr-body { padding: 22px; background: var(--card); }
+    .nr-keyword {
+      text-align: center;
+      padding: 6px 16px;
+      background: rgba(255,215,0,0.1);
+      border-radius: 20px;
+      font-size: 0.82rem;
+      color: var(--gold);
+      display: inline-block;
+      margin-bottom: 18px;
+    }
+    .nr-section-title {
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+    }
+    .nr-desc {
+      font-size: 0.92rem;
+      line-height: 1.9;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+    .nr-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .nr-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+    .nr-list li {
+      font-size: 0.82rem;
+      line-height: 1.5;
+      padding: 8px 10px;
+      border-radius: 8px;
+    }
+    .nr-list--strength li { background: rgba(100,220,130,0.08); color: #7ddfa0; }
+    .nr-list--strength li::before { content: '✓ '; }
+    .nr-list--challenge li { background: rgba(220,160,100,0.08); color: #e0b070; }
+    .nr-list--challenge li::before { content: '△ '; }
+
+    .nr-lucky-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+    .nr-lucky-item {
+      background: var(--surface);
+      border-radius: 10px;
+      padding: 10px 6px;
+      text-align: center;
+    }
+    .nr-lucky-label { font-size: 0.65rem; color: var(--muted); margin-bottom: 5px; }
+    .nr-lucky-val { font-size: 0.85rem; color: var(--gold); font-weight: bold; }
+
+    .nr-career {
+      background: var(--surface);
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 0.88rem;
+      line-height: 1.8;
+      color: var(--text);
+    }
+
+    @media (max-width: 480px) {
+      .nr-columns { grid-template-columns: 1fr; }
+      .nr-lucky-row { grid-template-columns: repeat(2, 1fr); }
+      .zr-lucky { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* ===== ローディング ===== */
+    .loading {
+      text-align: center;
+      padding: 20px;
+      color: var(--accent);
+      display: none;
+    }
+
+    .loading.show { display: block; }
+
+    /* ===== 算命学 結果カード ===== */
+    .sm-card {
+      display: none;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--accent);
+      margin-bottom: 20px;
+      animation: fadeIn 0.5s ease;
+      box-shadow: 0 0 30px rgba(77,231,255,0.1);
+    }
+    .sm-card.show { display: block; }
+
+    .sm-header {
+      background: linear-gradient(135deg, rgba(10,5,30,0.97) 0%, rgba(5,15,40,0.97) 100%);
+      padding: 28px 20px 22px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+    }
+
+    .sm-date-label { font-size: 0.75rem; color: var(--muted); margin-bottom: 14px; letter-spacing: 0.1em; }
+
+    .sm-meishiki {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .sm-kan-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .sm-kan-label { font-size: 0.65rem; color: var(--muted); letter-spacing: 0.1em; }
+
+    .sm-kan-char {
+      width: 60px; height: 60px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem;
+      font-weight: 700;
+      border: 1.5px solid var(--border);
+      text-shadow: 0 0 10px currentColor;
+    }
+    .sm-kan-char.moku  { background: rgba(60,120,40,0.25);  color: #7ddd60; border-color: #4a9a30; }
+    .sm-kan-char.hi    { background: rgba(160,50,30,0.25);  color: #ff8060; border-color: #cc4020; }
+    .sm-kan-char.tsuchi{ background: rgba(140,110,20,0.25); color: #e8c060; border-color: #b08020; }
+    .sm-kan-char.kin   { background: rgba(180,180,100,0.2); color: #e8e070; border-color: #c0b840; }
+    .sm-kan-char.mizu  { background: rgba(30,80,160,0.25);  color: #70c0ff; border-color: #3070cc; }
+
+    .sm-kan-reading { font-size: 0.7rem; color: var(--muted); }
+
+    .sm-gogyo-badge {
+      display: inline-flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .sm-badge {
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+    .sm-badge.moku  { background: rgba(60,120,40,0.3);  color: #7ddd60; border: 1px solid #4a9a30; }
+    .sm-badge.hi    { background: rgba(160,50,30,0.3);  color: #ff8060; border: 1px solid #cc4020; }
+    .sm-badge.tsuchi{ background: rgba(140,110,20,0.3); color: #e8c060; border: 1px solid #b08020; }
+    .sm-badge.kin   { background: rgba(180,180,100,0.2);color: #e8e070; border: 1px solid #c0b840; }
+    .sm-badge.mizu  { background: rgba(30,80,160,0.3);  color: #70c0ff; border: 1px solid #3070cc; }
+
+    .sm-body {
+      padding: 22px;
+      background: rgba(8,10,24,0.92);
+      backdrop-filter: blur(5px);
+    }
+
+    .sm-section-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+      text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+    }
+
+    .sm-nikkan-block {
+      background: rgba(5,7,18,0.85);
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .sm-nikkan-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+      text-shadow: 0 0 10px rgba(232,201,106,0.5);
+    }
+    .sm-nikkan-desc {
+      font-size: 0.92rem;
+      line-height: 2;
+      color: #f0eede;
+      text-shadow: 0 1px 5px rgba(0,0,0,0.9);
+    }
+
+    /* 五行バランスバー */
+    .sm-gogyo-bars { display: flex; flex-direction: column; gap: 8px; }
+    .sm-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .sm-bar-label { width: 28px; font-size: 0.78rem; font-weight: 700; text-align: center; flex-shrink: 0; }
+    .sm-bar-bg {
+      flex: 1;
+      height: 10px;
+      background: rgba(255,255,255,0.07);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    .sm-bar-fill {
+      height: 100%;
+      border-radius: 5px;
+      transition: width 0.8s ease;
+    }
+    .sm-bar-fill.moku  { background: linear-gradient(90deg,#3a7a20,#7ddd60); }
+    .sm-bar-fill.hi    { background: linear-gradient(90deg,#aa3010,#ff8060); }
+    .sm-bar-fill.tsuchi{ background: linear-gradient(90deg,#907010,#e8c060); }
+    .sm-bar-fill.kin   { background: linear-gradient(90deg,#909020,#e8e070); }
+    .sm-bar-fill.mizu  { background: linear-gradient(90deg,#1050a0,#70c0ff); }
+    .sm-bar-pct { font-size: 0.72rem; color: var(--muted); width: 32px; text-align: right; flex-shrink: 0; }
+
+    .sm-this-year {
+      background: rgba(5,7,18,0.85);
+      border-radius: 12px;
+      padding: 16px;
+      font-size: 0.92rem;
+      line-height: 2;
+      color: #f0eede;
+      text-shadow: 0 1px 5px rgba(0,0,0,0.9);
+    }
+
+    /* ===== ファンタジー演出 ===== */
+
+    /* --- 見出し階層 --- */
+    header h1, .site-title {
+      font-size: 2.4rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-shadow: 0 2px 14px rgba(0,0,0,1), 0 0 22px rgba(232,201,106,0.5);
+    }
+
+    h2, .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.95), 0 0 14px rgba(232,201,106,0.4);
+    }
+
+    /* カード内の中見出し */
+    .zr-section-title, .nr-section-title, .trc-section-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      text-shadow: 0 1px 6px rgba(0,0,0,0.9);
+    }
+
+    /* エリア名・ラベル */
+    .zr-area-name, .zr-lucky-label, .nr-lucky-label, .nr-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-shadow: 0 1px 5px rgba(0,0,0,0.9);
+    }
+
+    /* 本文 */
+    .zr-message, .nr-desc, .trc-message {
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 2.1;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.9);
+      color: #f5f0e8;
+    }
+
+    /* サブテキスト（エリアメッセージ・アドバイスなど） */
+    .zr-area-msg, .nr-career, .trc-advice {
+      font-size: 0.92rem;
+      font-weight: 500;
+      line-height: 1.95;
+      text-shadow: 0 1px 5px rgba(0,0,0,0.9);
+      color: #e8e4d8;
+    }
+
+    /* ラッキー値 */
+    .zr-lucky-val, .nr-lucky-val {
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.8);
+    }
+
+    /* カード名・タイトル系 */
+    .trc-name, .zr-name, .nr-title, .nr-number {
+      text-shadow: 0 2px 12px rgba(0,0,0,1), 0 0 18px rgba(232,201,106,0.4);
+    }
+
+    .trc-name { font-size: 1.7rem; font-weight: 700; }
+    .zr-name  { font-size: 1.6rem; font-weight: 700; }
+    .nr-title { font-size: 1.3rem; font-weight: 700; }
+
+    /* キーワードタグ */
+    .zr-keyword, .nr-keyword, .trc-keyword {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    /* ナビボタン */
+    .nav-btn {
+      font-family: 'Shippori Mincho', serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.12em;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.7);
+    }
+
+    /* ヘッダーサブテキスト */
+    header p {
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      color: #c8c4b8;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.95);
+    }
+
+    /* --- カード背景を濃くする --- */
+    .card {
+      background: rgba(8, 10, 24, 0.88) !important;
+      border: 1px solid rgba(126, 232, 255, 0.25);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.7), 0 0 20px rgba(77,231,255,0.05);
+    }
+
+    .zr-body, .nr-body, .trc-body {
+      background: rgba(8, 10, 24, 0.9) !important;
+    }
+
+    .zr-header, .nr-header, .trc-header {
+      background: linear-gradient(135deg, rgba(15,8,35,0.95) 0%, rgba(8,18,45,0.95) 100%) !important;
+    }
+
+    .zr-area-row {
+      background: rgba(5, 7, 18, 0.85) !important;
+    }
+
+    .zr-lucky-item, .nr-lucky-item {
+      background: rgba(5, 7, 18, 0.85) !important;
+    }
+
+    .nr-career {
+      background: rgba(5, 7, 18, 0.85) !important;
+    }
+
+    .nr-list--strength li { background: rgba(20, 60, 35, 0.7) !important; }
+    .nr-list--challenge li { background: rgba(60, 35, 15, 0.7) !important; }
+
+    /* 広告エリア */
+    .ad-banner {
+      background: rgba(8, 10, 24, 0.85) !important;
+    }
+
+    .icon-img {
+      filter: drop-shadow(0 0 8px rgba(77, 231, 255, 0.4));
+      transition: all 0.4s ease;
+    }
+
+    .icon-img:hover {
+      transform: scale(1.1) rotate(5deg);
+      filter: drop-shadow(0 0 15px rgba(77, 231, 255, 0.7));
+    }
+
+    /* ナビボタンにグロー */
+    .nav-btn.active, .nav-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(77, 231, 255, 0.07);
+      box-shadow: 0 0 12px rgba(77, 231, 255, 0.2);
+    }
+
+    /* カードにファンタジーな光縁 */
+    .card {
+      box-shadow: 0 0 20px rgba(77, 231, 255, 0.04);
+    }
+
+    /* 結果カードのアクセントをエメラルドに合わせる */
+    .tarot-result-card, .zr-card, .nr-card {
+      box-shadow: 0 0 30px rgba(77, 231, 255, 0.1);
+    }
+
+    /* タロットカード裏面の光 */
+    .tc-wrap:not(.picked):not(.other):hover .tc-back {
+      box-shadow: 0 0 18px rgba(77, 231, 255, 0.4);
+    }
+
+    /* ===== フッター ===== */
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: var(--muted);
+      font-size: 0.8rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ===== サイドバー広告（大画面） ===== */
+    @media (min-width: 1100px) {
+      .page-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 160px;
+        max-width: 1000px;
+        margin: 0 auto;
+        gap: 20px;
+        padding: 0 20px;
+      }
+
+      .sidebar-ad {
+        position: sticky;
+        top: 20px;
+        height: 600px;
+        background: var(--surface);
+        border: 1px dashed var(--border);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--muted);
+        font-size: 0.72rem;
+        writing-mode: horizontal-tb;
+        margin-top: 40px;
+      }
+    }
+
+    @media (max-width: 1099px) {
+      .sidebar-ad { display: none; }
+    }
+
+    @media (max-width: 500px) {
+      .zodiac-grid { grid-template-columns: repeat(3, 1fr); }
+      header h1 { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- 背景暗化オーバーレイ -->
+<div style="position:fixed;inset:0;background:rgba(5,8,20,0.72);z-index:0;pointer-events:none;"></div>
+
+<header style="position:relative;z-index:1;">
+  <div class="hero-img-wrap">
+    <img class="hero-img" src="hero_opt.jpg" alt="星の導き">
+  </div>
+  <p>タロット・星座・数秘術 — 無料本格占い</p>
+</header>
+
+<!-- トップ広告 (AdSense挿入場所) -->
+<div class="ad-banner">広告エリア (728×90) — AdSense審査通過後に挿入</div>
+
+<nav style="position:relative;z-index:1;">
+  <button class="nav-btn active" onclick="showSection('tarot')">🃏 タロット</button>
+  <button class="nav-btn" onclick="showSection('zodiac')">♈ 星座占い</button>
+  <button class="nav-btn" onclick="showSection('numerology')">🔢 数秘術</button>
+  <button class="nav-btn" onclick="showSection('sanmei')">☯ 算命学</button>
+</nav>
+
+<div class="page-wrapper" style="position:relative;z-index:1;">
+  <main>
+
+    <!-- ===== タロット ===== -->
+    <section id="tarot" class="section active">
+      <h2 class="section-title">🃏 タロット占い</h2>
+      <p class="section-desc">22枚の中から選んだカードがあなたへのメッセージを伝えます</p>
+
+      <!-- STEP 1: テーマ選択 -->
+      <div class="card tarot-step active" id="tarotStep1">
+        <div class="step-label"><span class="step-num">1</span> 占いたいテーマを選んでください</div>
+        <div class="theme-grid" id="themeGrid"></div>
+      </div>
+
+      <!-- STEP 2: カード選択 -->
+      <div class="card tarot-step" id="tarotStep2">
+        <div class="step-label"><span class="step-num">2</span> 心を静め、気になるカードを1枚選んでください</div>
+        <div class="cards-grid" id="cardsGrid"></div>
+        <p style="text-align:center;font-size:0.78rem;color:var(--muted);margin-top:8px;">カードにカーソルを当てて、引き寄せられたものをめくってください</p>
+      </div>
+
+      <!-- 結果 -->
+      <div class="tarot-result-card" id="tarotResultCard">
+        <div class="trc-header">
+          <div class="trc-theme-tag" id="trcThemeTag"></div>
+          <span class="trc-icon" id="trcIcon"></span>
+          <div class="trc-name" id="trcName"></div>
+          <div class="trc-pos"  id="trcPos"></div>
+          <div class="trc-keyword" id="trcKeyword"></div>
+        </div>
+        <div class="trc-body">
+          <div class="trc-section-title">✦ カードからのメッセージ</div>
+          <div class="trc-message" id="trcMessage"></div>
+          <div class="trc-section-title">✦ アドバイス</div>
+          <div class="trc-advice" id="trcAdvice"></div>
+          <button class="trc-retry" onclick="resetTarot()">🔀 もう一度占う</button>
+        </div>
+      </div>
+
+      <!-- 記事内広告 -->
+      <div class="ad-banner" style="height:250px;margin-top:20px;">広告エリア (300×250) — AdSense審査通過後に挿入</div>
+    </section>
+
+    <!-- ===== 星座占い ===== -->
+    <section id="zodiac" class="section">
+      <h2 class="section-title">♈ 星座占い</h2>
+      <p class="section-desc">生年月日から星座を自動判定、今日の運勢をお届けします</p>
+
+      <div class="card">
+        <label>生年月日を選択</label>
+        <div class="datepicker-wrap" id="dpWrap_zodiac">
+          <button class="datepicker-btn" onclick="toggleCalendar('zodiac')">
+            <span>📅</span><span id="dpLabel_zodiac" class="dp-placeholder">生年月日を選んでください</span>
+          </button>
+          <div class="datepicker-popup" id="dpPopup_zodiac"></div>
+        </div>
+
+        <label>または星座を直接選択</label>
+        <div class="zodiac-grid" id="zodiacGrid"></div>
+
+        <button class="btn-primary" onclick="calcZodiac()">🌟 今日の運勢を占う</button>
+      </div>
+
+      <div class="zr-card" id="zodiacResult">
+        <!-- ヘッダー -->
+        <div class="zr-header">
+          <div class="zr-date-label" id="zrDate"></div>
+          <div class="zr-icon-wrap">
+            <span class="zr-icon" id="zrIcon"></span>
+          </div>
+          <div class="zr-name" id="zrName"></div>
+          <div class="zr-keyword" id="zrKeyword"></div>
+        </div>
+        <!-- 総合メッセージ -->
+        <div class="zr-body">
+          <div class="zr-section-title">✦ 今日のメッセージ</div>
+          <div class="zr-message" id="zrMessage"></div>
+          <!-- 運勢エリア -->
+          <div class="zr-areas" id="zrAreas"></div>
+          <!-- ラッキー情報 -->
+          <div class="zr-section-title" style="margin-top:20px;">✦ 今日のラッキー</div>
+          <div class="zr-lucky" id="zrLucky"></div>
+        </div>
+      </div>
+
+      <div class="ad-banner" style="height:250px;">広告エリア (300×250) — AdSense審査通過後に挿入</div>
+    </section>
+
+    <!-- ===== 数秘術 ===== -->
+    <section id="numerology" class="section">
+      <h2 class="section-title">🔢 数秘術</h2>
+      <p class="section-desc">生年月日から「ライフパスナンバー」を算出します</p>
+
+      <div class="card">
+        <label>生年月日を選択</label>
+        <div class="datepicker-wrap" id="dpWrap_num">
+          <button class="datepicker-btn" onclick="toggleCalendar('num')">
+            <span>📅</span><span id="dpLabel_num" class="dp-placeholder">生年月日を選んでください</span>
+          </button>
+          <div class="datepicker-popup" id="dpPopup_num"></div>
+        </div>
+
+        <button class="btn-primary" onclick="calcNumerology()">🔮 数字を算出する</button>
+      </div>
+
+      <div class="nr-card" id="numResult">
+        <div class="nr-header">
+          <div class="nr-label">ライフパスナンバー</div>
+          <div class="nr-number" id="nrNumber"></div>
+          <div class="nr-title" id="nrTitle"></div>
+          <div class="nr-calc" id="nrCalc"></div>
+        </div>
+        <div class="nr-body">
+          <div class="nr-keyword" id="nrKeyword"></div>
+          <div class="nr-section-title">✦ あなたの本質</div>
+          <div class="nr-desc" id="nrDesc"></div>
+          <div class="nr-columns">
+            <div>
+              <div class="nr-section-title">✦ 強み</div>
+              <ul class="nr-list nr-list--strength" id="nrStrengths"></ul>
+            </div>
+            <div>
+              <div class="nr-section-title">✦ 課題</div>
+              <ul class="nr-list nr-list--challenge" id="nrChallenges"></ul>
+            </div>
+          </div>
+          <div class="nr-section-title">✦ 相性のいい数字・ラッキー情報</div>
+          <div class="nr-lucky-row" id="nrLucky"></div>
+          <div class="nr-section-title" style="margin-top:16px;">✦ 向いている職業・環境</div>
+          <div class="nr-career" id="nrCareer"></div>
+        </div>
+      </div>
+
+      <div class="ad-banner" style="height:250px;">広告エリア (300×250) — AdSense審査通過後に挿入</div>
+    </section>
+
+    <!-- ===== 算命学 ===== -->
+    <section id="sanmei" class="section">
+      <h2 class="section-title">☯ 算命学</h2>
+      <p class="section-desc">生年月日から「日干・年干支・五行」を算出し、あなたの宿命を読み解きます</p>
+
+      <div class="card">
+        <label>生年月日を選択</label>
+        <div class="datepicker-wrap" id="dpWrap_sanmei">
+          <button class="datepicker-btn" onclick="toggleCalendar('sanmei')">
+            <span>📅</span><span id="dpLabel_sanmei" class="dp-placeholder">生年月日を選んでください</span>
+          </button>
+          <div class="datepicker-popup" id="dpPopup_sanmei"></div>
+        </div>
+        <button class="btn-primary" onclick="calcSanmei()">☯ 命式を算出する</button>
+      </div>
+
+      <div class="sm-card" id="sanmeiResult">
+        <!-- 命式ヘッダー -->
+        <div class="sm-header">
+          <div class="sm-date-label" id="smDateLabel"></div>
+          <div class="sm-meishiki" id="smMeishiki"></div>
+          <div class="sm-gogyo-badge" id="smGogyoBadge"></div>
+        </div>
+        <div class="sm-body">
+          <!-- 日干詳細 -->
+          <div class="sm-section-title">✦ 日干（あなたの本質）</div>
+          <div class="sm-nikkan-block" id="smNikkanBlock"></div>
+
+          <!-- 五行バランス -->
+          <div class="sm-section-title" style="margin-top:20px;">✦ 五行バランス</div>
+          <div class="sm-gogyo-bars" id="smGogyoBars"></div>
+
+          <!-- 強み・課題 -->
+          <div class="nr-columns" style="margin-top:20px;">
+            <div>
+              <div class="sm-section-title">✦ 強み</div>
+              <ul class="nr-list nr-list--strength" id="smStrengths"></ul>
+            </div>
+            <div>
+              <div class="sm-section-title">✦ 課題</div>
+              <ul class="nr-list nr-list--challenge" id="smChallenges"></ul>
+            </div>
+          </div>
+
+          <!-- 今年の運勢 -->
+          <div class="sm-section-title" style="margin-top:20px;">✦ 今年（2026年）の運勢</div>
+          <div class="sm-this-year" id="smThisYear"></div>
+
+          <!-- ラッキー情報 -->
+          <div class="sm-section-title" style="margin-top:20px;">✦ ラッキー情報</div>
+          <div class="nr-lucky-row" id="smLucky"></div>
+
+          <!-- 適職 -->
+          <div class="sm-section-title" style="margin-top:20px;">✦ 向いている環境・職業</div>
+          <div class="nr-career" id="smCareer"></div>
+        </div>
+      </div>
+
+      <div class="ad-banner" style="height:250px;margin-top:20px;">広告エリア (300×250) — AdSense審査通過後に挿入</div>
+    </section>
+
+  </main>
+  <aside class="sidebar-ad">広告エリア<br>(160×600)</aside>
+</div>
+
+<footer>
+  <p>© 2026 星の導き — 占い結果はエンターテインメント目的です</p>
+</footer>
+
+<script>
+// ===== ナビ切り替え =====
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ===== タロットデータ =====
+const TAROT = [
+  { name: '愚者',     icon: '🤸', up_key: '自由・新出発・可能性',   rev_key: '無謀・不注意',
+    up_msg:  '新しい一歩を踏み出す勇気があなたの中に宿っています。常識や過去の枠にとらわれず、心の赴くままに動き出しましょう。その純粋な好奇心こそが、思いもよらない幸運を引き寄せます。',
+    rev_msg: '焦りや準備不足が見えます。今は慎重さが必要な時期。直感だけで動くのではなく、一度立ち止まって状況を整理してから行動しましょう。',
+    up_adv:  '「正解」を探しすぎないこと。不完全な状態でもいいので、まず動いてみることが大切です。',
+    rev_adv: 'リスクを書き出し、できる限りの備えをしてから次のステップへ進みましょう。' },
+  { name: '魔術師',   icon: '🪄', up_key: '意志力・創造・才能開花', rev_key: '欺き・未活用の才能',
+    up_msg:  'あなたには必要なものがすでに揃っています。自分の才能や資源に目を向けてください。強い意志と集中力で、思い描いたことを現実に変えられる時期です。',
+    rev_msg: '才能が眠ったまま活かされていないかもしれません。あるいは誰かの言葉に惑わされていませんか？自分の力を正直に見つめ直して。',
+    up_adv:  '手持ちの武器を棚卸しして。すでに十分な力があることに気づくはずです。',
+    rev_adv: '「どうせ無理」という思い込みを手放すことから始めてみましょう。' },
+  { name: '女教皇',   icon: '📖', up_key: '直感・内なる知恵・神秘', rev_key: '秘密・表面的な判断',
+    up_msg:  '答えはすでにあなたの内側にあります。静かに心の声に耳を傾けてください。今は行動より内省の時。直感が正しい道を教えてくれています。',
+    rev_msg: '感情や表面的な情報に振り回されているかもしれません。深く考える前に結論を出そうとしていませんか？',
+    up_adv:  '日記や瞑想など、内側の声を聞く習慣を持つと良いでしょう。',
+    rev_adv: '大切な決断は情報が揃ってからに。焦りは禁物です。' },
+  { name: '女帝',     icon: '👑', up_key: '豊かさ・愛情・創造性',   rev_key: '依存・停滞・過保護',
+    up_msg:  '豊かさと愛に満ちたエネルギーが流れています。自分を大切に、美しいものを楽しみ、人への愛情を惜しまないで。今は種を蒔く絶好の時期です。',
+    rev_msg: '与えすぎて自分が枯渇していませんか？または依存関係が生まれていないか振り返りを。',
+    up_adv:  '自分自身への投資を惜しまないこと。充実した自分からこそ、周りへの愛が溢れます。',
+    rev_adv: '境界線を引くことは冷たさではありません。自分の軸を守ることが長期的な愛に繋がります。' },
+  { name: '皇帝',     icon: '⚔️', up_key: '権威・安定・リーダーシップ', rev_key: '支配・頑固・独裁',
+    up_msg:  '確固たる意志と安定した基盤があなたを支えています。今こそリーダーとして行動する時。責任感を持って物事を進めると、周囲の信頼を勝ち取れます。',
+    rev_msg: 'コントロールを求めすぎていませんか？頑固さが人間関係に亀裂を生む可能性があります。',
+    up_adv:  '長期的な計画を立てて。地に足のついた行動が大きな成果をもたらします。',
+    rev_adv: '「自分が正しい」という前提を一度外し、相手の視点に立つ練習をしてみて。' },
+  { name: '教皇',     icon: '🕊️', up_key: '伝統・精神的成長・導き',  rev_key: '固定観念・束縛',
+    up_msg:  '学びや信頼できる人からのアドバイスを受け入れる時期です。伝統や慣習の中に大切な知恵が宿っています。師や先輩の言葉に耳を傾けてみましょう。',
+    rev_msg: '古い価値観や「べき論」に縛られていませんか？自分らしい答えを探す時かもしれません。',
+    up_adv:  '信頼できるメンターや先輩に相談してみると、道が開けます。',
+    rev_adv: 'ルールに従うことと、自分の本音を大切にすることのバランスを取って。' },
+  { name: '恋人たち', icon: '💑', up_key: '愛・選択・調和',         rev_key: '不和・誘惑・迷い',
+    up_msg:  '大切な選択の時が来ています。心と頭が一致する選択をしてください。愛する人との絆が深まる予感。本当に大切なものを見極める力があなたにはあります。',
+    rev_msg: '迷いや葛藤が生じているようです。誰かのために自分の気持ちを押し殺していませんか？',
+    up_adv:  '後悔のない選択をするために、一番大切な価値観は何かを明確にしておきましょう。',
+    rev_adv: '自分の本音から目を逸らさず、正直な対話を心がけて。' },
+  { name: '戦車',     icon: '🏆', up_key: '勝利・意志・前進',        rev_key: '挫折・暴走・方向迷子',
+    up_msg:  '困難を乗り越える力が高まっています。目標に向かって猛進しましょう。自己規律と強い意志があれば、どんな障害も乗り越えられる時期です。',
+    rev_msg: '方向性を見失っていたり、エネルギーが分散していませんか？焦りからの暴走に注意。',
+    up_adv:  '目標を紙に書いて毎日確認する習慣を。ブレない軸が勝利に繋がります。',
+    rev_adv: 'スピードを落として現在地を確認することも、前進のために必要です。' },
+  { name: '力',       icon: '🦁', up_key: '内なる強さ・忍耐・勇気',  rev_key: '自己不信・恐れ',
+    up_msg:  '優しさと粘り強さがあなたの最大の武器です。力で押さえつけるのではなく、愛と理解で周囲を包み込んでください。その穏やかな強さが状況を好転させます。',
+    rev_msg: '自信を失い、自分の力を過小評価していませんか？内側の恐れと向き合う勇気を持って。',
+    up_adv:  '感情的になりそうな場面でも、深呼吸して穏やかに対応することを意識してみて。',
+    rev_adv: '自分を責めることを今日だけでも止めてみましょう。あなたは十分に強い。' },
+  { name: '隠者',     icon: '🕯️', up_key: '内省・孤独・賢明な思慮', rev_key: '孤立・固執・引きこもり',
+    up_msg:  '今は一人で静かに考える時間が必要です。喧騒から離れ、内なる光を見つけましょう。孤独は弱さではなく、次のステップへの大切な準備期間です。',
+    rev_msg: '孤立が長引いていませんか？自分の殻に閉じこもりすぎることで、大切なチャンスを逃しているかも。',
+    up_adv:  '一人の時間を大切に。読書や瞑想など、自分と向き合う時間を意識的に作りましょう。',
+    rev_adv: '信頼できる人に本音を話してみて。一歩外に踏み出すことで光が見えてきます。' },
+  { name: '運命の輪', icon: '☸️', up_key: '転機・チャンス・サイクル', rev_key: '不運・変化への抵抗',
+    up_msg:  '人生の大きな転換期が訪れています。この流れに乗ることで、新しいステージへと移行できます。チャンスを恐れず、変化を歓迎してください。',
+    rev_msg: '変化を恐れて現状にしがみついていませんか？抵抗すればするほど流れに逆らうことになります。',
+    up_adv:  'タイミングを活かして。「今だ」と感じたら動く勇気を持ちましょう。',
+    rev_adv: '変化は終わりではなく始まりです。まず小さな一歩から受け入れてみて。' },
+  { name: '正義',     icon: '⚖️', up_key: '公正・真実・バランス',    rev_key: '不公正・偏り・自己欺瞞',
+    up_msg:  '正直さと公平さがあなたの道を開きます。感情に流されず、事実と向き合って判断してください。誠実な行動が長期的な信頼と成功をもたらします。',
+    rev_msg: '自分に都合のいい解釈をしていませんか？または不公正な扱いを受け入れすぎていないか振り返りを。',
+    up_adv:  '「自分が正しいか」より「これは公平かどうか」という視点で物事を見てみて。',
+    rev_adv: '自分の本当の気持ちに正直になることが、状況を好転させる鍵です。' },
+  { name: '吊られた男', icon: '🙃', up_key: '試練・新視点・手放し',  rev_key: '無駄な犠牲・停滞',
+    up_msg:  '今は思い通りにならない時期かもしれませんが、それには意味があります。違う角度から物事を見ることで、新しい真実が見えてきます。今は準備の時間。',
+    rev_msg: '不必要な我慢や犠牲が続いていませんか？自分を痛めつけることが美徳ではありません。',
+    up_adv:  '今できないことを悔やまず、今できることに集中することが突破口になります。',
+    rev_adv: 'いつまでも待ち続けることが正解とは限りません。行動を起こす時を見極めて。' },
+  { name: '死神',     icon: '🌙', up_key: '変容・終わりと始まり・再生', rev_key: '変化への抵抗・停滞',
+    up_msg:  '古いものを手放し、新しいステージへと移行する時です。「死」は終わりではなく、より良い形への変容。手放すことを恐れないでください。',
+    rev_msg: '変化を拒んで、終わりにすべきものにしがみついていませんか？執着が新しい可能性を妨げています。',
+    up_adv:  '整理と断捨離を。物だけでなく、人間関係や習慣を見直すことも含めて。',
+    rev_adv: '「もったいない」という感覚より「これからどうしたいか」を基準に決断してみて。' },
+  { name: '節制',     icon: '🏺', up_key: '調和・忍耐・バランス',    rev_key: '過剰・不均衡・焦り',
+    up_msg:  '焦らず着実に。少しずつ積み重ねることが大きな成果を生みます。対立するものを上手く融合させる才能があなたにはあります。穏やかな調和が幸運を呼びます。',
+    rev_msg: '何かが過剰になっていませんか？働きすぎ、依存、感情の振れ幅が大きくなっていないか確認を。',
+    up_adv:  '「ちょうどよい」を意識して。何ごとも極端にならないよう、日々のバランスを大切に。',
+    rev_adv: 'ペースを落として自分の状態を観察してみましょう。休息も立派な行動です。' },
+  { name: '悪魔',     icon: '⛓️', up_key: '執着・物質主義・束縛',   rev_key: '解放・自覚・鎖を断つ',
+    up_msg:  '何かに縛られている感覚はありませんか？恐れや欲望が判断を曇らせているかもしれません。本当に必要なものと、惰性で続けているものを見極める時です。',
+    rev_msg: '束縛から解放されるチャンスが来ています。「仕方ない」と諦めていたことを手放す勇気を持って。',
+    up_adv:  '習慣や依存関係を客観的に見直して。小さな自由から取り戻していきましょう。',
+    rev_adv: '鎖は思いのほか細いかもしれません。一歩踏み出す勇気が自由への扉を開きます。' },
+  { name: '塔',       icon: '⚡', up_key: '突然の変化・覚醒・崩壊',  rev_key: '危機の回避・小さな変化',
+    up_msg:  '突然の変化や衝撃的な出来事が、実は古い不要な構造を壊してくれています。痛みを伴うかもしれませんが、この破壊の後に本当の再生が始まります。',
+    rev_msg: '崩壊を避けようとしているが、それは先延ばしにすぎないかも。小さな変化から取り入れることで大きな破綻を防げます。',
+    up_adv:  '失ったものではなく、残ったものに目を向けて。それこそが本当に大切なものです。',
+    rev_adv: '定期的なメンテナンスと見直しが、大きな危機を予防します。' },
+  { name: '星',       icon: '⭐', up_key: '希望・再生・インスピレーション', rev_key: '失望・悲観・孤独感',
+    up_msg:  '試練の後に必ず光が差し込みます。希望を持って前に進んでください。あなたには見えない力に守られているという感覚を大切にして。夢は必ず叶います。',
+    rev_msg: '希望を持てずにいますか？疲弊しきっているなら、まず休むことが先決です。',
+    up_adv:  '毎日一つ、感謝できることを見つけてみて。希望の灯火が少しずつ大きくなります。',
+    rev_adv: '今は夢を語らなくていい。ただ自分を回復させることだけを考えましょう。' },
+  { name: '月',       icon: '🌕', up_key: '直感・幻想・無意識',      rev_key: '混乱の解消・明確さ',
+    up_msg:  '物事がはっきり見えない時期かもしれません。でも、その霧の中にこそ大切なメッセージが隠れています。直感を信じ、夢や潜在意識からのサインに気づいてください。',
+    rev_msg: '混乱が晴れ、物事が明確になってきます。根拠のない不安から解放されるサインかも。',
+    up_adv:  '夢を記録してみて。無意識からのメッセージが明確な答えを与えてくれることがあります。',
+    rev_adv: '先の見えない不安より、今この瞬間に集中することで安心感が増します。' },
+  { name: '太陽',     icon: '☀️', up_key: '成功・喜び・活力',        rev_key: '過信・遅延・陰り',
+    up_msg:  '明るくポジティブなエネルギーが溢れています！自信を持って行動すれば、輝かしい結果が待っています。今のあなたには周囲を照らす力があります。',
+    rev_msg: '自信過剰になっていませんか？または本来の輝きが曇っている状態かも。小さなことから喜びを見つけて。',
+    up_adv:  '今の喜びや成功を人と分かち合って。そのエネルギーが循環してさらに大きくなります。',
+    rev_adv: '完璧を求めすぎず、今の自分の良いところを認めることから始めましょう。' },
+  { name: '審判',     icon: '📯', up_key: '復活・決断・覚醒',        rev_key: '自己批判・先送り',
+    up_msg:  '過去を清算し、新たな自分として生まれ変わる時が来ました。長い間考えていた重要な決断を下す時です。内なる呼びかけに従ってください。',
+    rev_msg: '自分を責め続けていませんか？過去の失敗に囚われて、前に進むことを恐れていませんか？',
+    up_adv:  '長い間先送りにしてきたことを、今日一歩だけ進めてみましょう。',
+    rev_adv: '自己批判のエネルギーを、自己改善に転換してみて。あなたには変われる力があります。' },
+  { name: '世界',     icon: '🌍', up_key: '完成・達成・統合',        rev_key: '未完成・遅延・惜しい',
+    up_msg:  'ひとつのサイクルが完成し、大きな達成感に包まれます。努力が実を結ぶ時。自分自身と世界との調和を感じながら、次の新しい旅への準備をしましょう。',
+    rev_msg: 'もう少しで完成なのに、何かが滞っていますか？最後の一歩を踏み出す勇気が今求められています。',
+    up_adv:  '今の達成を祝うことを忘れずに。自分への労いが次へのエネルギーになります。',
+    rev_adv: '細部にこだわりすぎていませんか？80点でも前に進む勇気を持って。' },
+];
+
+const THEMES = [
+  { icon: '💕', name: '恋愛運' },
+  { icon: '💼', name: '仕事運' },
+  { icon: '💰', name: '金運'   },
+  { icon: '🤝', name: '対人関係' },
+  { icon: '🌿', name: '健康運' },
+  { icon: '✨', name: '総合運' },
+];
+
+let selectedTheme = null;
+
+function buildThemeGrid() {
+  const grid = document.getElementById('themeGrid');
+  THEMES.forEach((t, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'theme-btn';
+    btn.innerHTML = `<span class="theme-icon">${t.icon}</span>${t.name}`;
+    btn.onclick = () => {
+      document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      selectedTheme = i;
+      setTimeout(() => showTarotStep(2), 300);
+    };
+    grid.appendChild(btn);
+  });
+}
+
+function showTarotStep(step) {
+  document.querySelectorAll('.tarot-step').forEach(s => s.classList.remove('active'));
+  const el = document.getElementById(`tarotStep${step}`);
+  if (el) el.classList.add('active');
+  if (step === 2) buildCardsGrid();
+}
+
+function buildCardsGrid() {
+  const grid = document.getElementById('cardsGrid');
+  grid.innerHTML = '';
+  document.getElementById('tarotResultCard').classList.remove('show');
+
+  const deck = [...TAROT].map((c, i) => ({ ...c, idx: i, rev: Math.random() < 0.28 }));
+  deck.sort(() => Math.random() - 0.5);
+
+  deck.forEach(card => {
+    const wrap = document.createElement('div');
+    wrap.className = 'tc-wrap';
+    wrap.innerHTML = `
+      <div class="tc-inner">
+        <div class="tc-back">🌟</div>
+        <div class="tc-front">
+          <span class="cf-icon">${card.icon}</span>
+          <span class="cf-name">${card.name}</span>
+          <span class="cf-pos">${card.rev ? '逆位置' : '正位置'}</span>
+        </div>
+      </div>`;
+    wrap.onclick = () => pickCard(wrap, card, grid);
+    grid.appendChild(wrap);
+  });
+}
+
+function pickCard(wrap, card, grid) {
+  // 選択済みなら無視
+  if (wrap.classList.contains('picked')) return;
+
+  // このカードをflip、他は暗く
+  wrap.classList.add('picked');
+  grid.querySelectorAll('.tc-wrap').forEach(w => {
+    if (w !== wrap) w.classList.add('other');
+  });
+
+  // 結果を表示
+  setTimeout(() => showTarotResult(card), 700);
+}
+
+function showTarotResult(card) {
+  const theme = THEMES[selectedTheme ?? 5];
+  const rev   = card.rev;
+
+  document.getElementById('trcThemeTag').textContent  = `${theme.icon} ${theme.name}`;
+  document.getElementById('trcIcon').textContent      = card.icon;
+  document.getElementById('trcName').textContent      = card.name;
+  document.getElementById('trcPos').textContent       = rev ? '逆位置' : '正位置';
+  document.getElementById('trcKeyword').textContent   = rev ? card.rev_key : card.up_key;
+  document.getElementById('trcMessage').textContent   = rev ? card.rev_msg : card.up_msg;
+  document.getElementById('trcAdvice').textContent    = rev ? card.rev_adv : card.up_adv;
+
+  const result = document.getElementById('tarotResultCard');
+  result.classList.add('show');
+  setTimeout(() => result.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+}
+
+function resetTarot() {
+  selectedTheme = null;
+  document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('selected'));
+  document.getElementById('tarotResultCard').classList.remove('show');
+  showTarotStep(1);
+}
+
+buildThemeGrid();
+
+
+// ===== 星座データ =====
+const ZODIACS = [
+  { name: '牡羊座', icon: '♈', start: [3,21], end: [4,19], keyword: '情熱・勇気・リーダー',
+    colors: ['赤','オレンジ'], item: 'スポーツウェア', number: '9',
+    msg: ['今日は行動力が最大限に発揮される日。思い切ってチャレンジしましょう。直感を信じて前に進むことで、周囲もあなたに引き寄せられます。',
+          '少しスピードを落として周囲のサポートを受け入れる日。一人で突き進まず、チームを意識すると良い結果が生まれます。',
+          '新しい出会いや挑戦のタイミングが訪れます。勇気ある一歩が今後の大きな展開に繋がります。',
+          'エネルギーが高まっていますが、感情的な判断には注意を。深呼吸して状況を整理してから行動を。',
+          'あなたの熱意が周囲を動かします。今日は率先して声を上げることで、望む方向に進めるでしょう。'],
+    areas: {
+      総合運: ['⭐⭐⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐'],
+      恋愛運: ['⭐⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐⭐⭐'],
+      仕事運: ['⭐⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐'],
+      金運:   ['⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐⭐'],
+    },
+    area_msg: {
+      総合運: ['大きなチャンスが目前に。恐れず動き出しましょう。','エネルギーを分散させず一点集中が吉。','行動が実を結ぶ好調な一日。','周囲との摩擦に注意しつつ丁寧に。','リーダーシップを発揮するとうまくいきます。'],
+      恋愛運: ['積極的なアプローチが成功の鍵。勇気を出して。','相手のペースに合わせることで関係が深まります。','新しい出会いに恵まれる予感。外出を積極的に。','感情の起伏を抑えてじっくり向き合いましょう。','自分らしさをさらけ出すことで相手の心が開きます。'],
+      仕事運: ['プロジェクトを引っ張るときです。発言力が高まっています。','細かい確認作業を怠らないよう注意が必要な日。','新企画や提案が通りやすいタイミング。','チームとの連携を意識して進めると成果が出ます。','実力が評価される日。成果をアピールする機会を逃さずに。'],
+      金運:   ['衝動買いに注意。本当に必要なものかよく考えて。','節約より投資を意識する日。長期的な視点で。','臨時収入の気配あり。アンテナを張っておいて。','財布のひもを締めて堅実に。後で楽になります。','金銭管理を見直す好機。家計を整理してみて。'],
+    }
+  },
+  { name: '牡牛座', icon: '♉', start: [4,20], end: [5,20], keyword: '安定・忍耐・美的感覚',
+    colors: ['緑','ピンク'], item: 'お気に入りのスイーツ', number: '6',
+    msg: ['今日は五感を大切にする日。美しいものに囲まれることで運気が上がります。焦らずマイペースで進むことが最善策です。',
+          '積み重ねてきた努力が形になり始める兆し。粘り強く続けてきたことが報われます。',
+          '心地よい環境作りが運気を上げます。身の回りを整えてから行動しましょう。',
+          '人間関係のこじれに注意。頑固になりすぎず、柔軟な対応を心がけて。',
+          '美的センスが冴える日。クリエイティブな作業や趣味に時間を使うと充実感を得られます。'],
+    areas: {
+      総合運: ['⭐⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐⭐⭐'],
+      恋愛運: ['⭐⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐'],
+      仕事運: ['⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐⭐'],
+      金運:   ['⭐⭐⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐'],
+    },
+    area_msg: {
+      総合運: ['着実な前進が幸運を呼ぶ一日。','努力が実を結ぶタイミングが近い。','ゆっくりでも確実に進むことが大切。','無理なペースを避けて安定を保って。','あなたの堅実さが評価される日。'],
+      恋愛運: ['誠実な姿勢が相手の心を掴みます。','好きな人と二人の時間を大切に。','愛情を素直に表現することで距離が縮まります。','焦らず関係を育てることが長続きの秘訣。','贈り物や手料理など具体的な愛情表現が吉。'],
+      仕事運: ['コツコツ型の仕事が評価される日。','専門スキルを磨く学びに時間を。','信頼関係を築くことが仕事の土台に。','マニュアル通りの確実な作業が成果を生みます。','長期プロジェクトに力を入れるとき。'],
+      金運:   ['貯蓄運が好調。無駄遣いを控えてしっかり蓄えて。','美しいものへの投資が精神的な豊かさを生みます。','家計の見直しに最適な日。','高品質なものを厳選して購入する日。','副収入のアイデアを具体化する好機。'],
+    }
+  },
+  { name: '双子座', icon: '♊', start: [5,21], end: [6,20], keyword: '知性・好奇心・柔軟性',
+    colors: ['黄色','水色'], item: '本・ノート', number: '5',
+    msg: ['コミュニケーション運が絶好調。今日話したことが縁を広げ、新しいチャンスに繋がります。アイデアを積極的に発信して。',
+          '情報収集に最適な日。いつもより多くのインプットが今後の糧になります。気になることは何でも調べてみて。',
+          '柔軟な発想で難問を解決できる日。固定概念を外すと、思わぬ突破口が見えます。',
+          'マルチタスクが得意なあなたも、今日は一つのことに集中すると効率アップ。',
+          '言葉が力を持つ日。メールや会話で自分の気持ちを丁寧に伝えることで良い結果が生まれます。'],
+    areas: {
+      総合運: ['⭐⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐'],
+      恋愛運: ['⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐⭐'],
+      仕事運: ['⭐⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐⭐⭐'],
+      金運:   ['⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐'],
+    },
+    area_msg: {
+      総合運: ['知的好奇心が幸運を引き寄せます。','広い視野で物事を俯瞰する日。','新しい情報が思わぬ幸運に繋がります。','変化を楽しむ柔軟さが鍵。','コミュニケーション能力が輝く一日。'],
+      恋愛運: ['話題が豊富なあなたの魅力が光ります。','知的な会話が相手を惹きつける日。','気になる人に連絡してみるタイミング。','友達感覚の関係から恋に発展する予感。','言葉で気持ちを伝えることが恋愛成就の鍵。'],
+      仕事運: ['プレゼンや交渉ごとに最適な日。','情報共有でチームの効率がアップ。','新しいスキルを習得する学びの日。','複数のプロジェクトを器用にこなせます。','アイデア出しに最高のコンディション。'],
+      金運:   ['情報からお金を生む発想が吉。','衝動的な出費に注意。計画的に使って。','学びへの投資が将来の収入に繋がります。','副業やスキルアップで収入源を増やすとき。','フリマやネット販売で不用品を整理するのも◎。'],
+    }
+  },
+  { name: '蟹座', icon: '♋', start: [6,21], end: [7,22], keyword: '感受性・家庭・思いやり',
+    colors: ['白','シルバー'], item: '家族との手料理', number: '2',
+    msg: ['今日は家族や大切な人との時間を優先すると運気が上がります。感謝の気持ちを言葉や行動で伝えましょう。',
+          '直感が研ぎ澄まされている日。感じた違和感やひらめきを大切にして行動すると吉。',
+          '人の気持ちに寄り添える今日は、相談役として頼られる場面が増えそう。その優しさが縁を深めます。',
+          '過去の感情を整理することで新しい一歩が踏み出せます。手放すことを恐れないで。',
+          '心の声に従って行動する日。無理に合わせるより、自分が心地よい選択をすることで運が開きます。'],
+    areas: {
+      総合運: ['⭐⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐'],
+      恋愛運: ['⭐⭐⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐'],
+      仕事運: ['⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐⭐'],
+      金運:   ['⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐⭐⭐'],
+    },
+    area_msg: {
+      総合運: ['感情を大切にした判断が吉。','身近な人との絆が運気を高めます。','家庭や親しい人を優先する日。','自分の気持ちを正直に伝えましょう。','穏やかな環境作りが幸運を呼びます。'],
+      恋愛運: ['愛情表現をためらわないで。','相手の気持ちを細かく察知できる日。','家でのデートや手料理が喜ばれます。','感情的にならず穏やかに向き合いましょう。','長続きする関係の基盤を作る日。'],
+      仕事運: ['サポート役として力を発揮できます。','チームの雰囲気を整える役割が吉。','感情的な判断を避け、データを活用して。','後輩や部下の相談に乗ることで信頼が上がります。','丁寧な仕事ぶりが評価される日。'],
+      金運:   ['家関連の出費が発生しやすい日。予算を決めて。','食費など生活費の見直しに最適。','貯蓄よりも大切な人への投資が吉の日も。','家計管理に力を入れるとしっかり貯まります。','衝動買いは避け、必要なものだけ購入して。'],
+    }
+  },
+  { name: '獅子座', icon: '♌', start: [7,23], end: [8,22], keyword: '自信・創造・輝き',
+    colors: ['金','オレンジ'], item: 'ゴールドアクセサリー', number: '1',
+    msg: ['今日のあなたは輝いています。自信を持って自己表現することで、周囲を魅了できます。舞台の中心に立つことを恐れないで。',
+          'クリエイティブなエネルギーが最高潮。アイデアをかたちにするのに最適な日です。',
+          'あなたのカリスマ性が周囲に良い影響を与えます。リーダーシップを発揮しましょう。',
+          'プライドが邪魔をする場面も。素直に他者の意見を取り入れることで視野が広がります。',
+          '人から注目される出来事がありそう。笑顔と堂々とした態度で幸運を引き寄せて。'],
+    areas: {
+      総合運: ['⭐⭐⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐'],
+      恋愛運: ['⭐⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐⭐'],
+      仕事運: ['⭐⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐'],
+      金運:   ['⭐⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐⭐⭐'],
+    },
+    area_msg: {
+      総合運: ['あなたの魅力が最大に輝く日。','自己表現が運気を引き上げます。','中心にいることで幸運が集まります。','少し謙虚になるとさらに周囲との関係が良好に。','エネルギッシュな行動が成果を生む日。'],
+      恋愛運: ['堂々としたあなたが相手を惹きつけます。','好意を伝えるベストタイミング。','二人で輝ける関係を築ける日。','独占欲をコントロールして相手の自由を尊重して。','特別なデートの計画が吉。'],
+      仕事運: ['プレゼンや発表で実力を発揮できます。','リーダーシップが評価される日。','人前に出る仕事で運が開きます。','チームを鼓舞する言葉が周囲を動かします。','新プロジェクトの立ち上げに最適。'],
+      金運:   ['見栄を張っての出費に注意。','質の高いものへの投資は吉。','自己投資（学び・外見磨き）でリターンが期待できます。','高額な買い物は一晩考えてから。','才能を活かした副収入が期待できます。'],
+    }
+  },
+  { name: '乙女座', icon: '♍', start: [8,23], end: [9,22], keyword: '分析・誠実・完璧主義',
+    colors: ['ネイビー','グレー'], item: '手帳・プランナー', number: '4',
+    msg: ['細部への注意力が最大限に発揮される日。丁寧な仕事ぶりが周囲から高く評価されます。',
+          '計画を見直すタイミング。整理整頓や情報のアップデートで今後の効率が格段に上がります。',
+          '分析力が冴えています。複雑な問題も論理的に解きほぐすことができます。',
+          '完璧を求めすぎていませんか？「十分に良い」というラインを設けることで心が楽になります。',
+          '誠実な姿勢が人の信頼を集める日。地道な積み重ねが大きな実を結びます。'],
+    areas: {
+      総合運: ['⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐'],
+      恋愛運: ['⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐⭐'],
+      仕事運: ['⭐⭐⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐⭐'],
+      金運:   ['⭐⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐⭐⭐'],
+    },
+    area_msg: {
+      総合運: ['丁寧な行動が幸運の種をまきます。','計画通りに動くと好結果が出る日。','健康管理を見直す絶好のタイミング。','細かいことへの気配りが評価されます。','地道な努力が実を結ぶ予感。'],
+      恋愛運: ['誠実な姿勢が相手の信頼を勝ち取ります。','細かい気遣いが喜ばれる日。','完璧を求めすぎず相手の良い面を見て。','共通の趣味や知的な話題で距離が縮まります。','信頼を積み上げることで関係が深まります。'],
+      仕事運: ['精密な作業が求められる場面で実力発揮。','データ分析や書類整理が得意な今日。','チェックリストを活用して抜け漏れをなくして。','同僚のミスをフォローする場面で信頼が上がります。','改善提案が上手くいくタイミング。'],
+      金運:   ['無駄な出費を見つけて削減できる日。','家計簿やレシート整理に最適。','品質重視の買い物で失敗が少なくなります。','長期的な貯蓄計画を立てると◎。','医療・保険の見直しが吉。'],
+    }
+  },
+  { name: '天秤座', icon: '♎', start: [9,23], end: [10,22], keyword: 'バランス・調和・外交',
+    colors: ['ピンク','ライトブルー'], item: '花・インテリア小物', number: '6',
+    msg: ['人間関係が充実する一日。誰とでもうまく渡り合えるあなたの外交力が光ります。新しい出会いも吉。',
+          'バランス感覚が冴えています。物事の両面を見ることで最善の判断ができます。',
+          '美しい環境に身を置くことで運気が上がります。お気に入りのカフェや空間でインスピレーションを。',
+          '迷いすぎて決断が遅れることも。ある程度情報が揃ったら思い切って前に進みましょう。',
+          '誰かとの協力によって大きな成果が生まれます。一人で抱え込まず、力を借りることも大切。'],
+    areas: {
+      総合運: ['⭐⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐⭐'],
+      恋愛運: ['⭐⭐⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐'],
+      仕事運: ['⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐⭐'],
+      金運:   ['⭐⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐'],
+    },
+    area_msg: {
+      総合運: ['調和のとれた行動が幸運を呼びます。','人との縁を大切にすると運気アップ。','美的センスが輝く一日。','公平な判断が周囲の信頼を集めます。','協調性が幸運のカギ。'],
+      恋愛運: ['魅力全開の日。積極的に動いて。','相手の話をじっくり聞くと距離が縮まります。','おしゃれな場所でのデートが吉。','二人の関係をバランスよく保つことが大切。','新しい出会いに最適なタイミング。'],
+      仕事運: ['チームでの共同作業が成果を生みます。','調整役として力を発揮できる日。','交渉や取引に最適なコンディション。','会議での発言が評価される場面が来ます。','人間関係の修復に動くと吉。'],
+      金運:   ['おしゃれや美容への投資が◎。','割り勘や共同出費でトラブルに注意。','バランスのとれた家計管理を心がけて。','衝動買いより計画的な購入が吉。','センスを活かした副業で収入アップも。'],
+    }
+  },
+  { name: '蠍座', icon: '♏', start: [10,23], end: [11,21], keyword: '情熱・直感・変容',
+    colors: ['深紅','ブラック'], item: 'アロマキャンドル', number: '8',
+    msg: ['深い洞察力と強い直感があなたの武器。今日は表面だけでなく、物事の本質を見抜くことができます。',
+          '変化を恐れない日。古い自分の殻を脱ぎ捨てることで、新しい可能性が広がります。',
+          '秘めた情熱を行動に変えるときです。一歩踏み出すことで状況が大きく動きます。',
+          '嫉妬や執着がエネルギーを消耗させていませんか？手放すことで心が軽くなります。',
+          '深く信頼できる絆を築ける日。表面的な関係より、真剣な向き合いが大切にされます。'],
+    areas: {
+      総合運: ['⭐⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐⭐'],
+      恋愛運: ['⭐⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐⭐'],
+      仕事運: ['⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐'],
+      金運:   ['⭐⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐'],
+    },
+    area_msg: {
+      総合運: ['直感を信じて動くと道が開けます。','変革のタイミングが到来しています。','集中力が研ぎ澄まされた一日。','秘めた力を解放するとき。','深い洞察が幸運の扉を開きます。'],
+      恋愛運: ['深い絆を築けるタイミング。','相手の心の奥まで感じ取れる日。','独占欲をほどよくコントロールして。','真剣な交際に進む決断をするとき。','魅力的なオーラが相手を引き寄せます。'],
+      仕事運: ['調査・分析・研究に最高のコンディション。','秘密の情報を扱う仕事で力を発揮できます。','裏方での貢献が後々評価されます。','直感で相手の意図を読む力が活きる日。','粘り強く取り組むことで成果が出ます。'],
+      金運:   ['投資や資産運用を見直すタイミング。','固定費の見直しで大きく改善できます。','隠れた収入源を発掘できるかも。','衝動的な大きな出費は控えて。','長期的な視点でお金を動かすと◎。'],
+    }
+  },
+  { name: '射手座', icon: '♐', start: [11,22], end: [12,21], keyword: '冒険・自由・哲学',
+    colors: ['紫','ターコイズ'], item: '旅行グッズ・地図', number: '3',
+    msg: ['好奇心と冒険心が運気を高める一日。新しい場所、人、考え方との出会いが今後を豊かにします。',
+          '遠くへの思いが募る日。計画中の旅や新プロジェクトを前進させる絶好のタイミングです。',
+          '楽観的なエネルギーが周囲に伝播します。笑顔と明るい言葉で場の空気を変えましょう。',
+          '大局を見渡す眼力が輝く日。細部に迷い込まず、大きなビジョンを描いてみて。',
+          '学びへの情熱が高まります。新しいスキルや知識を取り入れると、将来の可能性が広がります。'],
+    areas: {
+      総合運: ['⭐⭐⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐⭐'],
+      恋愛運: ['⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐⭐'],
+      仕事運: ['⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐'],
+      金運:   ['⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐⭐'],
+    },
+    area_msg: {
+      総合運: ['チャレンジ精神が幸運を呼びます。','自由な発想で新しい道を切り開いて。','遠方や外国との縁が深まる予感。','大きな夢を描くと実現に近づきます。','楽観的な姿勢が周囲を引き寄せます。'],
+      恋愛運: ['自由を尊重し合える相手との縁が吉。','旅行や外出でロマンスが生まれやすい日。','率直な言葉で気持ちを伝えて。','束縛より自由な関係が長続きします。','遠距離恋愛に進展がありそう。'],
+      仕事運: ['新しい分野への挑戦が吉と出る日。','海外や遠方との仕事が動き出すかも。','ビジョンを語ることでチームが動きます。','学びに投資することが仕事運を高めます。','枠を超えた発想が評価される日。'],
+      金運:   ['旅や体験への出費は価値ある投資。','ギャンブル的な投資は避けて。','教育やスキルへの費用は惜しまないで。','思いがけないお金の流れがあるかも。','長期投資より短期の機動力を活かして。'],
+    }
+  },
+  { name: '山羊座', icon: '♑', start: [12,22], end: [1,19], keyword: '堅実・野心・責任感',
+    colors: ['ダークグリーン','ブラウン'], item: '名刺入れ・手帳', number: '8',
+    msg: ['着実な積み重ねが大きな成果につながる日。目の前のことに集中して丁寧に取り組みましょう。',
+          'キャリアや長期計画を見直す好機。今の行動が5年後の自分に直結しています。',
+          '信頼と実績がものを言う日。過去の誠実な行動が今日の評価として返ってきます。',
+          '厳しさとユーモアのバランスを意識して。周囲との関係を温かく保つことも大切です。',
+          '野心を持ちつつ焦らないことが吉。ペースを守って進めば確実に頂点へ近づきます。'],
+    areas: {
+      総合運: ['⭐⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐⭐'],
+      恋愛運: ['⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐⭐'],
+      仕事運: ['⭐⭐⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐'],
+      金運:   ['⭐⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐'],
+    },
+    area_msg: {
+      総合運: ['堅実な一歩が大きな結果を生みます。','実績を積み上げる大切な一日。','長期的な視点で動くと吉。','責任感が評価されるタイミング。','地に足のついた行動で幸運を掴んで。'],
+      恋愛運: ['誠実な態度が相手の信頼を勝ち取ります。','じっくり関係を育てることが大切。','真剣な交際に踏み出す好機。','仕事と恋愛のバランスを意識して。','安定した関係を築くことで満足感が得られます。'],
+      仕事運: ['責任ある仕事を任されるタイミング。','管理職や上位職へのアピールが吉。','長期プロジェクトで実力を発揮できます。','部下や後輩の指導で信頼が高まります。','専門性を磨くことが将来の財産に。'],
+      金運:   ['貯蓄・資産運用に最適な日。','長期投資を始めるタイミング。','固定費の削減で大きく改善できます。','不動産や安定した投資を検討するとき。','勤勉さが収入増につながる予感。'],
+    }
+  },
+  { name: '水瓶座', icon: '♒', start: [1,20], end: [2,18], keyword: '独創性・人道主義・革新',
+    colors: ['電気ブルー','シルバー'], item: 'ガジェット・先進的なグッズ', number: '7',
+    msg: ['独創的な発想が周囲を驚かせる日。常識に縛られない自由なアイデアこそが、今日最大の武器です。',
+          '人と人を繋ぐ役割が巡ってきます。コミュニティやグループの中で積極的に動くと良縁が生まれます。',
+          '未来を見据えた行動が吉。先進的な技術や新しいトレンドに敏感でいることが運気を上げます。',
+          '個性を大切にしながらも、周囲との調和を意識すると物事がスムーズに進みます。',
+          '人道的な視点で行動することで、思いがけない感謝や縁が生まれます。'],
+    areas: {
+      総合運: ['⭐⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐'],
+      恋愛運: ['⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐⭐⭐'],
+      仕事運: ['⭐⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐⭐'],
+      金運:   ['⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐'],
+    },
+    area_msg: {
+      総合運: ['革新的な行動が幸運を引き寄せます。','独自の視点が評価される一日。','コミュニティの力を借りると大きな成果が。','未来志向の計画が実を結ぶ予感。','自分らしさを貫くことで道が開けます。'],
+      恋愛運: ['友達から恋愛に発展しやすい日。','知的な会話で心が繋がります。','自由を大切にし合える関係が吉。','SNSやオンラインからの縁も◎。','ユニークな個性で相手を惹きつけて。'],
+      仕事運: ['革新的な提案が通りやすい日。','ITやテクノロジー関連の仕事で実力発揮。','グループプロジェクトでリーダーシップを。','社会貢献につながる仕事に情熱が湧きます。','ネットワーキングで仕事の幅が広がります。'],
+      金運:   ['新しい金融サービスやアプリを活用して。','仮想通貨など先進的な投資は慎重に。','副業・フリーランスで収入を増やすとき。','寄付やボランティアが巡り巡って運を呼びます。','友人とのお金の貸し借りに注意。'],
+    }
+  },
+  { name: '魚座', icon: '♓', start: [2,19], end: [3,20], keyword: '感性・夢想・共感',
+    colors: ['シーグリーン','ラベンダー'], item: '音楽・アート用品', number: '7',
+    msg: ['豊かな感受性とインスピレーションが溢れる一日。芸術的な活動や創造的な仕事で才能が輝きます。',
+          '人の心の奥を読み取れる日。共感力を活かして誰かの力になることで、良い縁が生まれます。',
+          '夢や直感からのメッセージを大切にして。潜在意識が正しい道を示してくれています。',
+          '現実から離れた時間も必要。音楽・映画・自然の中でリフレッシュすると運気が回復します。',
+          '流れに逆らわず自然体でいることが今日の開運法。無理に動かなくても良いことが動き出します。'],
+    areas: {
+      総合運: ['⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐'],
+      恋愛運: ['⭐⭐⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐'],
+      仕事運: ['⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐⭐'],
+      金運:   ['⭐⭐⭐⭐','⭐⭐⭐⭐⭐','⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐⭐⭐'],
+    },
+    area_msg: {
+      総合運: ['感性と直感を信じて動くと吉。','芸術や癒しの活動で運気が上がります。','夢や潜在意識からのサインを大切に。','穏やかな流れに乗ることが幸運の秘訣。','共感と優しさが縁を引き寄せます。'],
+      恋愛運: ['ロマンティックな雰囲気の中で縁が生まれます。','感情を正直に伝えることで絆が深まります。','芸術・音楽・映画などの共通の趣味で繋がれる日。','夢を語り合える相手との縁が深まります。','思いやりが愛情の土台を強化します。'],
+      仕事運: ['創造的な仕事で才能が輝く日。','アート・音楽・執筆などで実力発揮。','裏方のサポートが後から評価されます。','直感で動くと意外な好結果が。','感性が求められる仕事に集中して。'],
+      金運:   ['衝動的な感情買いに注意。','芸術や趣味への投資は◎。','夢見がちな大きな計画より堅実な管理を。','寄付や感謝の気持ちを表すとお金の流れが良くなります。','収支バランスを見直すと安定します。'],
+    }
+  },
+];
+
+let selectedZodiac = null;
+
+function mulberry32(a) {
+  return function() {
+    a |= 0; a = a + 0x6D2B79F5 | 0;
+    var t = Math.imul(a ^ a >>> 15, 1 | a);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  }
+}
+
+function buildZodiacGrid() {
+  const grid = document.getElementById('zodiacGrid');
+  ZODIACS.forEach((z, i) => {
+    const el = document.createElement('div');
+    el.className = 'zodiac-item';
+    el.innerHTML = `<span class="z-icon">${z.icon}</span>${z.name}`;
+    el.onclick = () => selectZodiac(i, el);
+    grid.appendChild(el);
+  });
+}
+
+function selectZodiac(i, el) {
+  document.querySelectorAll('.zodiac-item').forEach(e => e.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedZodiac = i;
+}
+
+function autoDetectZodiac(dateStr) {
+  if (!dateStr) return;
+  const d = new Date(dateStr);
+  const m = d.getMonth() + 1;
+  const day = d.getDate();
+  const idx = getZodiacIndex(m, day);
+  selectedZodiac = idx;
+  document.querySelectorAll('.zodiac-item').forEach((el, i) => {
+    el.classList.toggle('selected', i === idx);
+  });
+}
+
+function getZodiacIndex(m, day) {
+  for (let i = 0; i < ZODIACS.length; i++) {
+    const z = ZODIACS[i];
+    const [sm, sd] = z.start;
+    const [em, ed] = z.end;
+    if (sm <= em) {
+      if ((m === sm && day >= sd) || (m === em && day <= ed) || (m > sm && m < em)) return i;
+    } else {
+      if ((m === sm && day >= sd) || m > sm || m < em || (m === em && day <= ed)) return i;
+    }
+  }
+  return 0;
+}
+
+function calcZodiac() {
+  if (selectedZodiac === null) { alert('星座を選択してください'); return; }
+  const z   = ZODIACS[selectedZodiac];
+  const now  = new Date();
+  const seed = now.getFullYear() * 10000 + (now.getMonth()+1) * 100 + now.getDate() + selectedZodiac * 37;
+  const rng  = mulberry32(seed);
+  const pick = (arr) => arr[Math.floor(rng() * arr.length)];
+
+  // 日付ラベル
+  const dateStr = `${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日の運勢`;
+  document.getElementById('zrDate').textContent   = dateStr;
+  document.getElementById('zrIcon').textContent   = z.icon;
+  document.getElementById('zrName').textContent   = `${z.name}の今日の運勢`;
+  document.getElementById('zrKeyword').textContent = `✨ ${z.keyword}`;
+
+  // 総合メッセージ
+  document.getElementById('zrMessage').textContent = pick(z.msg);
+
+  // 各運勢エリア
+  const areasEl = document.getElementById('zrAreas');
+  areasEl.innerHTML = '';
+  ['総合運','恋愛運','仕事運','金運'].forEach(area => {
+    const stars = pick(z.areas[area]);
+    const msg   = pick(z.area_msg[area]);
+    areasEl.innerHTML += `
+      <div class="zr-area-row">
+        <div class="zr-area-top">
+          <span class="zr-area-name">${area}</span>
+          <span class="zr-stars">${stars}</span>
+        </div>
+        <div class="zr-area-msg">${msg}</div>
+      </div>`;
+  });
+
+  // ラッキー情報
+  document.getElementById('zrLucky').innerHTML = `
+    <div class="zr-lucky-item"><div class="zr-lucky-label">ラッキーカラー</div><div class="zr-lucky-val">${pick(z.colors)}</div></div>
+    <div class="zr-lucky-item"><div class="zr-lucky-label">ラッキーアイテム</div><div class="zr-lucky-val">${z.item}</div></div>
+    <div class="zr-lucky-item"><div class="zr-lucky-label">ラッキーナンバー</div><div class="zr-lucky-val">${z.number}</div></div>
+  `;
+
+  const result = document.getElementById('zodiacResult');
+  result.classList.add('show');
+  setTimeout(() => result.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+}
+
+buildZodiacGrid();
+
+
+// ===== 数秘術データ =====
+const NUM_DATA = {
+  1: {
+    title: '開拓者', keyword: '独立・リーダーシップ・創造',
+    color: '赤・オレンジ', compatible: '1・5・7', lucky: '1・10・19',
+    desc: '強いリーダーシップと独立心を持つあなたは、自らの道を切り開く力があります。革新的なアイデアと行動力で周囲を引っ張る存在です。時に孤独を感じることもありますが、それはあなたが先を歩いているから。「自分を信じる」ことがあなたの最大のテーマです。',
+    strengths: ['強いリーダーシップ','開拓精神と行動力','独自のアイデアを形にする力','困難に立ち向かう勇気','自立して物事を進める能力'],
+    challenges: ['孤独になりやすい','頑固で協調しにくいことも','完璧主義から焦りが生まれる','他者への依存を嫌がる','独善的になる傾向'],
+    career: 'リーダーや先駆者として力を発揮します。起業家・経営者・パイオニア的な専門職・スポーツ選手・クリエイター・政治家など、自分の意志で道を切り開く職業が向いています。',
+  },
+  2: {
+    title: '調和の人', keyword: '協調・感受性・外交',
+    color: 'ホワイト・シルバー', compatible: '2・4・6', lucky: '2・11・20',
+    desc: '繊細な感受性と優れた協調性を持ち、人と人を繋ぐ橋渡し役。チームワークを大切にし、細かな気遣いで周囲を支えます。決断に時間がかかることもありますが、それはあなたが深く考えているから。「共に歩む」ことがあなたの使命です。',
+    strengths: ['人の気持ちを察する感受性','チームワークと協調性','丁寧なコミュニケーション','細部への目配り','信頼を築く誠実さ'],
+    challenges: ['優柔不断になりやすい','他者に依存する傾向','批判に傷つきやすい','自己主張が苦手','人の顔色を伺いすぎる'],
+    career: '人をサポートし調和を生む職業が向いています。カウンセラー・社会福祉士・秘書・外交官・医療従事者・教師・接客業など、人と人の間で働く環境で才能が開花します。',
+  },
+  3: {
+    title: '表現者', keyword: '創造・表現・コミュニケーション',
+    color: 'イエロー・ゴールド', compatible: '3・6・9', lucky: '3・12・21',
+    desc: '豊かな創造力と明るいエネルギーで周囲を魅了します。言葉・芸術・音楽など表現の才能に恵まれ、人々に喜びをもたらす存在です。集中力を高めることが課題ですが、あなたの創造性は無限の可能性を秘めています。「表現することで世界が変わる」と信じて。',
+    strengths: ['豊かな創造力と芸術性','明るく場を盛り上げる力','言葉や表現の才能','人々に喜びをもたらす','楽観的なエネルギー'],
+    challenges: ['飽き性で一つのことが続かない','感情的になりやすい','散漫になりがち','批判に敏感','現実感が薄いことも'],
+    career: '表現と創造が活きる職業で輝きます。作家・芸術家・デザイナー・音楽家・俳優・ライター・コメディアン・教師・広告クリエイターなど、才能を発信できる場が最適です。',
+  },
+  4: {
+    title: '建設者', keyword: '安定・勤勉・実直',
+    color: 'ダークグリーン・ブラウン', compatible: '4・6・8', lucky: '4・13・22',
+    desc: '誠実さと粘り強さで着実に夢を実現する力を持ちます。計画的で責任感が強く、信頼できる存在として周囲から頼られます。時に頑固さが出ることもありますが、その堅固さこそがあなたの最大の武器。「積み重ねた土台が未来を作る」という信念で生きています。',
+    strengths: ['類まれな忍耐力と継続力','計画性と組織力','誠実で信頼できる人柄','詳細への注意力','実用的で現実的な思考'],
+    challenges: ['変化を嫌う保守的な面','頑固で融通が利かないことも','過労になりやすい','感情表現が不得意','新しいことへの抵抗感'],
+    career: '堅実さと組織力が活きる職業が向いています。建築家・エンジニア・会計士・医師・公務員・プロジェクトマネージャー・製造業・農業など、着実に積み上げる分野で評価されます。',
+  },
+  5: {
+    title: '自由人', keyword: '自由・変化・冒険',
+    color: 'ターコイズ・シルバー', compatible: '1・5・7', lucky: '5・14・23',
+    desc: '変化と自由を愛し、多彩な経験を通じて成長し続けます。好奇心旺盛で適応力が高く、どんな状況でも柔軟に対応できます。落ち着きが必要な場面もありますが、あなたの自由な魂は多くの人にインスピレーションを与えます。「変化の中にこそ本当の自分がいる」。',
+    strengths: ['抜群の適応力と柔軟性','好奇心と探求心','コミュニケーション能力','変化を楽しめるポジティブさ','多様な才能と器用さ'],
+    challenges: ['一つのことに集中しにくい','飽きやすく安定が苦手','衝動的な行動に注意','責任から逃げたくなる','ルーティンが苦手'],
+    career: '自由と変化が保障される環境で力を発揮します。旅行業・フリーランス・セールス・ジャーナリスト・通訳・スポーツ選手・プロデューサーなど、多様な経験が活きる仕事が向いています。',
+  },
+  6: {
+    title: '養育者', keyword: '愛・奉仕・責任',
+    color: 'ローズ・ラベンダー', compatible: '2・4・6', lucky: '6・15・24',
+    desc: '深い愛情と責任感で家族や仲間を守る心の温かい人。バランス感覚に優れ、美しいものを愛し、平和を大切にします。完璧主義が負担になることもありますが、あなたの愛は周囲に安心感と癒しを与えます。「愛することが最高の力」という信念を胸に。',
+    strengths: ['深い愛情と思いやり','調和を生み出すバランス感覚','美的センスと審美眼','責任感と信頼性','人々を癒す温かい存在感'],
+    challenges: ['完璧主義からの自己批判','愛情を押しつけることも','自己犠牲が過ぎる傾向','他者への期待が大きくなりすぎる','批判に非常に傷つきやすい'],
+    career: '愛とケアを提供できる環境で才能が輝きます。医師・看護師・カウンセラー・保育士・教師・社会福祉士・デザイナー・栄養士・ウェディングプランナーなど、人の幸せに関わる職業が向いています。',
+  },
+  7: {
+    title: '探求者', keyword: '知恵・直感・内省',
+    color: 'インディゴ・バイオレット', compatible: '1・5・7', lucky: '7・16・25',
+    desc: '深い思考力と鋭い分析力を持ち、真理を求め続けます。直感が強く、目に見えないものを感じ取る感性があります。孤独を好む面もありますが、それはあなたが深く考えているから。あなたの洞察は多くの謎を解き明かします。「知ることは力」という信念で進んで。',
+    strengths: ['深い思考力と分析力','研ぎ澄まされた直感','真理を追求する精神','独自の哲学と洞察力','深い集中力'],
+    challenges: ['孤独になりやすい','人間関係が難しいことも','完璧主義から疑念が生まれる','感情表現が不得意','秘密主義的な面がある'],
+    career: '知識と探求が活きる職業で能力を発揮します。研究者・科学者・哲学者・心理士・占い師・作家・プログラマー・探偵・宗教家・精神科医など、深い思考が求められる分野で輝きます。',
+  },
+  8: {
+    title: '達成者', keyword: '成功・権力・物質的繁栄',
+    color: 'ゴールド・ブラック', compatible: '2・4・8', lucky: '8・17・26',
+    desc: '強い意志と実行力で大きな目標を達成する力を持ちます。物事の本質を見抜く眼力と、リスクを計算した大胆な決断が得意です。権力への執着に注意が必要ですが、あなたのパワーは世界を動かす可能性を秘めています。「成功は必然」という確信を持って進んで。',
+    strengths: ['目標達成への強い意志','大きなビジョンと実行力','物事の本質を見抜く眼力','リーダーとしての威厳','ビジネスセンスと決断力'],
+    challenges: ['権力やお金への執着','完璧主義から来るストレス','ワークライフバランスが崩れやすい','人を管理しすぎる面','プライドが高すぎることも'],
+    career: '権限と実行力が活きる環境で本領を発揮します。経営者・弁護士・銀行家・投資家・政治家・プロデューサー・上級管理職など、大きな権限と責任を伴う職業で頭角を現します。',
+  },
+  9: {
+    title: '人道主義者', keyword: '奉仕・慈悲・完成',
+    color: 'レッド・ゴールド', compatible: '3・6・9', lucky: '9・18・27',
+    desc: '広い視野と深い慈悲心で世界に貢献することに喜びを感じます。過去の経験から学んだ知恵を持ち、多くの人の導き手となります。自己犠牲になりすぎない配慮も大切ですが、あなたの普遍的な愛は世界をより良くします。「愛と奉仕が最高の完成へ導く」。',
+    strengths: ['広い視野と大局的な思考','深い慈悲心と共感力','創造的な問題解決力','寛大さと許容力','精神的な成熟度'],
+    challenges: ['自己犠牲が過ぎることがある','感情の起伏が大きいことも','理想主義から失望しやすい','境界線を設けるのが苦手','過去にこだわりやすい'],
+    career: '人類への奉仕が活きる職業で輝きます。ボランティア活動家・国際協力機関・医師・弁護士・宗教家・芸術家・教育者・環境保護活動家など、大きな意義を感じられる仕事が向いています。',
+  },
+  11: {
+    title: '霊感の人', keyword: '直感・霊性・インスピレーション',
+    color: 'シルバー・ホワイト', compatible: '2・11・22', lucky: '11・22・33',
+    desc: '11はマスターナンバーと呼ばれる特別な数字。強い直感と霊的な感受性を持ち、インスピレーションで周囲を導く使命があります。感受性が強すぎて疲れることもありますが、その敏感さこそが最大の才能です。自分を大切にしながら、その光を世界に届けてください。',
+    strengths: ['卓越した直感と霊的感受性','インスピレーションの源','人々を鼓舞する能力','深い共感力と洞察力','精神的なリーダーシップ'],
+    challenges: ['神経が過敏になりやすい','現実と理想のギャップに苦しむ','感情の消耗が激しい','プレッシャーに弱い面も','孤独感を感じやすい'],
+    career: '精神性と直感が活きる職業が向いています。スピリチュアルカウンセラー・占い師・ヒーラー・詩人・音楽家・心理士・発明家・宗教家・教育者など、インスピレーションを与える仕事で使命を果たします。',
+  },
+  22: {
+    title: '超実現者', keyword: '建築・現実化・偉大なる夢',
+    color: 'ゴールド・ダークブルー', compatible: '4・8・22', lucky: '4・22・40',
+    desc: '22はマスターナンバーで最も強力な数字の一つ。大きなビジョンを現実に変える力を持ち、世界規模の変化を起こせる資質があります。重い責任を感じることもありますが、あなたには本当にその力があります。「夢を現実に変えること」があなたの使命です。',
+    strengths: ['巨大なビジョンと実現力','卓越したリーダーシップ','4と11の両方の才能','世界的な影響を与えられる力','実践力と精神性の融合'],
+    challenges: ['大きな期待のプレッシャー','燃え尽き症候群のリスク','自分への厳しさが過ぎる','孤独を感じやすい','完璧主義から動けなくなることも'],
+    career: '世界規模のプロジェクトや組織で力を発揮します。大企業の経営者・国家指導者・偉大な建築家・国際機関のトップ・革命的な発明家など、歴史に名を残すような仕事で使命を全うします。',
+  },
+  33: {
+    title: '宇宙の教師', keyword: '奉仕・癒し・精神的指導',
+    color: 'バイオレット・ゴールド', compatible: '6・11・33', lucky: '6・33・66',
+    desc: '33はマスターナンバーの中でも最高の奉仕を象徴します。無条件の愛と高い精神性で、周囲に癒しと知恵をもたらします。自分を犠牲にしすぎず、まず自分を満たすことも忘れないで。「愛を教えることが最高の使命」として生まれてきた魂です。',
+    strengths: ['無条件の愛と深い慈悲','精神的な知恵と洞察','大きな癒しのエネルギー','人々を高める力','6と11と22の才能の融合'],
+    challenges: ['自己犠牲が極限に達することも','重い使命感からのプレッシャー','現実的な問題への対応が苦手','感情の消耗が激しい','完璧な愛を追い求めすぎる'],
+    career: '人類の精神的向上に関わる職業が使命です。精神的指導者・聖職者・ヒーラー・偉大な教師・心理療法士・国際的な平和活動家など、魂のレベルで人々を導く仕事において真の力を発揮します。',
+  },
+};
+
+function calcNumerology() {
+  const d = dpState.num;
+  if (!d) { alert('生年月日を選択してください'); return; }
+
+  const y = d.getFullYear();
+  const m = d.getMonth() + 1;
+  const day = d.getDate();
+
+  // 計算ステップを表示
+  const allDigits = `${y}${String(m).padStart(2,'0')}${String(day).padStart(2,'0')}`;
+  const step1 = allDigits.split('').join(' + ');
+  let sum = allDigits.split('').reduce((a, c) => a + parseInt(c), 0);
+  let calcSteps = `${y}/${m}/${day} → ${step1} = ${sum}`;
+
+  while (sum > 9 && sum !== 11 && sum !== 22 && sum !== 33) {
+    const prev = sum;
+    const digits2 = String(sum).split('');
+    sum = digits2.reduce((a, c) => a + parseInt(c), 0);
+    if (sum > 9 && sum !== 11 && sum !== 22 && sum !== 33) {
+      calcSteps += ` → ${digits2.join(' + ')} = ${sum}`;
+    } else {
+      calcSteps += ` → ${digits2.join(' + ')} = ${sum}`;
+    }
+  }
+
+  const data = NUM_DATA[sum] || NUM_DATA[1];
+
+  document.getElementById('nrNumber').textContent  = sum;
+  document.getElementById('nrTitle').textContent   = `【${data.title}】`;
+  document.getElementById('nrCalc').textContent    = calcSteps;
+  document.getElementById('nrKeyword').textContent = `✨ ${data.keyword}`;
+  document.getElementById('nrDesc').textContent    = data.desc;
+
+  const sl = document.getElementById('nrStrengths');
+  sl.innerHTML = data.strengths.map(s => `<li>${s}</li>`).join('');
+  const cl = document.getElementById('nrChallenges');
+  cl.innerHTML = data.challenges.map(c => `<li>${c}</li>`).join('');
+
+  document.getElementById('nrLucky').innerHTML = `
+    <div class="nr-lucky-item"><div class="nr-lucky-label">ラッキーカラー</div><div class="nr-lucky-val">${data.color}</div></div>
+    <div class="nr-lucky-item"><div class="nr-lucky-label">相性の良い数字</div><div class="nr-lucky-val">${data.compatible}</div></div>
+    <div class="nr-lucky-item"><div class="nr-lucky-label">ラッキーナンバー</div><div class="nr-lucky-val">${data.lucky}</div></div>
+    <div class="nr-lucky-item"><div class="nr-lucky-label">マスターナンバー</div><div class="nr-lucky-val">${[11,22,33].includes(sum) ? '✓ 該当' : '—'}</div></div>
+  `;
+  document.getElementById('nrCareer').textContent = data.career;
+
+  const result = document.getElementById('numResult');
+  result.classList.add('show');
+  setTimeout(() => result.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+}
+
+// ===== 算命学 =====
+const TENKAN = ['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
+const TENKAN_READ = ['きのえ','きのと','ひのえ','ひのと','つちのえ','つちのと','かのえ','かのと','みずのえ','みずのと'];
+const CHISHI  = ['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
+const CHISHI_READ = ['ね','うし','とら','う','たつ','み','うま','ひつじ','さる','とり','いぬ','い'];
+const GOGYO_KAN = ['moku','moku','hi','hi','tsuchi','tsuchi','kin','kin','mizu','mizu'];
+const GOGYO_LABEL = { moku:'木', hi:'火', tsuchi:'土', kin:'金', mizu:'水' };
+const INYO = ['陽','陰','陽','陰','陽','陰','陽','陰','陽','陰'];
+
+// 日干計算（基準: 1900/1/1 = 甲=0）
+function calcNikkanIdx(year, month, day) {
+  const base = new Date(1900, 0, 1);
+  const target = new Date(year, month - 1, day);
+  const days = Math.round((target - base) / 86400000);
+  return ((days % 10) + 10) % 10;
+}
+
+// 年干支計算
+function calcYearKanshi(year) {
+  const kan = ((year - 4) % 10 + 10) % 10;
+  const shi = ((year - 4) % 12 + 12) % 12;
+  return { kan, shi };
+}
+
+// 月干支計算（節気省略版・簡略）
+function calcMonthKanshi(year, month) {
+  // 月支: 寅(1月)始まりで +2
+  const shi = ((month + 1) % 12);
+  // 月干: 年干×2 + 月支 を10で割った余り
+  const yearKan = ((year - 4) % 10 + 10) % 10;
+  const kan = ((yearKan % 5) * 2 + shi) % 10;
+  return { kan, shi };
+}
+
+const SM_DATA = {
+  0: { // 甲
+    name: '甲（きのえ）', gogyo: 'moku', inyo: '陽',
+    desc: '大木のようにまっすぐ天に向かって伸びる存在。正直で誠実、強いリーダーシップを持ち、自ら道を切り開く力があります。理想を高く掲げ、曲がったことが嫌いな正義の人。一本気で頑固な面もありますが、その純粋さが多くの人を惹きつけます。',
+    strengths: ['曲がったことが嫌いな正義感','強いリーダーシップと決断力','目標に向かって一直線に進む力','誠実で信頼される人柄','高い理想と向上心'],
+    challenges: ['頑固で融通が利かないことも','孤立しやすい一匹狼の気質','プライドが傷つくと立ち直りに時間が','細かい調整や妥協が苦手','感情を抑えすぎて溜め込む'],
+    lucky: { color: '青・緑', dir: '東', num: '3・8', kigo: '春・朝' },
+    career: 'リーダーや先駆者として最も輝きます。経営者・政治家・弁護士・スポーツ選手・軍人・パイオニア的な研究者など、自らの意志で道を切り開く職業が向いています。',
+    yearMsg: {
+      moku: '同じ木の気のため、エネルギーが増幅されます。積極的に動くほど運気が開けます。',
+      hi:   '木が火を生む相生の関係。あなたのエネルギーが周囲を照らす輝きの年。',
+      tsuchi: '木が土を剋す年。行動力は増しますが、強引さが摩擦を生む可能性も。',
+      kin:  '金が木を剋す年。試練や抵抗に遭いやすいですが、乗り越えることで大きな成長が。',
+      mizu: '水が木を生む相生。周囲のサポートを受けながら着実に成長できる年。',
+    }
+  },
+  1: { // 乙
+    name: '乙（きのと）', gogyo: 'moku', inyo: '陰',
+    desc: '柔軟にしなやかに環境に適応する草花のような存在。繊細な感受性と美的センスを持ち、状況を読む直感が優れています。表面は穏やかに見えても、内側に芯の強さを秘めています。人間関係の機微に敏感で、空気を読む能力に長けています。',
+    strengths: ['高い適応力と柔軟性','洗練された美的センス','人の心を読む鋭い直感','協調しながら目標を達成する力','粘り強く諦めない底力'],
+    challenges: ['依存心が出やすい','はっきり主張するのが苦手','嫉妬心を抱きやすい面も','優柔不断になることがある','感情の起伏が激しい時期が'],
+    lucky: { color: '薄緑・ピンク', dir: '東南', num: '3・4', kigo: '春・夕暮れ' },
+    career: '美・感性・人をサポートする分野で才能が開花します。デザイナー・アーティスト・カウンセラー・美容師・フローリスト・外交官・コーディネーターが向いています。',
+    yearMsg: {
+      moku: '同気で活力が増します。コツコツ続けてきたことが形になりやすい年。',
+      hi:   '相生の関係で運気上昇。感性と表現力が輝き、新しい縁が広がります。',
+      tsuchi: '木が土を剋す関係。エネルギーは高いですが、焦らず着実に進むことが大切。',
+      kin:  '金に剋される年。忍耐が必要ですが、プレッシャーが内なる強さを育てます。',
+      mizu: '水生木の相生。流れに乗ることで思わぬ幸運が舞い込む年。',
+    }
+  },
+  2: { // 丙
+    name: '丙（ひのえ）', gogyo: 'hi', inyo: '陽',
+    desc: '太陽のように明るく、周囲を温める存在。オープンで社交的、どんな人とも打ち解けられる天性の明るさがあります。情熱家で行動力があり、自分が信じたことには全力で取り組みます。存在するだけで場を明るくする、生まれながらのエンターテイナー。',
+    strengths: ['太陽のような明るさと情熱','卓越したコミュニケーション能力','行動力と積極性','人を惹きつけるカリスマ性','困難にめげないポジティブさ'],
+    challenges: ['軽率な言動で誤解を招くことも','秘密が守れないことがある','衝動的な行動に注意','エネルギーを使いすぎて燃え尽きる','プライドが高く引けない場面が'],
+    lucky: { color: '赤・オレンジ', dir: '南', num: '2・7', kigo: '夏・昼' },
+    career: '人の前に出る仕事・表現・エンターテインメントで輝きます。俳優・アナウンサー・営業職・政治家・教師・デザイナー・イベントプロデューサーが向いています。',
+    yearMsg: {
+      moku: '木が火を生む相生。周囲のサポートを受けて情熱が燃え上がる充実の年。',
+      hi:   '同気で激しくなりすぎる面も。明るさを保ちつつ冷静さとのバランスが鍵。',
+      tsuchi: '火が土を生む関係。あなたの行動力が周囲に豊かさをもたらす年。',
+      kin:  '火が金を剋す。改革を起こす力が強まりますが、対立には慎重に。',
+      mizu: '水が火を剋す年。エネルギーを抑えられる感覚も。内省する大切な時期。',
+    }
+  },
+  3: { // 丁
+    name: '丁（ひのと）', gogyo: 'hi', inyo: '陰',
+    desc: 'ろうそくの炎のように、静かに、しかし確実に周囲を照らす存在。知性と感性のバランスに優れ、細やかな気配りで人の心を温めます。表面の穏やかさの内側に強い信念と情熱を秘めており、じっくりと深く物事に向き合います。',
+    strengths: ['深い知性と鋭い洞察力','細やかな気配りと思いやり','芸術的な感性と創造力','信念を持ってやり遂げる力','人の心を温める存在感'],
+    challenges: ['内向きになりすぎることがある','感受性が高く傷つきやすい','完璧主義から来る疲弊','本音を言えずため込みやすい','嫉妬心を隠してしまう'],
+    lucky: { color: '深紅・紫', dir: '南西', num: '2・6', kigo: '夏・夜' },
+    career: '知性と感性が活きる仕事で才能発揮。研究者・作家・芸術家・占い師・教師・カウンセラー・宝石デザイナー・料理人が向いています。',
+    yearMsg: {
+      moku: '相生の関係で運気上昇。温かい縁と学びが深まる豊かな年。',
+      hi:   '同気で感情が激しくなる時期。感受性が高まり芸術的な才能が輝きます。',
+      tsuchi: '火生土。あなたの情熱が周囲に伝わり実を結ぶ年。',
+      kin:  '火剋金。改革心が強まりますが、衝突を避ける配慮を忘れずに。',
+      mizu: '水剋火の年。流れに抗うより、静かに内省することで智慧が深まります。',
+    }
+  },
+  4: { // 戊
+    name: '戊（つちのえ）', gogyo: 'tsuchi', inyo: '陽',
+    desc: '大地のように揺るぎない、どっしりとした安定感を持つ存在。信頼性と包容力があり、周囲の人々の拠り所となります。忍耐強く、どんな困難にも動じない精神力の持ち主。大きな山のような存在感で、組織や集団の中心的存在になります。',
+    strengths: ['揺るぎない精神的安定感','強い包容力と信頼性','長期的な視野と忍耐力','組織を束ねるリーダーシップ','困難に動じない精神力'],
+    challenges: ['変化や新しいことへの抵抗感','頑固で融通が利かない面','動き出すまでに時間がかかる','感情表現が不器用','細かい変化に気づきにくい'],
+    lucky: { color: '黄・茶', dir: '中央', num: '5・10', kigo: '土用・午後' },
+    career: '安定と信頼が求められる分野で実力を発揮。不動産・銀行・建設・農業・公務員・経営者・医師・宗教家・管理職が向いています。',
+    yearMsg: {
+      moku: '木剋土の年。変化を求められる時期。柔軟に対応することで新たな道が開けます。',
+      hi:   '火生土の相生。周囲の熱意があなたの力を引き出す充実の年。',
+      tsuchi: '同気で安定感が増す年。地道な努力が確実に実を結びます。',
+      kin:  '土生金の相生。あなたの努力が周囲に豊かさをもたらす実りの年。',
+      mizu: '土剋水の関係。強さが際立つ年ですが、柔軟さも忘れずに。',
+    }
+  },
+  5: { // 己
+    name: '己（つちのと）', gogyo: 'tsuchi', inyo: '陰',
+    desc: '豊かな田畑のように、人を育て実りをもたらす存在。細やかな観察眼と深い思いやりで、周囲の人の成長をサポートします。表面は穏やかですが、内側に粘り強い意志と実行力を秘めています。地道な努力を継続する力に長けた、縁の下の力持ち。',
+    strengths: ['細やかな気配りと観察眼','人を育てる深い包容力','地道な努力を続ける粘り強さ','実用的な知恵と応用力','縁を大切にする義理人情'],
+    challenges: ['疑い深くなりやすい','気を使いすぎて疲弊する','執着心が強くなることも','なかなか手放せない','心配性で悩みやすい'],
+    lucky: { color: '黄・ベージュ', dir: '北東', num: '5・8', kigo: '土用・薄明' },
+    career: '人の世話・育成・サポートが活きる仕事で輝きます。教師・保育士・農業・栄養士・介護福祉士・経理・人事担当・コンサルタントが向いています。',
+    yearMsg: {
+      moku: '木剋土の年。変化への適応が求められます。手放すことで新たな豊かさが。',
+      hi:   '相生の関係。人との縁が深まり、育ててきたものが花開く年。',
+      tsuchi: '同気で安定の年。信頼関係を深め、着実に前進することが吉。',
+      kin:  '土生金の相生。あなたの誠実さが結果として現れる実りの年。',
+      mizu: '土剋水の年。自分の芯をしっかり持つことで安定が保てます。',
+    }
+  },
+  6: { // 庚
+    name: '庚（かのえ）', gogyo: 'kin', inyo: '陽',
+    desc: '鋼のような強い意志と切れ味鋭い判断力を持つ存在。義理人情に厚く、筋を通すことを何より大切にします。改革者の気質を持ち、古いものを打ち壊して新しいものを作る力があります。厳しくも公正で、曲がったことが嫌いな潔い人。',
+    strengths: ['鋼の意志と決断力','義理と人情を大切にする誠実さ','改革を恐れない革新力','正義感と公正な判断力','やるとなったら徹底する行動力'],
+    challenges: ['融通が利かず頑固な面','感情より論理を優先しすぎる','白黒つけたがる','人に厳しくなりすぎることも','挫折からの回復に時間がかかる'],
+    lucky: { color: '白・シルバー', dir: '西', num: '4・9', kigo: '秋・夜明け' },
+    career: '強い意志と公正さが活きる仕事で才能発揮。弁護士・裁判官・警察官・自衛官・経営者・外科医・エンジニア・スポーツ選手が向いています。',
+    yearMsg: {
+      moku: '金剋木の関係。行動力が増し、切り開く力が高まる年。',
+      hi:   '火剋金の年。試練がありますが、それがあなたを磨く砥石となります。',
+      tsuchi: '土生金の相生。周囲のサポートを受けて力を蓄える充実の年。',
+      kin:  '同気で意志がより強くなる年。正義感を活かして道を切り開いて。',
+      mizu: '金生水の相生。あなたの行動が周囲に流れを生み出す躍動の年。',
+    }
+  },
+  7: { // 辛
+    name: '辛（かのと）', gogyo: 'kin', inyo: '陰',
+    desc: '磨かれた宝石のように、繊細な美しさと鋭い感受性を持つ存在。美的センスに優れ、細部への鋭い観察眼があります。表面の上品さの内側に強い精神力を秘めており、苦労を経て輝きを増す人。完璧を追求する職人気質の持ち主。',
+    strengths: ['洗練された美的センス','細部への鋭い観察眼','苦労を糧にする精神力','誠実さと品格','完璧を追求する職人気質'],
+    challenges: ['プライドが傷つくと脆い面も','批判に過敏になりやすい','完璧主義から来るストレス','感情を内側に溜め込む','人を試す傾向がある'],
+    lucky: { color: '白・パール', dir: '西北', num: '4・6', kigo: '秋・夕暮れ' },
+    career: '美・精密・品質が求められる分野で輝きます。宝石デザイナー・美容師・外科医・精密機械技術者・アーティスト・文筆家・審美眼が活きる職業が向いています。',
+    yearMsg: {
+      moku: '金剋木の関係。鋭さが際立ち、障害を切り開く力が強まる年。',
+      hi:   '火剋金の年。プレッシャーがかかりますが、磨かれてより輝く時期。',
+      tsuchi: '相生の関係。安定した土台の上で才能が花開く豊かな年。',
+      kin:  '同気で感性が鋭くなる年。美的な才能や専門性を磨くのに最適。',
+      mizu: '金生水の相生。あなたの洗練さが人の心を潤す優美な年。',
+    }
+  },
+  8: { // 壬
+    name: '壬（みずのえ）', gogyo: 'mizu', inyo: '陽',
+    desc: '大海のように広い視野と深い知恵を持つ存在。大胆で自由を愛し、どんな困難にも柔軟に対応できる適応力があります。知的好奇心が旺盛で、常に新しいことを求めて前進します。器が大きく、多くの人や物事を包み込む包容力の持ち主。',
+    strengths: ['海のような広い視野と包容力','抜群の適応力と柔軟性','旺盛な知的好奇心','大胆な発想と行動力','困難を乗り越える生命力'],
+    challenges: ['感情の波が大きい','一箇所に留まれない面も','大雑把になりすぎることがある','秘密主義になることも','流されやすい一面がある'],
+    lucky: { color: '黒・ダークブルー', dir: '北', num: '1・6', kigo: '冬・深夜' },
+    career: '自由と広い世界が活きる仕事で才能発揮。旅行業・国際ビジネス・研究者・発明家・哲学者・海洋関係・流通・フリーランスが向いています。',
+    yearMsg: {
+      moku: '水生木の相生。あなたの知恵が周囲の成長を促す実りある年。',
+      hi:   '水剋火の関係。エネルギーを整える内省の年。静かな積み重ねが大切。',
+      tsuchi: '土剋水の年。壁を感じる場面も。迂回する知恵が運を開きます。',
+      kin:  '金生水の相生。周囲のサポートがエネルギーに変わる充実の年。',
+      mizu: '同気で感受性が高まる年。直感と知恵が研ぎ澄まされます。',
+    }
+  },
+  9: { // 癸
+    name: '癸（みずのと）', gogyo: 'mizu', inyo: '陰',
+    desc: '大地を潤す雨のように、静かに、しかし確実に周囲に恵みをもたらす存在。深い感受性と共感力、そして豊かな想像力を持ちます。表面の繊細さの内側に、静かで強い意志と持続力を秘めています。縁の下で人々を支え、世界をより良くする力を持つ人。',
+    strengths: ['深い感受性と共感力','豊かな想像力と創造性','静かで強い意志と持続力','人の痛みがわかる思いやり','見えないところで支える力'],
+    challenges: ['自信を持ちにくい面がある','依存心が出やすい','感情に流されることがある','決断に時間がかかる','自己犠牲になりすぎることも'],
+    lucky: { color: '黒・ネイビー', dir: '北西', num: '1・3', kigo: '冬・夜明け前' },
+    career: '感性・癒し・支援が活きる仕事で輝きます。詩人・作家・音楽家・ヒーラー・心理士・看護師・社会活動家・精神科医・占術師が向いています。',
+    yearMsg: {
+      moku: '水生木の相生。あなたの感性が人を育て、縁が豊かに広がる年。',
+      hi:   '水剋火の年。焦らず内側を充実させることが後の飛躍につながります。',
+      tsuchi: '土剋水の年。制約を感じやすい時期。信頼できる人に頼ることが吉。',
+      kin:  '相生の関係。周囲からの支援を受けて才能が花開く恵みの年。',
+      mizu: '同気で感受性が高まる年。芸術・精神的な探求が深まります。',
+    }
+  }
+};
+
+// 今年（2026年）の干支
+const THIS_YEAR = 2026;
+const thisYearKan = ((THIS_YEAR - 4) % 10 + 10) % 10;
+const thisYearShi = ((THIS_YEAR - 4) % 12 + 12) % 12;
+const thisYearGogyo = GOGYO_KAN[thisYearKan];
+
+function calcSanmei() {
+  const d = dpState.sanmei;
+  if (!d) { alert('生年月日を選択してください'); return; }
+
+  const year  = d.getFullYear();
+  const month = d.getMonth() + 1;
+  const day   = d.getDate();
+
+  const nikkanIdx  = calcNikkanIdx(year, month, day);
+  const yearKanshi = calcYearKanshi(year);
+  const monthKanshi= calcMonthKanshi(year, month);
+
+  const nk = nikkanIdx;
+  const yk = yearKanshi.kan;
+  const ys = yearKanshi.shi;
+  const mk = monthKanshi.kan;
+  const ms = monthKanshi.shi;
+
+  const data = SM_DATA[nk];
+
+  // 命式表示
+  document.getElementById('smDateLabel').textContent =
+    `${year}年${month}月${day}日生まれ（${INYO[nk]}・${GOGYO_LABEL[data.gogyo]}）`;
+
+  // 年柱・月柱・日柱の3柱
+  document.getElementById('smMeishiki').innerHTML = [
+    { label: '年柱', kan: yk, shi: ys },
+    { label: '月柱', kan: mk, shi: ms },
+    { label: '日柱（本命）', kan: nk, shi: ((calcNikkanIdx(year, month, day) + 6) % 12) },
+  ].map(p => `
+    <div class="sm-kan-block">
+      <div class="sm-kan-label">${p.label}</div>
+      <div class="sm-kan-char ${GOGYO_KAN[p.kan]}">${TENKAN[p.kan]}</div>
+      <div class="sm-kan-char ${GOGYO_KAN[p.shi % 10] ?? 'moku'}" style="margin-top:4px;">${CHISHI[p.shi % 12]}</div>
+      <div class="sm-kan-reading">${TENKAN_READ[p.kan]}・${CHISHI_READ[p.shi % 12]}</div>
+    </div>`).join('');
+
+  // 五行バッジ
+  document.getElementById('smGogyoBadge').innerHTML =
+    `<div class="sm-badge ${data.gogyo}">${GOGYO_LABEL[data.gogyo]}の気</div>` +
+    `<div class="sm-badge ${GOGYO_KAN[yk]}">${GOGYO_LABEL[GOGYO_KAN[yk]]}年生まれ</div>` +
+    `<span style="font-size:0.8rem;color:var(--muted);align-self:center;">${INYO[nk]}</span>`;
+
+  // 日干解説
+  document.getElementById('smNikkanBlock').innerHTML =
+    `<div class="sm-nikkan-name">${data.name}</div>` +
+    `<div class="sm-nikkan-desc">${data.desc}</div>`;
+
+  // 五行バランス（年・月・日の3柱から集計）
+  const gogyoCount = { moku:0, hi:0, tsuchi:0, kin:0, mizu:0 };
+  [yk, mk, nk].forEach(k => gogyoCount[GOGYO_KAN[k]]++);
+  [ys % 12, ms % 12, ((nk + 6) % 12)].forEach(s => {
+    // 地支の五行（簡略）
+    const shiGogyo = ['mizu','tsuchi','moku','moku','tsuchi','hi','hi','tsuchi','kin','kin','tsuchi','mizu'];
+    gogyoCount[shiGogyo[s % 12]]++;
+  });
+  const total = Object.values(gogyoCount).reduce((a,b) => a+b, 0);
+  document.getElementById('smGogyoBars').innerHTML =
+    Object.entries(gogyoCount).map(([g, cnt]) => {
+      const pct = Math.round(cnt / total * 100);
+      return `<div class="sm-bar-row">
+        <div class="sm-bar-label sm-kan-char ${g}" style="width:32px;height:32px;font-size:0.9rem;">${GOGYO_LABEL[g]}</div>
+        <div class="sm-bar-bg"><div class="sm-bar-fill ${g}" style="width:${pct}%"></div></div>
+        <div class="sm-bar-pct">${pct}%</div>
+      </div>`;
+    }).join('');
+
+  // 強み・課題
+  document.getElementById('smStrengths').innerHTML = data.strengths.map(s => `<li>${s}</li>`).join('');
+  document.getElementById('smChallenges').innerHTML = data.challenges.map(c => `<li>${c}</li>`).join('');
+
+  // 今年の運勢
+  const yearMsg = data.yearMsg[thisYearGogyo] || '変化の多い年です。流れを読みながら柔軟に対応しましょう。';
+  document.getElementById('smThisYear').innerHTML =
+    `<strong style="color:var(--gold);">${THIS_YEAR}年（${TENKAN[thisYearKan]}${CHISHI[thisYearShi]}年）</strong>との関係：${GOGYO_LABEL[thisYearGogyo]}の気<br><br>${yearMsg}`;
+
+  // ラッキー情報
+  document.getElementById('smLucky').innerHTML = `
+    <div class="nr-lucky-item"><div class="nr-lucky-label">ラッキーカラー</div><div class="nr-lucky-val">${data.lucky.color}</div></div>
+    <div class="nr-lucky-item"><div class="nr-lucky-label">吉方位</div><div class="nr-lucky-val">${data.lucky.dir}</div></div>
+    <div class="nr-lucky-item"><div class="nr-lucky-label">ラッキーナンバー</div><div class="nr-lucky-val">${data.lucky.num}</div></div>
+    <div class="nr-lucky-item"><div class="nr-lucky-label">吉の時期</div><div class="nr-lucky-val">${data.lucky.kigo}</div></div>
+  `;
+
+  // 適職
+  document.getElementById('smCareer').textContent = data.career;
+
+  const result = document.getElementById('sanmeiResult');
+  result.classList.add('show');
+  setTimeout(() => result.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+}
+
+// ===== カスタムカレンダーピッカー =====
+const dpState = { zodiac: null, num: null, sanmei: null };
+const dpView  = { zodiac: null, num: null, sanmei: null };
+
+const WEEKDAYS = ['日','月','火','水','木','金','土'];
+const MONTHS   = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+
+function initCalendars() {
+  const today = new Date();
+  ['zodiac','num','sanmei'].forEach(id => {
+    dpView[id] = { year: today.getFullYear() - 25, month: today.getMonth() };
+    renderCalendar(id);
+  });
+}
+
+function toggleCalendar(id) {
+  const popup = document.getElementById(`dpPopup_${id}`);
+  const btn   = document.querySelector(`#dpWrap_${id} .datepicker-btn`);
+  const isOpen = popup.classList.contains('show');
+  // 全部閉じる
+  document.querySelectorAll('.datepicker-popup').forEach(p => p.classList.remove('show'));
+  document.querySelectorAll('.datepicker-btn').forEach(b => b.classList.remove('open'));
+  if (!isOpen) {
+    popup.classList.add('show');
+    btn.classList.add('open');
+  }
+}
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.datepicker-wrap')) {
+    document.querySelectorAll('.datepicker-popup').forEach(p => p.classList.remove('show'));
+    document.querySelectorAll('.datepicker-btn').forEach(b => b.classList.remove('open'));
+  }
+});
+
+function renderCalendar(id) {
+  const { year, month } = dpView[id];
+  const selected = dpState[id];
+  const today    = new Date();
+  const popup    = document.getElementById(`dpPopup_${id}`);
+
+  // 年セレクト生成
+  let yearOpts = '';
+  for (let y = 1924; y <= today.getFullYear(); y++) {
+    yearOpts += `<option value="${y}" ${y === year ? 'selected' : ''}>${y}年</option>`;
+  }
+
+  // 月セレクト生成
+  let monthOpts = '';
+  MONTHS.forEach((m, i) => {
+    monthOpts += `<option value="${i}" ${i === month ? 'selected' : ''}>${m}</option>`;
+  });
+
+  // カレンダー日付生成
+  const firstDay = new Date(year, month, 1).getDay(); // 0=日
+  const lastDate = new Date(year, month + 1, 0).getDate();
+
+  let dayCells = '';
+  for (let i = 0; i < firstDay; i++) dayCells += `<div class="dp-day empty"></div>`;
+  for (let d = 1; d <= lastDate; d++) {
+    const isToday    = year === today.getFullYear() && month === today.getMonth() && d === today.getDate();
+    const isSel      = selected && year === selected.getFullYear() && month === selected.getMonth() && d === selected.getDate();
+    const dow        = (firstDay + d - 1) % 7;
+    const dowClass   = dow === 0 ? 'sun' : dow === 6 ? 'sat' : '';
+    dayCells += `<div class="dp-day ${dowClass} ${isToday?'today':''} ${isSel?'selected':''}" onclick="selectDate('${id}',${year},${month},${d})">${d}</div>`;
+  }
+
+  popup.innerHTML = `
+    <div class="dp-header">
+      <button class="dp-nav" onclick="moveMonth('${id}',-1)">&#8249;</button>
+      <select class="dp-year-select" onchange="changeYear('${id}',this.value)">${yearOpts}</select>
+      <select class="dp-month-select" onchange="changeMonth('${id}',this.value)">${monthOpts}</select>
+      <button class="dp-nav" onclick="moveMonth('${id}',1)">&#8250;</button>
+    </div>
+    <div class="dp-weekdays">${WEEKDAYS.map(w=>`<div>${w}</div>`).join('')}</div>
+    <div class="dp-days">${dayCells}</div>
+  `;
+}
+
+function moveMonth(id, delta) {
+  const v = dpView[id];
+  let m = v.month + delta;
+  let y = v.year;
+  if (m < 0)  { m = 11; y--; }
+  if (m > 11) { m = 0;  y++; }
+  dpView[id] = { year: y, month: m };
+  renderCalendar(id);
+}
+
+function changeYear(id, y) {
+  dpView[id].year = parseInt(y);
+  renderCalendar(id);
+}
+
+function changeMonth(id, m) {
+  dpView[id].month = parseInt(m);
+  renderCalendar(id);
+}
+
+function selectDate(id, year, month, day) {
+  const d = new Date(year, month, day);
+  dpState[id] = d;
+  const label = document.getElementById(`dpLabel_${id}`);
+  label.textContent = `${year}年${month+1}月${day}日`;
+  label.classList.remove('dp-placeholder');
+  // カレンダー再描画（選択状態を反映）
+  renderCalendar(id);
+  // 閉じる
+  document.getElementById(`dpPopup_${id}`).classList.remove('show');
+  document.querySelector(`#dpWrap_${id} .datepicker-btn`).classList.remove('open');
+  // コールバック
+  if (id === 'zodiac') {
+    autoDetectZodiac(`${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`);
+  }
+  // 算命学は選択後すぐ自動計算しない（ボタンで実行）
+}
+
+initCalendars();
+</script>
+</body>
+</html>
