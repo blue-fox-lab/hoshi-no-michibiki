@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>星の導き - タロット・星座・数秘術占い</title>
+  <title>星の導き - タロット・星座・数秘術・算命学・0学・西洋占星術</title>
   <meta name="description" content="タロット占い・星座占い・数秘術の3種類の本格占いが無料で楽しめます。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -85,24 +85,28 @@
 
     /* ===== ナビ ===== */
     nav {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      padding: 20px;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      padding: 16px 20px;
+      max-width: 400px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
 
     .nav-btn {
-      padding: 12px 32px;
+      padding: 12px 8px;
       border-radius: 30px;
       border: 2px solid rgba(180, 180, 220, 0.35);
       background: rgba(8, 10, 24, 0.75);
       color: #c8c4d8;
       cursor: pointer;
-      font-size: 1rem;
+      font-size: 0.9rem;
       transition: all 0.25s;
       backdrop-filter: blur(4px);
       -webkit-backdrop-filter: blur(4px);
+      text-align: center;
     }
 
     .nav-btn.active, .nav-btn:hover {
@@ -261,7 +265,7 @@
       position: absolute;
       top: calc(100% + 6px);
       left: 0;
-      z-index: 100;
+      z-index: 9999;
       background: #1e1e38;
       border: 1px solid var(--accent);
       border-radius: 14px;
@@ -1094,6 +1098,288 @@
       box-shadow: 0 0 18px rgba(77, 231, 255, 0.4);
     }
 
+    /* ===== 0学 ===== */
+    .zg-card {
+      display: none;
+      background: linear-gradient(135deg, rgba(20,20,50,0.95), rgba(30,20,60,0.95));
+      border: 1px solid #9b6dff;
+      border-radius: 16px;
+      margin-top: 20px;
+      overflow: hidden;
+      animation: fadeIn 0.4s ease;
+    }
+    .zg-card.show { display: block; }
+    .zg-header {
+      background: linear-gradient(135deg, #2a1060, #1a0840);
+      padding: 28px 20px;
+      text-align: center;
+      border-bottom: 1px solid rgba(155,109,255,0.3);
+    }
+    .zg-label { font-size: 0.8rem; color: #b0aec8; letter-spacing: 0.15em; margin-bottom: 8px; }
+    .zg-number {
+      font-size: 4rem;
+      font-weight: 700;
+      color: #c8a0ff;
+      line-height: 1;
+      margin-bottom: 8px;
+      text-shadow: 0 0 20px rgba(155,109,255,0.6);
+    }
+    .zg-title { font-size: 1.2rem; color: #e8c96a; margin-bottom: 6px; }
+    .zg-calc { font-size: 0.78rem; color: #b0aec8; }
+    .zg-body { padding: 20px; }
+    .zg-keyword {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #c8a0ff;
+      background: rgba(155,109,255,0.15);
+      border-radius: 20px;
+      padding: 8px 16px;
+      margin-bottom: 16px;
+    }
+    .zg-section-title {
+      font-size: 0.82rem;
+      color: #9b6dff;
+      letter-spacing: 0.1em;
+      margin: 14px 0 8px;
+      border-left: 3px solid #9b6dff;
+      padding-left: 8px;
+    }
+    .zg-desc { font-size: 0.9rem; color: #f0eede; line-height: 1.85; }
+    .zg-list { padding-left: 1.2em; }
+    .zg-list li { font-size: 0.88rem; color: #f0eede; margin-bottom: 5px; }
+    .zg-list--strength li::marker { color: #c8a0ff; }
+    .zg-list--challenge li::marker { color: #ff8fa0; }
+    .zg-lucky-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+    .zg-lucky-item {
+      background: rgba(10,14,26,0.6);
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+    }
+    .zg-lucky-label { font-size: 0.72rem; color: #b0aec8; margin-bottom: 4px; }
+    .zg-lucky-val { font-size: 0.9rem; color: #e8c96a; }
+    .zg-career { font-size: 0.88rem; color: #f0eede; line-height: 1.8; }
+
+    /* ===== トップへ戻るボタン ===== */
+    .btn-go-top {
+      display: block;
+      width: 100%;
+      max-width: 300px;
+      margin: 20px auto 0;
+      padding: 12px;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      color: var(--muted);
+      font-family: inherit;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-go-top:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ===== 西洋占星術 ===== */
+    .sy-card {
+      display: none;
+      background: linear-gradient(135deg, rgba(15,10,40,0.95), rgba(25,15,55,0.95));
+      border: 1px solid #7060c0;
+      border-radius: 16px;
+      margin-top: 20px;
+      overflow: hidden;
+      animation: fadeIn 0.4s ease;
+    }
+    .sy-card.show { display: block; }
+    .sy-header {
+      background: linear-gradient(135deg, #1a0a50, #0a0830);
+      padding: 24px 16px;
+      text-align: center;
+      border-bottom: 1px solid rgba(112,96,192,0.3);
+    }
+    .sy-title-label { font-size: 0.8rem; color: #b0aec8; letter-spacing: 0.15em; margin-bottom: 14px; }
+    .sy-signs-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      max-width: 360px;
+      margin: 0 auto;
+    }
+    .sy-sign-item {
+      background: rgba(112,96,192,0.15);
+      border: 1px solid rgba(112,96,192,0.35);
+      border-radius: 10px;
+      padding: 10px 8px;
+      text-align: center;
+    }
+    .sy-sign-planet { font-size: 0.72rem; color: #b0aec8; margin-bottom: 4px; }
+    .sy-sign-icon { font-size: 1.4rem; margin-bottom: 2px; }
+    .sy-sign-name { font-size: 0.9rem; color: #e8c96a; font-weight: 500; }
+    .sy-body { padding: 20px; }
+    .sy-planet-block {
+      margin-bottom: 20px;
+      border-bottom: 1px solid rgba(112,96,192,0.2);
+      padding-bottom: 16px;
+    }
+    .sy-planet-block:last-child { border-bottom: none; margin-bottom: 0; }
+    .sy-planet-title {
+      font-size: 1rem;
+      color: #c0b0ff;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .sy-planet-sign-badge {
+      font-size: 0.78rem;
+      background: rgba(112,96,192,0.25);
+      border-radius: 12px;
+      padding: 2px 10px;
+      color: #e8c96a;
+    }
+    .sy-planet-desc { font-size: 0.88rem; color: #f0eede; line-height: 1.85; }
+    .sy-keyword {
+      font-size: 0.8rem;
+      color: #c0b0ff;
+      margin-top: 6px;
+    }
+
+    /* ===== グローバル生年月日 ===== */
+    .birthday-section {
+      position: relative;
+      z-index: 10;
+      max-width: 480px;
+      margin: 0 auto 20px;
+      padding: 0 16px;
+      overflow: visible;
+    }
+
+    .birthday-card {
+      background: rgba(26, 30, 46, 0.92);
+      border: 1px solid var(--gold);
+      border-radius: 12px;
+      padding: 20px 24px;
+      text-align: center;
+      overflow: visible;
+    }
+
+    .birthday-card h3 {
+      font-size: 1rem;
+      color: var(--gold);
+      margin-bottom: 12px;
+      letter-spacing: 0.08em;
+    }
+
+    .birthday-display {
+      font-size: 1.2rem;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .birthday-set-area { display: block; }
+    .birthday-done-area { display: none; }
+
+    .btn-reset-bday {
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      color: var(--muted);
+      font-size: 0.8rem;
+      padding: 6px 16px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+    .btn-reset-bday:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ===== 今日の総合運 ===== */
+    .today-fortune {
+      display: none;
+      position: relative;
+      z-index: 1;
+      max-width: 480px;
+      margin: 0 auto 24px;
+      padding: 0 16px;
+    }
+
+    .tf-card {
+      background: rgba(26, 30, 46, 0.92);
+      border: 1px solid var(--accent);
+      border-radius: 12px;
+      padding: 20px 24px;
+    }
+
+    .tf-title {
+      text-align: center;
+      font-size: 1rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      margin-bottom: 14px;
+    }
+
+    .tf-date {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .tf-overall {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 4px;
+    }
+
+    .tf-overall-label {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .tf-stars-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .tf-star-item {
+      background: rgba(10,14,26,0.6);
+      border-radius: 8px;
+      padding: 8px 4px;
+      text-align: center;
+    }
+
+    .tf-star-label {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .tf-star-val {
+      font-size: 0.9rem;
+      color: var(--gold);
+    }
+
+    .tf-message {
+      font-size: 0.88rem;
+      color: var(--text);
+      line-height: 1.8;
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+      margin-top: 4px;
+    }
+
+    .tf-lucky {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 10px;
+      text-align: center;
+    }
+
     /* ===== フッター ===== */
     footer {
       position: relative;
@@ -1165,17 +1451,56 @@
 <div class="ad-banner">広告エリア (728×90) — AdSense審査通過後に挿入</div>
 
 <nav style="position:relative;z-index:1;">
-  <button class="nav-btn active" onclick="showSection('tarot')">🃏 タロット</button>
+  <button class="nav-btn" onclick="showSection('tarot')">🃏 タロット</button>
   <button class="nav-btn" onclick="showSection('zodiac')">♈ 星座占い</button>
   <button class="nav-btn" onclick="showSection('numerology')">🔢 数秘術</button>
   <button class="nav-btn" onclick="showSection('sanmei')">☯ 算命学</button>
+  <button class="nav-btn" onclick="showSection('zerogaku')">0️⃣ 0学</button>
+  <button class="nav-btn" onclick="showSection('seiyou')">♏ 西洋占星術</button>
 </nav>
+
+<!-- ===== グローバル生年月日入力 ===== -->
+<div class="birthday-section">
+  <div class="birthday-card">
+    <h3>✨ あなたの生年月日</h3>
+
+    <!-- 未入力時 -->
+    <div class="birthday-set-area" id="bdaySetArea">
+      <p style="font-size:0.85rem;color:var(--muted);margin-bottom:12px;">入力すると全ての占いに自動反映されます</p>
+      <div class="datepicker-wrap" id="dpWrap_global" style="max-width:280px;margin:0 auto 12px;">
+        <button class="datepicker-btn" onclick="toggleCalendar('global')">
+          <span>📅</span><span id="dpLabel_global" class="dp-placeholder">生年月日を選んでください</span>
+        </button>
+        <div class="datepicker-popup" id="dpPopup_global"></div>
+      </div>
+    </div>
+
+    <!-- 入力済み -->
+    <div class="birthday-done-area" id="bdayDoneArea">
+      <div class="birthday-display" id="bdayDisplay"></div>
+      <button class="btn-reset-bday" onclick="resetBirthday()">✏️ 入力し直す</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 今日の総合運 ===== -->
+<div class="today-fortune" id="todayFortune">
+  <div class="tf-card">
+    <div class="tf-title">⭐ 今日の総合運</div>
+    <div class="tf-date" id="tfDate"></div>
+    <div class="tf-overall" id="tfOverall"></div>
+    <div class="tf-overall-label" id="tfOverallLabel"></div>
+    <div class="tf-stars-row" id="tfStarsRow"></div>
+    <div class="tf-message" id="tfMessage"></div>
+    <div class="tf-lucky" id="tfLucky"></div>
+  </div>
+</div>
 
 <div class="page-wrapper" style="position:relative;z-index:1;">
   <main>
 
     <!-- ===== タロット ===== -->
-    <section id="tarot" class="section active">
+    <section id="tarot" class="section">
       <h2 class="section-title">🃏 タロット占い</h2>
       <p class="section-desc">22枚の中から選んだカードがあなたへのメッセージを伝えます</p>
 
@@ -1212,6 +1537,7 @@
 
       <!-- 記事内広告 -->
       <div class="ad-banner" style="height:250px;margin-top:20px;">広告エリア (300×250) — AdSense審査通過後に挿入</div>
+      <button class="btn-go-top" onclick="goTop()">↑ トップページへ（生年月日入力はこちら）</button>
     </section>
 
     <!-- ===== 星座占い ===== -->
@@ -1219,20 +1545,7 @@
       <h2 class="section-title">♈ 星座占い</h2>
       <p class="section-desc">生年月日から星座を自動判定、今日の運勢をお届けします</p>
 
-      <div class="card">
-        <label>生年月日を選択</label>
-        <div class="datepicker-wrap" id="dpWrap_zodiac">
-          <button class="datepicker-btn" onclick="toggleCalendar('zodiac')">
-            <span>📅</span><span id="dpLabel_zodiac" class="dp-placeholder">生年月日を選んでください</span>
-          </button>
-          <div class="datepicker-popup" id="dpPopup_zodiac"></div>
-        </div>
-
-        <label>または星座を直接選択</label>
-        <div class="zodiac-grid" id="zodiacGrid"></div>
-
-        <button class="btn-primary" onclick="calcZodiac()">🌟 今日の運勢を占う</button>
-      </div>
+      <div id="noBday_zodiac" style="display:none;text-align:center;padding:30px 20px;color:var(--muted);">⚠️ トップページで生年月日を入力してください</div>
 
       <div class="zr-card" id="zodiacResult">
         <!-- ヘッダー -->
@@ -1257,6 +1570,7 @@
       </div>
 
       <div class="ad-banner" style="height:250px;">広告エリア (300×250) — AdSense審査通過後に挿入</div>
+      <button class="btn-go-top" onclick="goTop()">↑ トップページへ（生年月日入力はこちら）</button>
     </section>
 
     <!-- ===== 数秘術 ===== -->
@@ -1264,17 +1578,7 @@
       <h2 class="section-title">🔢 数秘術</h2>
       <p class="section-desc">生年月日から「ライフパスナンバー」を算出します</p>
 
-      <div class="card">
-        <label>生年月日を選択</label>
-        <div class="datepicker-wrap" id="dpWrap_num">
-          <button class="datepicker-btn" onclick="toggleCalendar('num')">
-            <span>📅</span><span id="dpLabel_num" class="dp-placeholder">生年月日を選んでください</span>
-          </button>
-          <div class="datepicker-popup" id="dpPopup_num"></div>
-        </div>
-
-        <button class="btn-primary" onclick="calcNumerology()">🔮 数字を算出する</button>
-      </div>
+      <div id="noBday_numerology" style="display:none;text-align:center;padding:30px 20px;color:var(--muted);">⚠️ トップページで生年月日を入力してください</div>
 
       <div class="nr-card" id="numResult">
         <div class="nr-header">
@@ -1305,6 +1609,7 @@
       </div>
 
       <div class="ad-banner" style="height:250px;">広告エリア (300×250) — AdSense審査通過後に挿入</div>
+      <button class="btn-go-top" onclick="goTop()">↑ トップページへ（生年月日入力はこちら）</button>
     </section>
 
     <!-- ===== 算命学 ===== -->
@@ -1312,16 +1617,7 @@
       <h2 class="section-title">☯ 算命学</h2>
       <p class="section-desc">生年月日から「日干・年干支・五行」を算出し、あなたの宿命を読み解きます</p>
 
-      <div class="card">
-        <label>生年月日を選択</label>
-        <div class="datepicker-wrap" id="dpWrap_sanmei">
-          <button class="datepicker-btn" onclick="toggleCalendar('sanmei')">
-            <span>📅</span><span id="dpLabel_sanmei" class="dp-placeholder">生年月日を選んでください</span>
-          </button>
-          <div class="datepicker-popup" id="dpPopup_sanmei"></div>
-        </div>
-        <button class="btn-primary" onclick="calcSanmei()">☯ 命式を算出する</button>
-      </div>
+      <div id="noBday_sanmei" style="display:none;text-align:center;padding:30px 20px;color:var(--muted);">⚠️ トップページで生年月日を入力してください</div>
 
       <div class="sm-card" id="sanmeiResult">
         <!-- 命式ヘッダー -->
@@ -1366,6 +1662,86 @@
       </div>
 
       <div class="ad-banner" style="height:250px;margin-top:20px;">広告エリア (300×250) — AdSense審査通過後に挿入</div>
+      <button class="btn-go-top" onclick="goTop()">↑ トップページへ（生年月日入力はこちら）</button>
+    </section>
+
+    <!-- ===== 0学 ===== -->
+    <section id="zerogaku" class="section">
+      <h2 class="section-title">0️⃣ 0学</h2>
+      <p class="section-desc">生まれ年の数字から0〜9の「ゼロ数」を算出し、あなたの本質を読み解きます</p>
+
+      <div id="noBday_zerogaku" style="display:none;text-align:center;padding:30px 20px;color:var(--muted);">⚠️ トップページで生年月日を入力してください</div>
+
+      <div class="zg-card" id="zerogakuResult">
+        <div class="zg-header">
+          <div class="zg-label">あなたのゼロ数</div>
+          <div class="zg-number" id="zgNumber"></div>
+          <div class="zg-title" id="zgTitle"></div>
+          <div class="zg-calc" id="zgCalc"></div>
+        </div>
+        <div class="zg-body">
+          <div class="zg-keyword" id="zgKeyword"></div>
+          <div class="zg-section-title">✦ あなたの本質</div>
+          <div class="zg-desc" id="zgDesc"></div>
+          <div class="zg-section-title" style="margin-top:16px;">✦ 強み・才能</div>
+          <ul class="zg-list zg-list--strength" id="zgStrengths"></ul>
+          <div class="zg-section-title">✦ 課題・注意点</div>
+          <ul class="zg-list zg-list--challenge" id="zgChallenges"></ul>
+          <div class="zg-section-title" style="margin-top:16px;">✦ 相性のいい数字・ラッキー情報</div>
+          <div class="zg-lucky-row" id="zgLucky"></div>
+          <div class="zg-section-title" style="margin-top:16px;">✦ 向いている環境・職業</div>
+          <div class="zg-career" id="zgCareer"></div>
+        </div>
+      </div>
+
+      <div class="ad-banner" style="height:250px;margin-top:20px;">広告エリア (300×250) — AdSense審査通過後に挿入</div>
+      <button class="btn-go-top" onclick="goTop()">↑ トップページへ（生年月日入力はこちら）</button>
+    </section>
+
+    <!-- ===== 西洋占星術 ===== -->
+    <section id="seiyou" class="section">
+      <h2 class="section-title">♏ 西洋占星術</h2>
+      <p class="section-desc">生年月日と出生時刻からホロスコープの主要星座を読み解きます</p>
+
+      <div class="card">
+        <div id="seiyouBdayInfo" style="font-size:0.9rem;color:var(--muted);margin-bottom:16px;text-align:center;"></div>
+
+        <label>出生時刻（任意・わかる場合）</label>
+        <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
+          <select id="seiyouHour" style="flex:1;padding:10px;background:rgba(10,14,26,0.8);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:inherit;font-size:0.9rem;">
+            <option value="">--時</option>
+            <option value="0">00時</option><option value="1">01時</option><option value="2">02時</option>
+            <option value="3">03時</option><option value="4">04時</option><option value="5">05時</option>
+            <option value="6">06時</option><option value="7">07時</option><option value="8">08時</option>
+            <option value="9">09時</option><option value="10">10時</option><option value="11">11時</option>
+            <option value="12">12時</option><option value="13">13時</option><option value="14">14時</option>
+            <option value="15">15時</option><option value="16">16時</option><option value="17">17時</option>
+            <option value="18">18時</option><option value="19">19時</option><option value="20">20時</option>
+            <option value="21">21時</option><option value="22">22時</option><option value="23">23時</option>
+          </select>
+          <select id="seiyouMin" style="flex:1;padding:10px;background:rgba(10,14,26,0.8);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:inherit;font-size:0.9rem;">
+            <option value="">--分</option>
+            <option value="0">00分</option><option value="5">05分</option><option value="10">10分</option>
+            <option value="15">15分</option><option value="20">20分</option><option value="25">25分</option>
+            <option value="30">30分</option><option value="35">35分</option><option value="40">40分</option>
+            <option value="45">45分</option><option value="50">50分</option><option value="55">55分</option>
+          </select>
+        </div>
+        <p style="font-size:0.78rem;color:var(--muted);margin-bottom:16px;">※時刻不明の場合はアセンダントを省略します</p>
+
+        <button class="btn-primary" onclick="calcSeiyou()">♏ ホロスコープを読む</button>
+      </div>
+
+      <div class="sy-card" id="seiyouResult">
+        <div class="sy-header">
+          <div class="sy-title-label">あなたのホロスコープ</div>
+          <div class="sy-signs-row" id="sySigns"></div>
+        </div>
+        <div class="sy-body" id="syBody"></div>
+      </div>
+
+      <div class="ad-banner" style="height:250px;margin-top:20px;">広告エリア (300×250) — AdSense審査通過後に挿入</div>
+      <button class="btn-go-top" onclick="goTop()">↑ トップページへ（生年月日入力はこちら）</button>
     </section>
 
   </main>
@@ -1388,6 +1764,35 @@ function showSection(id) {
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   event.target.classList.add('active');
+  // 生年月日・総合運エリアを隠す
+  document.querySelector('.birthday-section').style.display = 'none';
+  document.getElementById('todayFortune').style.display = 'none';
+
+  const d = dpState.global;
+  const autoCalcSections = { zodiac: calcZodiac, numerology: calcNumerology, sanmei: calcSanmei, zerogaku: calcZerogaku };
+
+  if (autoCalcSections[id]) {
+    const msgEl = document.getElementById(`noBday_${id}`);
+    if (d) {
+      if (msgEl) msgEl.style.display = 'none';
+      autoCalcSections[id]();
+    } else {
+      if (msgEl) msgEl.style.display = 'block';
+    }
+  } else if (id === 'seiyou') {
+    const el = document.getElementById('seiyouBdayInfo');
+    if (el) el.textContent = d ? `🎂 生年月日：${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日` : '⚠️ トップページで生年月日を入力してください';
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function goTop() {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.birthday-section').style.display = 'block';
+  const saved = localStorage.getItem('hoshi_birthday');
+  if (saved) document.getElementById('todayFortune').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // ===== タロットデータ =====
@@ -1861,6 +2266,7 @@ function mulberry32(a) {
 
 function buildZodiacGrid() {
   const grid = document.getElementById('zodiacGrid');
+  if (!grid) return;
   ZODIACS.forEach((z, i) => {
     const el = document.createElement('div');
     el.className = 'zodiac-item';
@@ -2052,8 +2458,8 @@ const NUM_DATA = {
 };
 
 function calcNumerology() {
-  const d = dpState.num;
-  if (!d) { alert('生年月日を選択してください'); return; }
+  const d = dpState.global;
+  if (!d) { return; }
 
   const y = d.getFullYear();
   const m = d.getMonth() + 1;
@@ -2296,8 +2702,8 @@ const thisYearShi = ((THIS_YEAR - 4) % 12 + 12) % 12;
 const thisYearGogyo = GOGYO_KAN[thisYearKan];
 
 function calcSanmei() {
-  const d = dpState.sanmei;
-  if (!d) { alert('生年月日を選択してください'); return; }
+  const d = dpState.global;
+  if (!d) { return; }
 
   const year  = d.getFullYear();
   const month = d.getMonth() + 1;
@@ -2388,18 +2794,17 @@ function calcSanmei() {
 }
 
 // ===== カスタムカレンダーピッカー =====
-const dpState = { zodiac: null, num: null, sanmei: null };
-const dpView  = { zodiac: null, num: null, sanmei: null };
+const dpState = { zodiac: null, num: null, sanmei: null, global: null, zero: null, seiyou: null };
+const dpView  = { zodiac: null, num: null, sanmei: null, global: null, zero: null, seiyou: null };
 
 const WEEKDAYS = ['日','月','火','水','木','金','土'];
 const MONTHS   = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
 
 function initCalendars() {
   const today = new Date();
-  ['zodiac','num','sanmei'].forEach(id => {
-    dpView[id] = { year: today.getFullYear() - 25, month: today.getMonth() };
-    renderCalendar(id);
-  });
+  dpView['global'] = { year: today.getFullYear() - 25, month: today.getMonth() };
+  const popup = document.getElementById('dpPopup_global');
+  if (popup) renderCalendar('global');
 }
 
 function toggleCalendar(id) {
@@ -2501,7 +2906,453 @@ function selectDate(id, year, month, day) {
   if (id === 'zodiac') {
     autoDetectZodiac(`${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`);
   }
+  // グローバル生年月日が選択された場合、全占いに反映
+  if (id === 'global') {
+    applyGlobalBirthday(year, month, day);
+  }
   // 算命学は選択後すぐ自動計算しない（ボタンで実行）
+}
+
+function applyGlobalBirthday(year, month, day) {
+  const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+  const labelText = `${year}年${month+1}月${day}日`;
+  const d = new Date(year, month, day);
+
+  // localStorage保存
+  localStorage.setItem('hoshi_birthday', dateStr);
+
+  // globalのdpStateを更新
+  dpState.global = d;
+  dpView.global = { year, month };
+
+  // 全datepickerに反映
+  ['zodiac','num','sanmei','zero','seiyou'].forEach(pid => {
+    dpState[pid] = d;
+    dpView[pid] = { year, month };
+    const lbl = document.getElementById(`dpLabel_${pid}`);
+    if (lbl) { lbl.textContent = labelText; lbl.classList.remove('dp-placeholder'); }
+    const popup = document.getElementById(`dpPopup_${pid}`);
+    if (popup) renderCalendar(pid);
+  });
+
+  // 星座自動判定
+  autoDetectZodiac(dateStr);
+
+  // 表示切替
+  document.querySelector('.birthday-section').style.display = 'block';
+  document.getElementById('bdaySetArea').style.display = 'none';
+  document.getElementById('bdayDoneArea').style.display = 'block';
+  document.getElementById('bdayDisplay').textContent = `🎂 ${labelText}`;
+  document.getElementById('todayFortune').style.display = 'none'; // 一旦隠してから表示
+
+  // 今日の総合運を表示
+  showTodayFortune(year, month, day);
+}
+
+function resetBirthday() {
+  localStorage.removeItem('hoshi_birthday');
+  document.getElementById('bdaySetArea').style.display = 'block';
+  document.getElementById('bdayDoneArea').style.display = 'none';
+  document.getElementById('todayFortune').style.display = 'none';
+  // globalのラベルをリセット
+  const lbl = document.getElementById('dpLabel_global');
+  lbl.textContent = '生年月日を選んでください';
+  lbl.classList.add('dp-placeholder');
+  dpState.global = null;
+}
+
+function showTodayFortune(year, month, day) {
+  const today = new Date();
+  const seed = today.getFullYear() * 10000 + (today.getMonth()+1) * 100 + today.getDate()
+             + year * 7 + (month+1) * 13 + day * 3;
+  const rng = (offset) => ((seed * 1103515245 + 12345 * (offset + 1)) & 0x7fffffff) % 100;
+
+  const overallScores = ['大吉','中吉','吉','小吉'];
+  const overallEmojis = ['🌟','✨','⭐','🌙'];
+  const idx = rng(0) % 4;
+  const overall = overallScores[idx];
+  const emoji = overallEmojis[idx];
+
+  const areas = ['恋愛運','仕事運','金運','健康運'];
+  const starsArr = areas.map((_, i) => {
+    const s = Math.floor(rng(i + 1) / 20) + 1;
+    return Math.min(s, 5);
+  });
+
+  const messages = [
+    '星の流れがあなたを後押ししています。積極的な行動が吉です。直感を信じて一歩踏み出しましょう。',
+    '人との縁が深まる一日。周囲への感謝を忘れず、笑顔で過ごすことで運気が上昇します。',
+    'じっくり考えることが大切な日。焦らず着実に物事を進めると良い結果につながります。',
+    '新しいアイデアが浮かびやすい日。思いついたことをメモしておくと後で役立ちます。',
+    '過去の努力が実を結ぶ兆しがあります。自分を信じて前向きに過ごしましょう。',
+    '穏やかな一日になりそうです。好きな人と過ごす時間を大切にしてください。',
+    '変化を受け入れることで新たな可能性が開きます。柔軟な姿勢が幸運を呼びます。',
+  ];
+  const message = messages[rng(5) % messages.length];
+
+  const colors = ['ローズゴールド','ラベンダー','ミントグリーン','パールホワイト','スカイブルー','ゴールド','コーラルピンク'];
+  const items = ['クリスタル','ハーブティー','白いハンカチ','丸いもの','天然石','新しい文房具'];
+  const luckyColor = colors[rng(6) % colors.length];
+  const luckyItem = items[rng(7) % items.length];
+  const luckyNum = (rng(8) % 9) + 1;
+
+  const weekdays = ['日','月','火','水','木','金','土'];
+  const todayStr = `${today.getFullYear()}年${today.getMonth()+1}月${today.getDate()}日（${weekdays[today.getDay()]}）`;
+
+  document.getElementById('tfDate').textContent = todayStr;
+  document.getElementById('tfOverall').textContent = emoji;
+  document.getElementById('tfOverallLabel').textContent = overall;
+  document.getElementById('tfStarsRow').innerHTML = areas.map((a, i) => `
+    <div class="tf-star-item">
+      <div class="tf-star-label">${a}</div>
+      <div class="tf-star-val">${'★'.repeat(starsArr[i])}${'☆'.repeat(5 - starsArr[i])}</div>
+    </div>`).join('');
+  document.getElementById('tfMessage').textContent = message;
+  document.getElementById('tfLucky').innerHTML =
+    `🍀 ラッキーカラー：${luckyColor}　🔢 ラッキーナンバー：${luckyNum}　🎁 ラッキーアイテム：${luckyItem}`;
+
+  document.getElementById('todayFortune').style.display = 'block';
+}
+
+// ページ読み込み時にlocalStorageから復元
+(function loadSavedBirthday() {
+  const saved = localStorage.getItem('hoshi_birthday');
+  if (!saved) return;
+  const [y, m, d] = saved.split('-').map(Number);
+  // カレンダー初期化後に反映するため少し遅延
+  setTimeout(() => {
+    dpState.global = new Date(y, m-1, d);
+    dpView.global = { year: y, month: m-1 };
+    const lbl = document.getElementById('dpLabel_global');
+    lbl.textContent = `${y}年${m}月${d}日`;
+    lbl.classList.remove('dp-placeholder');
+    renderCalendar('global');
+    applyGlobalBirthday(y, m-1, d);
+  }, 100);
+})();
+
+// ===== 西洋占星術 =====
+const SY_SIGNS = [
+  { name: '牡羊座', icon: '♈', en: 'Aries' },
+  { name: '牡牛座', icon: '♉', en: 'Taurus' },
+  { name: '双子座', icon: '♊', en: 'Gemini' },
+  { name: '蟹座',   icon: '♋', en: 'Cancer' },
+  { name: '獅子座', icon: '♌', en: 'Leo' },
+  { name: '乙女座', icon: '♍', en: 'Virgo' },
+  { name: '天秤座', icon: '♎', en: 'Libra' },
+  { name: '蠍座',   icon: '♏', en: 'Scorpio' },
+  { name: '射手座', icon: '♐', en: 'Sagittarius' },
+  { name: '山羊座', icon: '♑', en: 'Capricorn' },
+  { name: '水瓶座', icon: '♒', en: 'Aquarius' },
+  { name: '魚座',   icon: '♓', en: 'Pisces' },
+];
+
+// J2000.0からの日数計算
+function julianDays(y, m, d, h = 12) {
+  if (m <= 2) { y--; m += 12; }
+  const A = Math.floor(y / 100);
+  const B = 2 - A + Math.floor(A / 4);
+  return Math.floor(365.25 * (y + 4716)) + Math.floor(30.6001 * (m + 1)) + d + h / 24 + B - 1524.5;
+}
+
+function degToSign(deg) {
+  const d = ((deg % 360) + 360) % 360;
+  return Math.floor(d / 30);
+}
+
+function calcPlanetSign(jd, lon0, speed) {
+  const d = jd - 2451545.0; // J2000.0
+  return degToSign(lon0 + speed * d);
+}
+
+// 太陽黄経（簡易計算）
+function sunLongitude(jd) {
+  const n = jd - 2451545.0;
+  const L = (280.460 + 0.9856474 * n) % 360;
+  const g = ((357.528 + 0.9856003 * n) % 360) * Math.PI / 180;
+  return ((L + 1.915 * Math.sin(g) + 0.020 * Math.sin(2 * g)) % 360 + 360) % 360;
+}
+
+// 月黄経（簡易計算）
+function moonLongitude(jd) {
+  const n = jd - 2451545.0;
+  const L = (218.316 + 13.176396 * n) % 360;
+  const M = ((134.963 + 13.064993 * n) % 360) * Math.PI / 180;
+  const F = ((93.272  + 13.229350 * n) % 360) * Math.PI / 180;
+  return ((L + 6.289 * Math.sin(M) - 1.274 * Math.sin(2 * F - M) + 0.658 * Math.sin(2 * F)) % 360 + 360) % 360;
+}
+
+// アセンダント（簡易）
+function ascendant(jd, hour) {
+  const lst = (100.46 + 0.985647 * (jd - 2451545) + 15 * hour) % 360;
+  return degToSign(((lst + 180) % 360 + 360) % 360);
+}
+
+const SY_SUN_DESC = [
+  { keyword: '情熱・行動力・開拓', desc: '牡羊座の太陽を持つあなたは、情熱的で行動力にあふれたパイオニアです。新しいことへの挑戦を恐れず、直感で動く勇敢さがあります。リーダーシップを発揮しやすい一方、衝動的になることも。エネルギーを建設的な方向へ向けることが開運の鍵です。' },
+  { keyword: '安定・美・感覚的な喜び', desc: '牡牛座の太陽を持つあなたは、安定と美を愛する感覚派です。物事をじっくりと積み上げる粘り強さと、美しいものへの鋭い感性を持っています。物質的な豊かさを大切にしますが、変化への柔軟さも時に必要です。' },
+  { keyword: '知性・好奇心・コミュニケーション', desc: '双子座の太陽を持つあなたは、好奇心旺盛で知的な探求者です。多彩な才能とコミュニケーション能力に恵まれ、どんな環境にも適応できる柔軟さがあります。飽きやすい一面もありますが、その広い興味こそが人生を豊かにします。' },
+  { keyword: '感受性・愛情・保護', desc: '蟹座の太陽を持つあなたは、深い感受性と強い愛情を持つ守護者です。家族や大切な人への献身的な愛と、鋭い直感力が特徴です。感情が豊かな反面、傷つきやすい面もあります。安心できる居場所を持つことで力を発揮します。' },
+  { keyword: '創造性・誇り・輝き', desc: '獅子座の太陽を持つあなたは、生まれながらの輝きを持つ創造者です。堂々とした存在感と、周囲を明るく照らす温かいエネルギーがあります。認められることで才能が開花しますが、謙虚さとのバランスが大切です。' },
+  { keyword: '分析・誠実・奉仕', desc: '乙女座の太陽を持つあなたは、鋭い分析力と誠実さを持つ完璧主義者です。細部への注意力と向上心が高く、何事も丁寧にこなします。自己批判が強くなりすぎず、自分の努力を認めることが心の平和につながります。' },
+  { keyword: '調和・美・公平性', desc: '天秤座の太陽を持つあなたは、美と調和を愛する外交官です。人間関係において公平さを重んじ、バランスを取る天賦の才があります。優柔不断になることもありますが、その慎重さは深い思慮の表れです。' },
+  { keyword: '洞察・情熱・変容', desc: '蠍座の太陽を持つあなたは、深い洞察力と強烈な情熱を持つ変容の達人です。物事の本質を見抜く力と、逆境から蘇る強さがあります。感情の強さをコントロールすることで、大きな変革をもたらせます。' },
+  { keyword: '自由・哲学・楽観', desc: '射手座の太陽を持つあなたは、自由と真実を追い求める冒険家です。広い視野と楽観的な精神で、遠くの目標に向かって進み続けます。自由への渇望を大切にしながら、地に足をつけることでさらなる成長が生まれます。' },
+  { keyword: '責任・野心・忍耐', desc: '山羊座の太陽を持つあなたは、強い責任感と不屈の忍耐力を持つ達成者です。高い目標に向かってコツコツと積み上げる力があり、長期的な成功を手にします。時には立ち止まって、喜びを味わう時間も大切にしてください。' },
+  { keyword: '独創性・人道主義・未来志向', desc: '水瓶座の太陽を持つあなたは、独創的なアイデアと人道主義的な精神を持つ革命家です。時代の先を行く思考と、人類全体への愛があります。個性を大切にしながら、深い人間的なつながりも育んでいきましょう。' },
+  { keyword: '共感・霊性・夢', desc: '魚座の太陽を持つあなたは、深い共感力と豊かな感受性を持つ夢想家です。霊的な洞察と芸術的才能に恵まれ、人の痛みに寄り添える優しさがあります。現実と理想のバランスを保つことで、あなたの夢は現実となります。' },
+];
+
+const SY_MOON_DESC = [
+  '月が牡羊座にあるあなたは、感情表現が直接的で情熱的です。瞬発力があり、気持ちに正直に動きますが、感情が冷めるのも早い傾向があります。',
+  '月が牡牛座にあるあなたは、感情が安定しており、穏やかで変化を好みません。心地よい環境と感覚的な喜びが心の栄養です。',
+  '月が双子座にあるあなたは、感情を言葉で表現することが得意です。知的な刺激や会話で気持ちが安定します。',
+  '月が蟹座にあるあなたは、感受性が豊かで感情の波が大きいです。家族や親しい人との絆が心の安らぎになります。',
+  '月が獅子座にあるあなたは、感情表現が豊かで劇的です。認められることで心が満たされ、愛情を与えることに喜びを感じます。',
+  '月が乙女座にあるあなたは、感情を整理して表現する傾向があります。日常のルーティンと実用性が心の安定につながります。',
+  '月が天秤座にあるあなたは、調和を求め、対立を避けようとします。美しい環境と良好な人間関係が心の支えです。',
+  '月が蠍座にあるあなたは、感情が深く強烈です。表面には出さなくても内側では激しく感じています。信頼できる絆を大切にします。',
+  '月が射手座にあるあなたは、楽観的で自由な感情の持ち主です。冒険や学びを通じて気持ちが高まります。',
+  '月が山羊座にあるあなたは、感情をコントロールする傾向があります。責任を果たすことで心の充実感を得ます。',
+  '月が水瓶座にあるあなたは、感情を客観的に見る傾向があります。仲間との絆と自由な空間が心の居場所です。',
+  '月が魚座にあるあなたは、境界が溶けるほどの共感力を持ちます。音楽や芸術、瞑想が心を癒します。',
+];
+
+const SY_VENUS_DESC = [
+  '金星牡羊：恋愛は直情的で積極的。一目惚れしやすく、情熱的に愛します。',
+  '金星牡牛：愛情が深く安定志向。ゆっくりと関係を育てることを好みます。',
+  '金星双子：恋愛に知的な刺激を求めます。会話の楽しさが愛の鍵です。',
+  '金星蟹：愛情深く献身的。相手を包み込むような深い愛を持ちます。',
+  '金星獅子：情熱的でロマンチック。愛する人を輝かせたいと思っています。',
+  '金星乙女：誠実で思いやりある愛し方をします。細やかな気配りが愛情表現です。',
+  '金星天秤：優雅で調和を大切にします。美しい関係性を理想とします。',
+  '金星蠍：愛は深く濃密。一度愛したら全力で向き合う情熱的な恋愛をします。',
+  '金星射手：自由な愛を好みます。共に成長し冒険できるパートナーを求めます。',
+  '金星山羊：真剣で長続きする愛を望みます。誠実さと安定を愛情の柱にします。',
+  '金星水瓶：ユニークで個性的な愛し方をします。精神的なつながりを重視します。',
+  '金星魚：無条件の愛を体現します。ロマンチックで夢のある愛情を注ぎます。',
+];
+
+const SY_MARS_DESC = [
+  '火星牡羊：行動力が抜群。思い立ったらすぐ動く、エネルギッシュなタイプ。',
+  '火星牡牛：一度動き出したら粘り強い。じっくりと力を積み上げます。',
+  '火星双子：頭の回転が速く、言葉で状況を切り開きます。',
+  '火星蟹：感情が行動の原動力。大切な人を守るために力を発揮します。',
+  '火星獅子：堂々とした行動力。リーダーとして場を引っ張ります。',
+  '火星乙女：丁寧で緻密な行動スタイル。完成度を高めることに情熱を注ぎます。',
+  '火星天秤：協調しながら動きます。相手との調和を大切にした行動をとります。',
+  '火星蠍：一点集中の強烈な行動力。目標に向かって深く掘り下げます。',
+  '火星射手：大きな目標に向かって大胆に行動します。好奇心がエンジンです。',
+  '火星山羊：計画的で着実。長期的な目標に向けてコツコツと力を蓄えます。',
+  '火星水瓶：独自の方法で動きます。革新的なアプローチで周囲を驚かせます。',
+  '火星魚：直感的な行動スタイル。流れに乗るように目標へ向かいます。',
+];
+
+const SY_ASC_DESC = [
+  'アセンダント牡羊：第一印象はエネルギッシュで率直。人を引きつける勢いがあります。',
+  'アセンダント牡牛：落ち着いた安定感が漂います。信頼できる人物に映ります。',
+  'アセンダント双子：軽やかで知的な印象。話しやすく親しみやすい雰囲気があります。',
+  'アセンダント蟹：温かく包容力のある印象。人を安心させる柔らかさがあります。',
+  'アセンダント獅子：存在感があり堂々としています。自然にリーダー的な印象を与えます。',
+  'アセンダント乙女：清潔感があり誠実な印象。細やかで知的な雰囲気が漂います。',
+  'アセンダント天秤：上品で洗練された印象。優雅さと社交性が際立ちます。',
+  'アセンダント蠍：神秘的でミステリアスな印象。深みと強さを感じさせます。',
+  'アセンダント射手：明るく開放的な印象。冒険心と楽観主義が滲み出ています。',
+  'アセンダント山羊：真面目で信頼感のある印象。責任感の強さが伝わります。',
+  'アセンダント水瓶：個性的でユニークな印象。独自のオーラが人を惹きつけます。',
+  'アセンダント魚：柔らかく夢幻的な印象。共感力と優しさが自然に伝わります。',
+];
+
+function calcSeiyou() {
+  const d = dpState.global || dpState.seiyou;
+  if (!d) { alert('トップページで生年月日を入力してください'); return; }
+
+  const y = d.getFullYear(), m = d.getMonth() + 1, day = d.getDate();
+  const hourEl = document.getElementById('seiyouHour');
+  const minEl  = document.getElementById('seiyouMin');
+  const hasTime = hourEl.value !== '';
+  const hour = hasTime ? (parseInt(hourEl.value) + (parseInt(minEl.value) || 0) / 60) : 12;
+
+  const jd = julianDays(y, m, day, hour);
+
+  const sunIdx  = degToSign(sunLongitude(jd));
+  const moonIdx = degToSign(moonLongitude(jd));
+  // 金星: J2000基準 270.0°, 速度 1.6021°/day
+  const venusIdx = calcPlanetSign(jd, 270.0, 1.6021);
+  // 火星: J2000基準 355.5°, 速度 0.5240°/day
+  const marsIdx  = calcPlanetSign(jd, 355.5, 0.5240);
+  const ascIdx   = hasTime ? ascendant(jd, hour) : null;
+
+  // 結果表示
+  const planets = [
+    { planet: '☀️ 太陽', sign: SY_SIGNS[sunIdx] },
+    { planet: '🌙 月',   sign: SY_SIGNS[moonIdx] },
+    { planet: '♀ 金星', sign: SY_SIGNS[venusIdx] },
+    { planet: '♂ 火星', sign: SY_SIGNS[marsIdx] },
+  ];
+  if (ascIdx !== null) planets.push({ planet: '⬆ AC', sign: SY_SIGNS[ascIdx] });
+
+  document.getElementById('sySigns').innerHTML = planets.map(p => `
+    <div class="sy-sign-item">
+      <div class="sy-sign-planet">${p.planet}</div>
+      <div class="sy-sign-icon">${p.sign.icon}</div>
+      <div class="sy-sign-name">${p.sign.name}</div>
+    </div>`).join('');
+
+  const bodyItems = [
+    { title: `☀️ 太陽星座：${SY_SIGNS[sunIdx].icon} ${SY_SIGNS[sunIdx].name}`, keyword: SY_SUN_DESC[sunIdx].keyword, desc: SY_SUN_DESC[sunIdx].desc },
+    { title: `🌙 月星座：${SY_SIGNS[moonIdx].icon} ${SY_SIGNS[moonIdx].name}`,   keyword: '感情・内面', desc: SY_MOON_DESC[moonIdx] },
+    { title: `♀ 金星：${SY_SIGNS[venusIdx].icon} ${SY_SIGNS[venusIdx].name}`,  keyword: '愛・美・魅力', desc: SY_VENUS_DESC[venusIdx] },
+    { title: `♂ 火星：${SY_SIGNS[marsIdx].icon} ${SY_SIGNS[marsIdx].name}`,    keyword: '行動・情熱・エネルギー', desc: SY_MARS_DESC[marsIdx] },
+  ];
+  if (ascIdx !== null) {
+    bodyItems.push({ title: `⬆ アセンダント：${SY_SIGNS[ascIdx].icon} ${SY_SIGNS[ascIdx].name}`, keyword: '第一印象・外見', desc: SY_ASC_DESC[ascIdx] });
+  }
+
+  document.getElementById('syBody').innerHTML = bodyItems.map(item => `
+    <div class="sy-planet-block">
+      <div class="sy-planet-title">${item.title} <span class="sy-planet-sign-badge">${item.keyword}</span></div>
+      <div class="sy-planet-desc">${item.desc}</div>
+    </div>`).join('');
+
+  const result = document.getElementById('seiyouResult');
+  result.classList.add('show');
+  setTimeout(() => result.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+}
+
+// ===== 0学データ =====
+const ZEROGAKU = {
+  0: {
+    title: '神秘の探求者',
+    keyword: '直感・神秘・無限・再生',
+    desc: '0はすべての始まりであり終わり。あなたは深い直感力と霊的な感受性を持つ、神秘的な存在です。目に見えないものを感じ取る力があり、人生の深いテーマと向き合い続けます。周囲からは不思議な雰囲気を持つ人として映ることが多く、独特のオーラを放っています。',
+    strengths: ['卓越した直感力と霊感', '深い洞察力と観察眼', '変化への適応力', '哲学的・精神的な思考'],
+    challenges: ['現実的な判断が難しくなることがある', '孤立感を感じやすい', '優柔不断になりやすい', '自分の境界線を引くのが苦手'],
+    lucky: { color: 'パールホワイト', dir: '北', num: '0・10・20', kigo: '冬至・新月の頃' },
+    career: '占い師、カウンセラー、作家、芸術家、スピリチュアル系、研究者、哲学者など、深い洞察力を活かせる仕事が向いています。',
+  },
+  1: {
+    title: '孤高のパイオニア',
+    keyword: '独立・リーダーシップ・開拓・意志',
+    desc: '1はすべての数の始まり。あなたは強い意志と独立心を持つ、生まれながらのリーダーです。新しいことへの挑戦を恐れず、自分の信念を曲げない強さがあります。人に頼ることが苦手なこともありますが、その自立心こそが大きな成果を生み出す原動力になります。',
+    strengths: ['強いリーダーシップ', '独創的なアイデア', '高い行動力と決断力', '開拓者精神'],
+    challenges: ['頑固になりやすい', '人の意見を聞き入れにくい', '孤立することがある', '完璧主義になりやすい'],
+    lucky: { color: 'ゴールド', dir: '東', num: '1・10・19', kigo: '春分・元旦' },
+    career: '経営者、起業家、エンジニア、スポーツ選手、政治家、プロジェクトリーダーなど、自分の力で切り拓く仕事に向いています。',
+  },
+  2: {
+    title: '調和の仲介者',
+    keyword: '協調・感受性・バランス・愛',
+    desc: '2は対を成す数。あなたは繊細な感受性と高い共感力を持ち、人と人をつなぐ調和の力があります。チームワークを大切にし、場の空気を読む能力に長けています。傷つきやすい面もありますが、その優しさこそが周囲を引きつける最大の魅力です。',
+    strengths: ['高い共感力と思いやり', '優れた協調性', '繊細な感受性', 'チームをまとめる力'],
+    challenges: ['自己主張が苦手', '傷つきやすく引きずりやすい', '依存関係になりやすい', '優柔不断になることがある'],
+    lucky: { color: 'ラベンダー', dir: '西', num: '2・11・20', kigo: '梅雨・秋雨の頃' },
+    career: 'カウンセラー、保育士、看護師、外交官、通訳、社会福祉士、調停者など、人と人をつなぐ仕事が向いています。',
+  },
+  3: {
+    title: '輝く表現者',
+    keyword: '創造・表現・喜び・コミュニケーション',
+    desc: '3は創造と表現の数。あなたは豊かな創造力と明るいエネルギーを持ち、場を盛り上げる天性の才能があります。言葉や芸術を通じて自己表現することで輝きます。楽観的な性格で多くの人を惹きつけますが、集中力を高めることが成功の鍵です。',
+    strengths: ['豊かな創造力と想像力', '明るく人を惹きつける魅力', '優れたコミュニケーション能力', '楽観的な思考'],
+    challenges: ['飽きやすく散漫になりやすい', '感情の起伏が激しい', '計画性が不足しがち', '批判に敏感'],
+    lucky: { color: 'イエロー', dir: '南', num: '3・12・21', kigo: '春・桜の季節' },
+    career: '俳優、アーティスト、デザイナー、作家、ミュージシャン、講師、マーケターなど、表現力を活かす仕事が向いています。',
+  },
+  4: {
+    title: '堅実な建設者',
+    keyword: '安定・努力・誠実・基盤',
+    desc: '4は大地の数。あなたは誠実で責任感が強く、コツコツと努力を積み重ねる堅実さを持っています。約束を守り、信頼を大切にするため、周囲から厚い信頼を得ます。変化を好まない面もありますが、その安定感が周りの人の拠り所になります。',
+    strengths: ['強い責任感と誠実さ', 'コツコツ続ける忍耐力', '高い信頼性', '実践的で現実的な判断力'],
+    challenges: ['融通が利かないことがある', '変化への抵抗感', '頑固になりやすい', '完璧主義でストレスを溜めやすい'],
+    lucky: { color: 'アースブラウン', dir: '北東', num: '4・13・22', kigo: '土用・秋分' },
+    career: '建築士、会計士、エンジニア、公務員、医師、農業、管理職など、堅実さと専門性が活きる仕事に向いています。',
+  },
+  5: {
+    title: '自由な冒険家',
+    keyword: '自由・変化・冒険・多才',
+    desc: '5は変化と自由の数。あなたは好奇心旺盛で多彩な才能を持ち、変化を楽しめる冒険家です。新しい体験や刺激を求め、多くの人と交わることでエネルギーを得ます。束縛を嫌い、自由な環境で最大限の力を発揮します。',
+    strengths: ['多彩な才能と適応力', '旺盛な好奇心', '優れた社交性', '変化への対応力'],
+    challenges: ['飽きやすく継続が苦手', '衝動的な行動が多い', '自由すぎて生活が乱れることがある', '責任から逃げがちになることがある'],
+    lucky: { color: 'ターコイズ', dir: '全方位', num: '5・14・23', kigo: '旅立ちの時・移ろいの季節' },
+    career: '旅行業、フリーランス、起業家、ジャーナリスト、スポーツインストラクター、営業職など、自由と変化のある仕事が向いています。',
+  },
+  6: {
+    title: '愛情深い守護者',
+    keyword: '愛・責任・家族・奉仕・美',
+    desc: '6は愛と調和の数。あなたは深い愛情と責任感を持ち、大切な人を守ることに喜びを感じます。家族や仲間のために献身的に尽くし、周囲に安心感を与える存在です。美的センスも高く、美しいものに囲まれた環境で輝きます。',
+    strengths: ['深い愛情と思いやり', '強い責任感', '高い美的センス', '家族・仲間を大切にする心'],
+    challenges: ['過保護・世話焼きになりすぎる', '自分を犠牲にしやすい', '完璧な家庭や関係を求めすぎる', '人の問題を抱え込みすぎる'],
+    lucky: { color: 'ローズピンク', dir: '南西', num: '6・15・24', kigo: '母の日・結婚記念日の頃' },
+    career: '教師、医療従事者、保育士、カウンセラー、料理人、インテリアデザイナー、福祉士など、人を支え美を追求する仕事が向いています。',
+  },
+  7: {
+    title: '知の探究者',
+    keyword: '分析・精神性・真実・孤独',
+    desc: '7は精神と知性の数。あなたは鋭い分析力と深い思考力を持ち、物事の本質を見抜く洞察力があります。一人でじっくり考える時間を大切にし、真実を追い求める探究者です。表面的な人間関係より深い絆を好み、少数の信頼できる人との関係を大切にします。',
+    strengths: ['鋭い分析力と論理的思考', '深い洞察力', '専門的知識の習得力', '精神的な強さ'],
+    challenges: ['孤立しがちで内向きになりやすい', '完璧主義で他人に厳しくなる', 'コミュニケーションが苦手なことがある', '疑い深くなりすぎることがある'],
+    lucky: { color: 'ディープブルー', dir: '北西', num: '7・16・25', kigo: '冬・月明かりの夜' },
+    career: '研究者、哲学者、データアナリスト、作家、エンジニア、医師、占い師など、深い専門知識と分析力を活かせる仕事が向いています。',
+  },
+  8: {
+    title: '力強い達成者',
+    keyword: '権力・物質的成功・野心・達成',
+    desc: '8は物質と力の数。あなたは強いリーダーシップと高い目標達成能力を持ち、ビジネスや組織の中で頭角を現します。権力と責任を担うことができる強さがあり、大きな成果を上げる才能があります。物質的な成功だけでなく、精神的なバランスも大切にしましょう。',
+    strengths: ['卓越したリーダーシップ', '高い目標達成能力', 'ビジネスセンス', '強い精神力と忍耐力'],
+    challenges: ['権力欲が強くなりすぎることがある', 'ワーカホリックになりやすい', '感情より理論を優先しすぎる', '人間関係をおろそかにすることがある'],
+    lucky: { color: 'ブラック＆ゴールド', dir: '北', num: '8・17・26', kigo: '決算期・年末' },
+    career: '経営者、投資家、銀行員、弁護士、政治家、マネージャーなど、権限と責任を持つポジションで力を発揮します。',
+  },
+  9: {
+    title: '博愛の完成者',
+    keyword: '博愛・完成・叡智・慈悲',
+    desc: '9はすべての数の完成形。あなたは広い視野と深い人類愛を持ち、世界や社会全体のために何かをしたいという崇高な使命感があります。過去の経験から多くを学び、人生の深い叡智を体現する存在です。自己犠牲的になりやすいため、自分自身も大切にすることが重要です。',
+    strengths: ['広い視野と寛容さ', '深い叡智と洞察力', '強い使命感', '豊かな感受性と芸術的才能'],
+    challenges: ['自己犠牲的になりすぎる', '理想が高すぎて現実と乖離する', '過去にとらわれやすい', '境界線が引けず疲弊することがある'],
+    lucky: { color: 'ディープパープル', dir: '全方位', num: '9・18・27', kigo: '年の終わり・区切りの時' },
+    career: '社会活動家、NGO・NPO職員、芸術家、教育者、医療従事者、カウンセラーなど、社会や人類への貢献を実感できる仕事が向いています。',
+  },
+};
+
+function calcZerogaku() {
+  const d = dpState.global;
+  if (!d) { return; }
+
+  const year = d.getFullYear();
+  // 年の数字を足して1桁になるまで繰り返す（10になったら0）
+  let sum = String(year).split('').reduce((a, c) => a + Number(c), 0);
+  while (sum > 9) {
+    if (sum === 10) { sum = 0; break; }
+    sum = String(sum).split('').reduce((a, c) => a + Number(c), 0);
+  }
+
+  const zeroNum = sum;
+  const data = ZEROGAKU[zeroNum];
+
+  // 計算過程
+  const digits = String(year).split('').join(' + ');
+  const step1 = String(year).split('').reduce((a, c) => a + Number(c), 0);
+  let calcStr = `${year} → ${digits} = ${step1}`;
+  if (step1 !== zeroNum) calcStr += ` → ${step1 === 10 ? '10 → 0' : String(step1).split('').join(' + ') + ' = ' + zeroNum}`;
+
+  document.getElementById('zgNumber').textContent = zeroNum;
+  document.getElementById('zgTitle').textContent = data.title;
+  document.getElementById('zgCalc').textContent = `計算式：${calcStr}`;
+  document.getElementById('zgKeyword').textContent = `✦ ${data.keyword}`;
+  document.getElementById('zgDesc').textContent = data.desc;
+  document.getElementById('zgStrengths').innerHTML = data.strengths.map(s => `<li>${s}</li>`).join('');
+  document.getElementById('zgChallenges').innerHTML = data.challenges.map(c => `<li>${c}</li>`).join('');
+  document.getElementById('zgLucky').innerHTML = `
+    <div class="zg-lucky-item"><div class="zg-lucky-label">ラッキーカラー</div><div class="zg-lucky-val">${data.lucky.color}</div></div>
+    <div class="zg-lucky-item"><div class="zg-lucky-label">吉方位</div><div class="zg-lucky-val">${data.lucky.dir}</div></div>
+    <div class="zg-lucky-item"><div class="zg-lucky-label">ラッキーナンバー</div><div class="zg-lucky-val">${data.lucky.num}</div></div>
+    <div class="zg-lucky-item"><div class="zg-lucky-label">吉の時期</div><div class="zg-lucky-val">${data.lucky.kigo}</div></div>
+  `;
+  document.getElementById('zgCareer').textContent = data.career;
+
+  const result = document.getElementById('zerogakuResult');
+  result.classList.add('show');
+  setTimeout(() => result.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
 }
 
 initCalendars();
