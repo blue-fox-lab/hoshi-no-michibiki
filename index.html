@@ -79,7 +79,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--muted);
+      color: #ffffff;
       font-size: 0.75rem;
     }
 
@@ -1058,6 +1058,7 @@
     /* 広告エリア */
     .ad-banner {
       background: rgba(8, 10, 24, 0.85) !important;
+      color: #ffffff !important;
     }
 
     .icon-img {
@@ -1095,11 +1096,19 @@
 
     /* ===== フッター ===== */
     footer {
+      position: relative;
+      z-index: 2;
       text-align: center;
       padding: 30px;
-      color: var(--muted);
-      font-size: 0.8rem;
-      border-top: 1px solid var(--border);
+      color: #ffffff !important;
+      font-size: 1rem;
+      background: #1a1e2e !important;
+      border-top: 2px solid #7ee8ff;
+    }
+    footer a {
+      color: #7ee8ff !important;
+      text-decoration: underline;
+      font-size: 1rem;
     }
 
     /* ===== サイドバー広告（大画面） ===== */
@@ -1363,9 +1372,9 @@
   <aside class="sidebar-ad">広告エリア<br>(160×600)</aside>
 </div>
 
-<footer>
-  <p>© 2026 星の導き — 占い結果はエンターテインメント目的です</p>
-  <p style="margin-top: 8px;"><a href="privacy.html" style="color: var(--muted); text-decoration: underline;">プライバシーポリシー</a></p>
+<footer style="position:relative;z-index:2;background:#1a1e2e;">
+  <p style="color:#ffffff;">© 2026 星の導き — 占い結果はエンターテインメント目的です</p>
+  <p style="margin-top: 8px;"><a href="privacy.html" style="color: #7ee8ff; text-decoration: underline; font-size:1rem;">プライバシーポリシー</a></p>
 </footer>
 
 <script>
