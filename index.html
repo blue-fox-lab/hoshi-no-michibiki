@@ -426,22 +426,72 @@
     }
 
     .theme-btn {
-      padding: 14px 8px;
-      background: var(--surface);
-      border: 1.5px solid var(--border);
-      border-radius: 12px;
-      color: var(--muted);
+      position: relative;
+      padding: 16px 6px 14px;
+      background: linear-gradient(160deg, rgba(20,14,45,0.92), rgba(10,18,42,0.96));
+      border: 1px solid rgba(232,201,106,0.22);
+      border-radius: 14px;
       cursor: pointer;
-      font-size: 0.88rem;
+      color: rgba(210,205,235,0.82);
+      font-size: 0.78rem;
+      font-family: 'Shippori Mincho', serif;
+      letter-spacing: 0.06em;
       text-align: center;
-      transition: all 0.2s;
-      line-height: 1.4;
+      transition: all 0.28s ease;
+      line-height: 1.5;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.45), inset 0 0 8px rgba(126,232,255,0.02);
     }
-    .theme-btn .theme-icon { font-size: 1.5rem; display: block; margin-bottom: 4px; }
-    .theme-btn:hover, .theme-btn.selected {
-      border-color: var(--accent);
-      color: var(--accent);
-      background: rgba(224,170,255,0.08);
+
+    .theme-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(232,201,106,0.06), transparent 65%);
+      pointer-events: none;
+    }
+
+    .theme-btn .theme-icon {
+      display: block;
+      width: 52px;
+      height: 52px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin: 0 auto 8px;
+      filter: drop-shadow(0 0 4px rgba(232,201,106,0.35));
+      transition: all 0.28s ease;
+    }
+
+    .theme-btn .theme-name {
+      display: block;
+      font-size: 0.76rem;
+      word-break: keep-all;
+    }
+
+    .theme-btn:hover {
+      border-color: rgba(232,201,106,0.55);
+      color: rgba(232,201,106,0.92);
+      background: linear-gradient(160deg, rgba(35,22,68,0.96), rgba(15,26,58,0.98));
+      box-shadow: 0 0 16px rgba(232,201,106,0.14), 0 4px 18px rgba(0,0,0,0.5), inset 0 0 10px rgba(232,201,106,0.04);
+      transform: translateY(-2px);
+    }
+
+    .theme-btn:hover .theme-icon {
+      filter: drop-shadow(0 0 7px rgba(232,201,106,0.65));
+      transform: scale(1.12);
+    }
+
+    .theme-btn.selected {
+      border-color: rgba(232,201,106,0.8);
+      color: var(--gold);
+      background: linear-gradient(160deg, rgba(42,26,90,0.97), rgba(18,30,68,0.98));
+      box-shadow: 0 0 22px rgba(232,201,106,0.22), 0 0 8px rgba(126,232,255,0.08), inset 0 0 14px rgba(232,201,106,0.06);
+      transform: translateY(-2px) scale(1.03);
+    }
+
+    .theme-btn.selected .theme-icon {
+      filter: drop-shadow(0 0 10px rgba(232,201,106,0.8));
+      transform: scale(1.15);
     }
 
     /* ===== タロット — カードグリッド ===== */
@@ -453,17 +503,17 @@
       align-items: center;
       gap: 10px;
       margin-bottom: 20px;
-      font-size: 0.82rem;
-      color: var(--muted);
+      font-size: 0.85rem;
+      font-family: 'Shippori Mincho', serif;
+      color: rgba(210,205,235,0.85);
+      letter-spacing: 0.06em;
     }
     .step-num {
-      width: 22px; height: 22px;
-      background: var(--accent);
-      color: #1a0a2e;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.75rem;
-      font-weight: bold;
+      font-family: 'Georgia', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gold);
+      text-shadow: 0 0 8px rgba(232,201,106,0.6);
       flex-shrink: 0;
     }
 
@@ -506,16 +556,22 @@
 
     /* 裏面（選択前） */
     .tc-back {
-      background: linear-gradient(135deg, #1a0a2e 0%, #2d1060 50%, #1a0a2e 100%);
+      background-image: url('tarot_back.jpg');
+      background-size: cover;
+      background-position: center;
       border: 1.5px solid #3a2a5e;
-      font-size: 1.4rem;
     }
-    .tc-back::after {
-      content: '';
-      position: absolute;
-      inset: 4px;
-      border: 1px solid rgba(224,170,255,0.2);
-      border-radius: 5px;
+    .tc-back-star {
+      width: 58%;
+      height: 58%;
+      object-fit: contain;
+      mix-blend-mode: screen;
+      filter: drop-shadow(0 0 6px rgba(232,201,106,0.7));
+      animation: tc-star-pulse 2.5s ease-in-out infinite;
+    }
+    @keyframes tc-star-pulse {
+      0%, 100% { filter: drop-shadow(0 0 5px rgba(232,201,106,0.6)); transform: scale(1); }
+      50%       { filter: drop-shadow(0 0 14px rgba(232,201,106,1)) drop-shadow(0 0 8px rgba(126,232,255,0.4)); transform: scale(1.08); }
     }
     .tc-wrap:not(.picked):not(.other):hover .tc-back {
       border-color: var(--accent);
@@ -525,14 +581,25 @@
     /* 表面（めくり後） */
     .tc-front {
       transform: rotateY(180deg);
-      background: linear-gradient(160deg, #1e0a38, #0d1a3a);
+      background-size: cover;
+      background-position: center top;
       border: 1.5px solid var(--accent);
-      padding: 6px 4px;
+      padding: 0;
       text-align: center;
+      overflow: hidden;
     }
-    .tc-front .cf-icon { font-size: 1.6rem; }
-    .tc-front .cf-name { font-size: 0.6rem; color: var(--accent); line-height: 1.2; }
-    .tc-front .cf-pos  { font-size: 0.55rem; color: var(--muted); }
+    .tc-front-overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(0,0,12,0.88) 28%);
+      padding: 18px 4px 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+    .tc-front .cf-name { font-size: 0.6rem; color: #fff; line-height: 1.2; font-weight: bold; }
+    .tc-front .cf-pos  { font-size: 0.52rem; color: var(--gold); }
 
     /* ===== タロット — 結果 ===== */
     .tarot-result-card {
@@ -562,7 +629,17 @@
       color: var(--accent);
       margin-bottom: 14px;
     }
-    .trc-icon  { font-size: 3.5rem; margin-bottom: 10px; display: block; }
+    .trc-icon {
+      display: block;
+      width: 110px;
+      height: 165px;
+      margin: 0 auto 12px;
+      border-radius: 8px;
+      object-fit: cover;
+      object-position: center top;
+      border: 1.5px solid var(--accent);
+      box-shadow: 0 4px 20px rgba(126,232,255,0.3);
+    }
     .trc-name  { font-size: 1.5rem; color: #fff; font-weight: bold; margin-bottom: 4px; }
     .trc-pos   { font-size: 0.82rem; color: var(--muted); margin-bottom: 10px; }
     .trc-keyword {
@@ -1936,13 +2013,13 @@
 
       <!-- STEP 1: テーマ選択 -->
       <div class="card tarot-step active" id="tarotStep1">
-        <div class="step-label"><span class="step-num">1</span> 占いたいテーマを選んでください</div>
+        <div class="step-label"><span class="step-num">Ⅰ.</span> 占いたいテーマを選んでください</div>
         <div class="theme-grid" id="themeGrid"></div>
       </div>
 
       <!-- STEP 2: カード選択 -->
       <div class="card tarot-step" id="tarotStep2">
-        <div class="step-label"><span class="step-num">2</span> 心を静め、気になるカードを1枚選んでください</div>
+        <div class="step-label"><span class="step-num">Ⅱ.</span> 心を静め、気になるカードを1枚選んでください</div>
         <div class="cards-grid" id="cardsGrid"></div>
         <p style="text-align:center;font-size:0.78rem;color:var(--muted);margin-top:8px;">カードにカーソルを当てて、引き寄せられたものをめくってください</p>
       </div>
@@ -1951,7 +2028,7 @@
       <div class="tarot-result-card" id="tarotResultCard">
         <div class="trc-header">
           <div class="trc-theme-tag" id="trcThemeTag"></div>
-          <span class="trc-icon" id="trcIcon"></span>
+          <img class="trc-icon" id="trcIcon" src="" alt="">
           <div class="trc-name" id="trcName"></div>
           <div class="trc-pos"  id="trcPos"></div>
           <div class="trc-keyword" id="trcKeyword"></div>
@@ -2246,112 +2323,112 @@ function goTop() {
 
 // ===== タロットデータ =====
 const TAROT = [
-  { name: '愚者',     icon: '🤸', up_key: '自由・新出発・可能性',   rev_key: '無謀・不注意',
+  { name: '愚者', img: 'tarot_00.jpg',     icon: '🤸', up_key: '自由・新出発・可能性',   rev_key: '無謀・不注意',
     up_msg:  '新しい一歩を踏み出す勇気があなたの中に宿っています。常識や過去の枠にとらわれず、心の赴くままに動き出しましょう。その純粋な好奇心こそが、思いもよらない幸運を引き寄せます。',
     rev_msg: '焦りや準備不足が見えます。今は慎重さが必要な時期。直感だけで動くのではなく、一度立ち止まって状況を整理してから行動しましょう。',
     up_adv:  '「正解」を探しすぎないこと。不完全な状態でもいいので、まず動いてみることが大切です。',
     rev_adv: 'リスクを書き出し、できる限りの備えをしてから次のステップへ進みましょう。' },
-  { name: '魔術師',   icon: '🪄', up_key: '意志力・創造・才能開花', rev_key: '欺き・未活用の才能',
+  { name: '魔術師', img: 'tarot_01.jpg',   icon: '🪄', up_key: '意志力・創造・才能開花', rev_key: '欺き・未活用の才能',
     up_msg:  'あなたには必要なものがすでに揃っています。自分の才能や資源に目を向けてください。強い意志と集中力で、思い描いたことを現実に変えられる時期です。',
     rev_msg: '才能が眠ったまま活かされていないかもしれません。あるいは誰かの言葉に惑わされていませんか？自分の力を正直に見つめ直して。',
     up_adv:  '手持ちの武器を棚卸しして。すでに十分な力があることに気づくはずです。',
     rev_adv: '「どうせ無理」という思い込みを手放すことから始めてみましょう。' },
-  { name: '女教皇',   icon: '📖', up_key: '直感・内なる知恵・神秘', rev_key: '秘密・表面的な判断',
+  { name: '女教皇', img: 'tarot_02.jpg',   icon: '📖', up_key: '直感・内なる知恵・神秘', rev_key: '秘密・表面的な判断',
     up_msg:  '答えはすでにあなたの内側にあります。静かに心の声に耳を傾けてください。今は行動より内省の時。直感が正しい道を教えてくれています。',
     rev_msg: '感情や表面的な情報に振り回されているかもしれません。深く考える前に結論を出そうとしていませんか？',
     up_adv:  '日記や瞑想など、内側の声を聞く習慣を持つと良いでしょう。',
     rev_adv: '大切な決断は情報が揃ってからに。焦りは禁物です。' },
-  { name: '女帝',     icon: '👑', up_key: '豊かさ・愛情・創造性',   rev_key: '依存・停滞・過保護',
+  { name: '女帝', img: 'tarot_03.jpg',     icon: '👑', up_key: '豊かさ・愛情・創造性',   rev_key: '依存・停滞・過保護',
     up_msg:  '豊かさと愛に満ちたエネルギーが流れています。自分を大切に、美しいものを楽しみ、人への愛情を惜しまないで。今は種を蒔く絶好の時期です。',
     rev_msg: '与えすぎて自分が枯渇していませんか？または依存関係が生まれていないか振り返りを。',
     up_adv:  '自分自身への投資を惜しまないこと。充実した自分からこそ、周りへの愛が溢れます。',
     rev_adv: '境界線を引くことは冷たさではありません。自分の軸を守ることが長期的な愛に繋がります。' },
-  { name: '皇帝',     icon: '⚔️', up_key: '権威・安定・リーダーシップ', rev_key: '支配・頑固・独裁',
+  { name: '皇帝', img: 'tarot_04.jpg',     icon: '⚔️', up_key: '権威・安定・リーダーシップ', rev_key: '支配・頑固・独裁',
     up_msg:  '確固たる意志と安定した基盤があなたを支えています。今こそリーダーとして行動する時。責任感を持って物事を進めると、周囲の信頼を勝ち取れます。',
     rev_msg: 'コントロールを求めすぎていませんか？頑固さが人間関係に亀裂を生む可能性があります。',
     up_adv:  '長期的な計画を立てて。地に足のついた行動が大きな成果をもたらします。',
     rev_adv: '「自分が正しい」という前提を一度外し、相手の視点に立つ練習をしてみて。' },
-  { name: '教皇',     icon: '🕊️', up_key: '伝統・精神的成長・導き',  rev_key: '固定観念・束縛',
+  { name: '教皇', img: 'tarot_05.jpg',     icon: '🕊️', up_key: '伝統・精神的成長・導き',  rev_key: '固定観念・束縛',
     up_msg:  '学びや信頼できる人からのアドバイスを受け入れる時期です。伝統や慣習の中に大切な知恵が宿っています。師や先輩の言葉に耳を傾けてみましょう。',
     rev_msg: '古い価値観や「べき論」に縛られていませんか？自分らしい答えを探す時かもしれません。',
     up_adv:  '信頼できるメンターや先輩に相談してみると、道が開けます。',
     rev_adv: 'ルールに従うことと、自分の本音を大切にすることのバランスを取って。' },
-  { name: '恋人たち', icon: '💑', up_key: '愛・選択・調和',         rev_key: '不和・誘惑・迷い',
+  { name: '恋人たち', img: 'tarot_06.jpg', icon: '💑', up_key: '愛・選択・調和',         rev_key: '不和・誘惑・迷い',
     up_msg:  '大切な選択の時が来ています。心と頭が一致する選択をしてください。愛する人との絆が深まる予感。本当に大切なものを見極める力があなたにはあります。',
     rev_msg: '迷いや葛藤が生じているようです。誰かのために自分の気持ちを押し殺していませんか？',
     up_adv:  '後悔のない選択をするために、一番大切な価値観は何かを明確にしておきましょう。',
     rev_adv: '自分の本音から目を逸らさず、正直な対話を心がけて。' },
-  { name: '戦車',     icon: '🏆', up_key: '勝利・意志・前進',        rev_key: '挫折・暴走・方向迷子',
+  { name: '戦車', img: 'tarot_07.jpg',     icon: '🏆', up_key: '勝利・意志・前進',        rev_key: '挫折・暴走・方向迷子',
     up_msg:  '困難を乗り越える力が高まっています。目標に向かって猛進しましょう。自己規律と強い意志があれば、どんな障害も乗り越えられる時期です。',
     rev_msg: '方向性を見失っていたり、エネルギーが分散していませんか？焦りからの暴走に注意。',
     up_adv:  '目標を紙に書いて毎日確認する習慣を。ブレない軸が勝利に繋がります。',
     rev_adv: 'スピードを落として現在地を確認することも、前進のために必要です。' },
-  { name: '力',       icon: '🦁', up_key: '内なる強さ・忍耐・勇気',  rev_key: '自己不信・恐れ',
+  { name: '力', img: 'tarot_08.jpg',       icon: '🦁', up_key: '内なる強さ・忍耐・勇気',  rev_key: '自己不信・恐れ',
     up_msg:  '優しさと粘り強さがあなたの最大の武器です。力で押さえつけるのではなく、愛と理解で周囲を包み込んでください。その穏やかな強さが状況を好転させます。',
     rev_msg: '自信を失い、自分の力を過小評価していませんか？内側の恐れと向き合う勇気を持って。',
     up_adv:  '感情的になりそうな場面でも、深呼吸して穏やかに対応することを意識してみて。',
     rev_adv: '自分を責めることを今日だけでも止めてみましょう。あなたは十分に強い。' },
-  { name: '隠者',     icon: '🕯️', up_key: '内省・孤独・賢明な思慮', rev_key: '孤立・固執・引きこもり',
+  { name: '隠者', img: 'tarot_09.jpg',     icon: '🕯️', up_key: '内省・孤独・賢明な思慮', rev_key: '孤立・固執・引きこもり',
     up_msg:  '今は一人で静かに考える時間が必要です。喧騒から離れ、内なる光を見つけましょう。孤独は弱さではなく、次のステップへの大切な準備期間です。',
     rev_msg: '孤立が長引いていませんか？自分の殻に閉じこもりすぎることで、大切なチャンスを逃しているかも。',
     up_adv:  '一人の時間を大切に。読書や瞑想など、自分と向き合う時間を意識的に作りましょう。',
     rev_adv: '信頼できる人に本音を話してみて。一歩外に踏み出すことで光が見えてきます。' },
-  { name: '運命の輪', icon: '☸️', up_key: '転機・チャンス・サイクル', rev_key: '不運・変化への抵抗',
+  { name: '運命の輪', img: 'tarot_10.jpg', icon: '☸️', up_key: '転機・チャンス・サイクル', rev_key: '不運・変化への抵抗',
     up_msg:  '人生の大きな転換期が訪れています。この流れに乗ることで、新しいステージへと移行できます。チャンスを恐れず、変化を歓迎してください。',
     rev_msg: '変化を恐れて現状にしがみついていませんか？抵抗すればするほど流れに逆らうことになります。',
     up_adv:  'タイミングを活かして。「今だ」と感じたら動く勇気を持ちましょう。',
     rev_adv: '変化は終わりではなく始まりです。まず小さな一歩から受け入れてみて。' },
-  { name: '正義',     icon: '⚖️', up_key: '公正・真実・バランス',    rev_key: '不公正・偏り・自己欺瞞',
+  { name: '正義', img: 'tarot_11.jpg',     icon: '⚖️', up_key: '公正・真実・バランス',    rev_key: '不公正・偏り・自己欺瞞',
     up_msg:  '正直さと公平さがあなたの道を開きます。感情に流されず、事実と向き合って判断してください。誠実な行動が長期的な信頼と成功をもたらします。',
     rev_msg: '自分に都合のいい解釈をしていませんか？または不公正な扱いを受け入れすぎていないか振り返りを。',
     up_adv:  '「自分が正しいか」より「これは公平かどうか」という視点で物事を見てみて。',
     rev_adv: '自分の本当の気持ちに正直になることが、状況を好転させる鍵です。' },
-  { name: '吊られた男', icon: '🙃', up_key: '試練・新視点・手放し',  rev_key: '無駄な犠牲・停滞',
+  { name: '吊られた男', img: 'tarot_12.jpg', icon: '🙃', up_key: '試練・新視点・手放し',  rev_key: '無駄な犠牲・停滞',
     up_msg:  '今は思い通りにならない時期かもしれませんが、それには意味があります。違う角度から物事を見ることで、新しい真実が見えてきます。今は準備の時間。',
     rev_msg: '不必要な我慢や犠牲が続いていませんか？自分を痛めつけることが美徳ではありません。',
     up_adv:  '今できないことを悔やまず、今できることに集中することが突破口になります。',
     rev_adv: 'いつまでも待ち続けることが正解とは限りません。行動を起こす時を見極めて。' },
-  { name: '死神',     icon: '🌙', up_key: '変容・終わりと始まり・再生', rev_key: '変化への抵抗・停滞',
+  { name: '死神', img: 'tarot_13.jpg',     icon: '🌙', up_key: '変容・終わりと始まり・再生', rev_key: '変化への抵抗・停滞',
     up_msg:  '古いものを手放し、新しいステージへと移行する時です。「死」は終わりではなく、より良い形への変容。手放すことを恐れないでください。',
     rev_msg: '変化を拒んで、終わりにすべきものにしがみついていませんか？執着が新しい可能性を妨げています。',
     up_adv:  '整理と断捨離を。物だけでなく、人間関係や習慣を見直すことも含めて。',
     rev_adv: '「もったいない」という感覚より「これからどうしたいか」を基準に決断してみて。' },
-  { name: '節制',     icon: '🏺', up_key: '調和・忍耐・バランス',    rev_key: '過剰・不均衡・焦り',
+  { name: '節制', img: 'tarot_14.jpg',     icon: '🏺', up_key: '調和・忍耐・バランス',    rev_key: '過剰・不均衡・焦り',
     up_msg:  '焦らず着実に。少しずつ積み重ねることが大きな成果を生みます。対立するものを上手く融合させる才能があなたにはあります。穏やかな調和が幸運を呼びます。',
     rev_msg: '何かが過剰になっていませんか？働きすぎ、依存、感情の振れ幅が大きくなっていないか確認を。',
     up_adv:  '「ちょうどよい」を意識して。何ごとも極端にならないよう、日々のバランスを大切に。',
     rev_adv: 'ペースを落として自分の状態を観察してみましょう。休息も立派な行動です。' },
-  { name: '悪魔',     icon: '⛓️', up_key: '執着・物質主義・束縛',   rev_key: '解放・自覚・鎖を断つ',
+  { name: '悪魔', img: 'tarot_15.jpg',     icon: '⛓️', up_key: '執着・物質主義・束縛',   rev_key: '解放・自覚・鎖を断つ',
     up_msg:  '何かに縛られている感覚はありませんか？恐れや欲望が判断を曇らせているかもしれません。本当に必要なものと、惰性で続けているものを見極める時です。',
     rev_msg: '束縛から解放されるチャンスが来ています。「仕方ない」と諦めていたことを手放す勇気を持って。',
     up_adv:  '習慣や依存関係を客観的に見直して。小さな自由から取り戻していきましょう。',
     rev_adv: '鎖は思いのほか細いかもしれません。一歩踏み出す勇気が自由への扉を開きます。' },
-  { name: '塔',       icon: '⚡', up_key: '突然の変化・覚醒・崩壊',  rev_key: '危機の回避・小さな変化',
+  { name: '塔', img: 'tarot_16.jpg',       icon: '⚡', up_key: '突然の変化・覚醒・崩壊',  rev_key: '危機の回避・小さな変化',
     up_msg:  '突然の変化や衝撃的な出来事が、実は古い不要な構造を壊してくれています。痛みを伴うかもしれませんが、この破壊の後に本当の再生が始まります。',
     rev_msg: '崩壊を避けようとしているが、それは先延ばしにすぎないかも。小さな変化から取り入れることで大きな破綻を防げます。',
     up_adv:  '失ったものではなく、残ったものに目を向けて。それこそが本当に大切なものです。',
     rev_adv: '定期的なメンテナンスと見直しが、大きな危機を予防します。' },
-  { name: '星',       icon: '⭐', up_key: '希望・再生・インスピレーション', rev_key: '失望・悲観・孤独感',
+  { name: '星', img: 'tarot_17.jpg',       icon: '⭐', up_key: '希望・再生・インスピレーション', rev_key: '失望・悲観・孤独感',
     up_msg:  '試練の後に必ず光が差し込みます。希望を持って前に進んでください。あなたには見えない力に守られているという感覚を大切にして。夢は必ず叶います。',
     rev_msg: '希望を持てずにいますか？疲弊しきっているなら、まず休むことが先決です。',
     up_adv:  '毎日一つ、感謝できることを見つけてみて。希望の灯火が少しずつ大きくなります。',
     rev_adv: '今は夢を語らなくていい。ただ自分を回復させることだけを考えましょう。' },
-  { name: '月',       icon: '🌕', up_key: '直感・幻想・無意識',      rev_key: '混乱の解消・明確さ',
+  { name: '月', img: 'tarot_18.jpg',       icon: '🌕', up_key: '直感・幻想・無意識',      rev_key: '混乱の解消・明確さ',
     up_msg:  '物事がはっきり見えない時期かもしれません。でも、その霧の中にこそ大切なメッセージが隠れています。直感を信じ、夢や潜在意識からのサインに気づいてください。',
     rev_msg: '混乱が晴れ、物事が明確になってきます。根拠のない不安から解放されるサインかも。',
     up_adv:  '夢を記録してみて。無意識からのメッセージが明確な答えを与えてくれることがあります。',
     rev_adv: '先の見えない不安より、今この瞬間に集中することで安心感が増します。' },
-  { name: '太陽',     icon: '☀️', up_key: '成功・喜び・活力',        rev_key: '過信・遅延・陰り',
+  { name: '太陽', img: 'tarot_19.jpg',     icon: '☀️', up_key: '成功・喜び・活力',        rev_key: '過信・遅延・陰り',
     up_msg:  '明るくポジティブなエネルギーが溢れています！自信を持って行動すれば、輝かしい結果が待っています。今のあなたには周囲を照らす力があります。',
     rev_msg: '自信過剰になっていませんか？または本来の輝きが曇っている状態かも。小さなことから喜びを見つけて。',
     up_adv:  '今の喜びや成功を人と分かち合って。そのエネルギーが循環してさらに大きくなります。',
     rev_adv: '完璧を求めすぎず、今の自分の良いところを認めることから始めましょう。' },
-  { name: '審判',     icon: '📯', up_key: '復活・決断・覚醒',        rev_key: '自己批判・先送り',
+  { name: '審判', img: 'tarot_20.jpg',     icon: '📯', up_key: '復活・決断・覚醒',        rev_key: '自己批判・先送り',
     up_msg:  '過去を清算し、新たな自分として生まれ変わる時が来ました。長い間考えていた重要な決断を下す時です。内なる呼びかけに従ってください。',
     rev_msg: '自分を責め続けていませんか？過去の失敗に囚われて、前に進むことを恐れていませんか？',
     up_adv:  '長い間先送りにしてきたことを、今日一歩だけ進めてみましょう。',
     rev_adv: '自己批判のエネルギーを、自己改善に転換してみて。あなたには変われる力があります。' },
-  { name: '世界',     icon: '🌍', up_key: '完成・達成・統合',        rev_key: '未完成・遅延・惜しい',
+  { name: '世界', img: 'tarot_21.jpg',     icon: '🌍', up_key: '完成・達成・統合',        rev_key: '未完成・遅延・惜しい',
     up_msg:  'ひとつのサイクルが完成し、大きな達成感に包まれます。努力が実を結ぶ時。自分自身と世界との調和を感じながら、次の新しい旅への準備をしましょう。',
     rev_msg: 'もう少しで完成なのに、何かが滞っていますか？最後の一歩を踏み出す勇気が今求められています。',
     up_adv:  '今の達成を祝うことを忘れずに。自分への労いが次へのエネルギーになります。',
@@ -2359,12 +2436,18 @@ const TAROT = [
 ];
 
 const THEMES = [
-  { icon: '💕', name: '恋愛運' },
-  { icon: '💼', name: '仕事運' },
-  { icon: '💰', name: '金運'   },
-  { icon: '🤝', name: '対人関係' },
-  { icon: '🌿', name: '健康運' },
-  { icon: '✨', name: '総合運' },
+  { img: 'icon_theme_love.png',     name: '恋愛運'    },
+  { img: 'icon_theme_marriage.png', name: '結婚・婚活' },
+  { img: 'icon_theme_work.png',     name: '仕事運'    },
+  { img: 'icon_theme_career.png',   name: '転職・独立' },
+  { img: 'icon_theme_money.png',    name: '金運'      },
+  { img: 'icon_theme_relation.png', name: '対人関係'  },
+  { img: 'icon_theme_family.png',   name: '家族・家庭' },
+  { img: 'icon_theme_health.png',   name: '健康運'    },
+  { img: 'icon_theme_talent.png',   name: '才能・創造' },
+  { img: 'icon_theme_destiny.png',  name: '運命・使命' },
+  { img: 'icon_theme_change.png',   name: '転機・変化' },
+  { img: 'icon_theme_overall.png',  name: '総合運'    },
 ];
 
 let selectedTheme = null;
@@ -2374,7 +2457,7 @@ function buildThemeGrid() {
   THEMES.forEach((t, i) => {
     const btn = document.createElement('button');
     btn.className = 'theme-btn';
-    btn.innerHTML = `<span class="theme-icon">${t.icon}</span>${t.name}`;
+    btn.innerHTML = `<img class="theme-icon" src="${t.img}" alt="${t.name}"><span class="theme-name">${t.name}</span>`;
     btn.onclick = () => {
       document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('selected'));
       btn.classList.add('selected');
@@ -2405,11 +2488,12 @@ function buildCardsGrid() {
     wrap.className = 'tc-wrap';
     wrap.innerHTML = `
       <div class="tc-inner">
-        <div class="tc-back">🌟</div>
-        <div class="tc-front">
-          <span class="cf-icon">${card.icon}</span>
-          <span class="cf-name">${card.name}</span>
-          <span class="cf-pos">${card.rev ? '逆位置' : '正位置'}</span>
+        <div class="tc-back"><img src="icon_fortune_star.png" class="tc-back-star" alt=""></div>
+        <div class="tc-front" style="background-image:url('${card.img}')">
+          <div class="tc-front-overlay">
+            <span class="cf-name">${card.name}</span>
+            <span class="cf-pos">${card.rev ? '逆位置' : '正位置'}</span>
+          </div>
         </div>
       </div>`;
     wrap.onclick = () => pickCard(wrap, card, grid);
@@ -2435,8 +2519,12 @@ function showTarotResult(card) {
   const theme = THEMES[selectedTheme ?? 5];
   const rev   = card.rev;
 
-  document.getElementById('trcThemeTag').textContent  = `${theme.icon} ${theme.name}`;
-  document.getElementById('trcIcon').textContent      = card.icon;
+  document.getElementById('trcThemeTag').innerHTML = `<img src="${theme.img}" style="width:18px;height:18px;vertical-align:middle;margin-right:5px;filter:drop-shadow(0 0 4px rgba(232,201,106,0.6));">${theme.name}`;
+  const iconEl = document.getElementById('trcIcon');
+  iconEl.src = card.img;
+  iconEl.alt = card.name;
+  if (rev) iconEl.style.transform = 'rotate(180deg)';
+  else iconEl.style.transform = '';
   document.getElementById('trcName').textContent      = card.name;
   document.getElementById('trcPos').textContent       = rev ? '逆位置' : '正位置';
   document.getElementById('trcKeyword').textContent   = rev ? card.rev_key : card.up_key;
