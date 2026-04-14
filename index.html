@@ -189,6 +189,18 @@
       color: #fff;
       text-shadow: 0 0 16px rgba(232, 201, 106, 0.7), 0 2px 8px rgba(0,0,0,0.8);
       letter-spacing: 0.12em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .section-title-icon {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 8px rgba(232,201,106,0.7));
+      flex-shrink: 0;
     }
 
     .section-desc {
@@ -1524,6 +1536,134 @@
       .zodiac-grid { grid-template-columns: repeat(3, 1fr); }
       header h1 { font-size: 1.6rem; }
     }
+    /* ===== 結果カード 統一リデザイン ===== */
+
+    /* 共通：全結果カードの枠線・背景を統一 */
+    .tarot-result-card,
+    .zr-card,
+    .nr-card,
+    .sm-card,
+    .zg-card,
+    .sy-card {
+      border: 1px solid rgba(232, 201, 106, 0.45) !important;
+      background: rgba(4, 5, 15, 0.96) !important;
+      box-shadow: 0 0 24px rgba(232, 201, 106, 0.08), 0 0 12px rgba(126, 232, 255, 0.05) !important;
+    }
+
+    /* 各ヘッダーに背景画像 + オーバーレイ */
+    .trc-header,
+    .zr-header,
+    .nr-header,
+    .sm-header,
+    .zg-header,
+    .sy-header {
+      position: relative;
+      background-size: cover !important;
+      background-position: center !important;
+    }
+
+    .trc-header::before,
+    .zr-header::before,
+    .nr-header::before,
+    .sm-header::before,
+    .zg-header::before,
+    .sy-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(4, 5, 18, 0.60);
+    }
+
+    .trc-header > *,
+    .zr-header > *,
+    .nr-header > *,
+    .sm-header > *,
+    .zg-header > *,
+    .sy-header > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* セクション別背景画像 */
+    #tarot .trc-header    { background-image: url('bg_tarot.jpg') !important; }
+    #zodiac .zr-header    { background-image: url('bg_zodiac.jpg') !important; }
+    #numerology .nr-header { background-image: url('bg_numerology.jpg') !important; }
+    #sanmei .sm-header    { background-image: url('bg_sanmei.jpg') !important; }
+    #zerogaku .zg-header  { background-image: url('bg_zero.jpg') !important; }
+    #seiyou .sy-header    { background-image: url('bg_seiyou.jpg') !important; }
+
+    /* ヘッダー内テキスト */
+    .trc-name, .zr-name, .nr-number, .zg-number,
+    .nr-title, .zg-title, .sm-gogyo-badge {
+      color: #fff !important;
+      text-shadow: 0 0 16px rgba(232,201,106,0.6), 0 2px 8px rgba(0,0,0,0.9) !important;
+    }
+
+    .trc-keyword, .zr-keyword, .nr-keyword, .zg-keyword {
+      background: rgba(232, 201, 106, 0.15) !important;
+      border: 1px solid rgba(232, 201, 106, 0.4) !important;
+      color: var(--gold) !important;
+    }
+
+    /* ボディ部分 */
+    .trc-body, .zr-body, .nr-body, .sm-body, .zg-body, .sy-body {
+      background: transparent !important;
+      border-top: 1px solid rgba(232, 201, 106, 0.2) !important;
+    }
+
+    /* セクションタイトル（小見出し） */
+    .trc-section-title, .zr-section-title, .nr-section-title,
+    .sm-section-title, .zg-section-title {
+      color: rgba(232, 201, 106, 0.85) !important;
+      border-bottom: 1px solid rgba(232, 201, 106, 0.2) !important;
+    }
+
+    /* ラッキーエリア */
+    .zr-lucky-item, .nr-lucky-item, .zg-lucky-item {
+      background: rgba(232, 201, 106, 0.06) !important;
+      border: 1px solid rgba(232, 201, 106, 0.2) !important;
+    }
+
+    .zr-lucky-val, .nr-lucky-val, .zg-lucky-val {
+      color: #fff !important;
+    }
+
+    /* ラッキーラベルにアイコン追加 */
+    .zr-lucky-label::before,
+    .nr-lucky-label::before,
+    .zg-lucky-label::before,
+    .sm-lucky-label::before {
+      content: '';
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      vertical-align: middle;
+      margin-right: 4px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      filter: drop-shadow(0 0 3px rgba(232,201,106,0.5));
+    }
+
+    /* 運勢エリア（星座） */
+    .zr-area-item {
+      background: rgba(232, 201, 106, 0.05) !important;
+      border: 1px solid rgba(232, 201, 106, 0.15) !important;
+    }
+
+    /* 五行バー（算命学） */
+    .sm-gogyo-bar-fill {
+      background: linear-gradient(90deg, var(--gold), var(--accent)) !important;
+    }
+
+    /* 西洋占星術サインカード */
+    .sy-sign-card {
+      background: rgba(232, 201, 106, 0.06) !important;
+      border: 1px solid rgba(232, 201, 106, 0.25) !important;
+    }
+
+    .sy-sign-name { color: var(--gold) !important; }
+
   </style>
 </head>
 <body>
@@ -1608,7 +1748,7 @@
     <section id="tarot" class="section">
       <div class="section-header">
         <div class="section-header-bg" style="background-image:url('bg_tarot.jpg');">
-          <h2 class="section-title">🃏 タロット占い</h2>
+          <h2 class="section-title"><img src="icon_tarot.png" class="section-title-icon" alt="">タロット占い</h2>
           <p class="section-desc">22枚の中から選んだカードがあなたへのメッセージを伝えます</p>
         </div>
       </div>
@@ -1653,7 +1793,7 @@
     <section id="zodiac" class="section">
       <div class="section-header">
         <div class="section-header-bg" style="background-image:url('bg_zodiac.jpg');">
-          <h2 class="section-title">♈ 星座占い</h2>
+          <h2 class="section-title"><img src="icon_zodiac.png" class="section-title-icon" alt="">星座占い</h2>
           <p class="section-desc">生年月日から星座を自動判定、今日の運勢をお届けします</p>
         </div>
       </div>
@@ -1690,7 +1830,7 @@
     <section id="numerology" class="section">
       <div class="section-header">
         <div class="section-header-bg" style="background-image:url('bg_numerology.jpg');">
-          <h2 class="section-title">🔢 数秘術</h2>
+          <h2 class="section-title"><img src="icon_numerology.png" class="section-title-icon" alt="">数秘術</h2>
           <p class="section-desc">生年月日から「ライフパスナンバー」を算出します</p>
         </div>
       </div>
@@ -1733,7 +1873,7 @@
     <section id="sanmei" class="section">
       <div class="section-header">
         <div class="section-header-bg" style="background-image:url('bg_sanmei.jpg');">
-          <h2 class="section-title">☯ 算命学</h2>
+          <h2 class="section-title"><img src="icon_sanmei.png" class="section-title-icon" alt="">算命学</h2>
           <p class="section-desc">生年月日から「日干・年干支・五行」を算出し、あなたの宿命を読み解きます</p>
         </div>
       </div>
@@ -1790,7 +1930,7 @@
     <section id="zerogaku" class="section">
       <div class="section-header">
         <div class="section-header-bg" style="background-image:url('bg_zero.jpg');">
-          <h2 class="section-title">0️⃣ 0学</h2>
+          <h2 class="section-title"><img src="icon_zero.png" class="section-title-icon" alt="">0学</h2>
           <p class="section-desc">生まれ年の数字から0〜9の「ゼロ数」を算出し、あなたの本質を読み解きます</p>
         </div>
       </div>
@@ -1827,7 +1967,7 @@
     <section id="seiyou" class="section">
       <div class="section-header">
         <div class="section-header-bg" style="background-image:url('bg_seiyou.jpg');">
-          <h2 class="section-title">♏ 西洋占星術</h2>
+          <h2 class="section-title"><img src="icon_seiyou.png" class="section-title-icon" alt="">西洋占星術</h2>
           <p class="section-desc">生年月日と出生時刻からホロスコープの主要星座を読み解きます</p>
         </div>
       </div>
