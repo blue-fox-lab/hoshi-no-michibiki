@@ -1224,21 +1224,35 @@
 
     /* ===== トップへ戻るボタン ===== */
     .btn-go-top {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
       width: 100%;
-      max-width: 300px;
-      margin: 20px auto 0;
-      padding: 12px;
-      background: transparent;
-      border: 1px solid var(--border);
+      max-width: 340px;
+      margin: 0 auto 24px;
+      padding: 12px 20px;
+      background: linear-gradient(135deg, #2a1a5e 0%, #0d1a4a 100%);
+      border: 1px solid rgba(232, 201, 106, 0.5);
       border-radius: 30px;
-      color: var(--muted);
+      color: rgba(232, 201, 106, 0.9);
       font-family: inherit;
-      font-size: 0.9rem;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.3s;
+      box-shadow: 0 0 12px rgba(232,201,106,0.1);
     }
-    .btn-go-top:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-go-top:hover {
+      border-color: var(--accent);
+      color: #fff;
+      box-shadow: 0 0 18px rgba(126,232,255,0.3);
+    }
+    .btn-go-top img {
+      width: 18px;
+      height: 18px;
+      filter: drop-shadow(0 0 4px rgba(232,201,106,0.6));
+    }
 
     /* ===== 西洋占星術 ===== */
     .sy-card {
@@ -1664,6 +1678,157 @@
 
     .sy-sign-name { color: var(--gold) !important; }
 
+    /* ===== テキスト改行の最適化（日本語） ===== */
+    .section-desc {
+      overflow-wrap: break-word;
+      text-wrap: balance;
+      word-break: auto-phrase;
+    }
+
+    .zr-message, .zr-area-msg,
+    .nr-desc, .nr-career,
+    .zg-desc, .zg-list li, .zg-career,
+    .trc-message, .trc-advice,
+    .tf-message,
+    .sm-nikkan-desc,
+    .omikuji-hint {
+      overflow-wrap: break-word;
+      text-wrap: pretty;
+      word-break: auto-phrase;
+    }
+
+    /* ラッキーグリッドラベル — 文字間隔を詰めて改行防止 */
+    .nr-lucky-label {
+      letter-spacing: 0.01em !important;
+      font-size: 0.66rem !important;
+    }
+
+    /* ラッキー値はなるべく折り返さない */
+    .nr-lucky-val, .zr-lucky-val {
+      word-break: keep-all;
+      overflow-wrap: normal;
+    }
+
+    /* モバイル: ラッキーグリッドを2列に（実機対応）*/
+    @media (max-width: 600px) {
+      .nr-lucky-row { grid-template-columns: repeat(2, 1fr) !important; }
+    }
+
+    /* ===== おみくじアニメーション ===== */
+    .omikuji-predraw { text-align: center; padding: 8px 0 16px; }
+
+    .omikuji-icon-wrap {
+      margin: 16px auto 12px;
+      width: 90px; height: 90px;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+
+    .omikuji-star-anim {
+      width: 72px; height: 72px;
+      filter: drop-shadow(0 0 10px rgba(232,201,106,0.6));
+      animation: omikuji-pulse 2.2s ease-in-out infinite;
+    }
+
+    @keyframes omikuji-pulse {
+      0%, 100% { filter: drop-shadow(0 0 8px rgba(232,201,106,0.5)); transform: scale(1); }
+      50%       { filter: drop-shadow(0 0 22px rgba(232,201,106,0.95)) drop-shadow(0 0 10px rgba(126,232,255,0.4)); transform: scale(1.08); }
+    }
+
+    .omikuji-hint {
+      font-size: 0.8rem;
+      color: rgba(200,190,230,0.75);
+      letter-spacing: 0.06em;
+      margin-bottom: 16px;
+    }
+
+    .omikuji-draw-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 28px;
+      background: linear-gradient(135deg, #3a1a7e 0%, #1a2a6a 100%);
+      border: 1px solid rgba(232,201,106,0.7);
+      border-radius: 30px;
+      color: rgba(232,201,106,0.95);
+      font-family: 'Shippori Mincho', serif;
+      font-size: 0.92rem; font-weight: 700;
+      letter-spacing: 0.12em;
+      cursor: pointer;
+      box-shadow: 0 0 16px rgba(232,201,106,0.18), inset 0 0 8px rgba(126,232,255,0.04);
+      transition: all 0.3s;
+    }
+
+    .omikuji-draw-btn:hover:not(:disabled) {
+      background: linear-gradient(135deg, #4a2a9e 0%, #2a3a8a 100%);
+      box-shadow: 0 0 28px rgba(232,201,106,0.38);
+      transform: scale(1.04);
+    }
+
+    .omikuji-draw-btn:disabled { opacity: 0.5; cursor: default; }
+
+    /* シェイクアニメーション */
+    @keyframes omikuji-shake {
+      0%,100% { transform: rotate(0deg) scale(1); }
+      10% { transform: rotate(-14deg) scale(1.06); }
+      22% { transform: rotate(14deg)  scale(1.06); }
+      34% { transform: rotate(-12deg) scale(1.1); }
+      46% { transform: rotate(12deg)  scale(1.1); }
+      58% { transform: rotate(-8deg)  scale(1.12); }
+      70% { transform: rotate(8deg)   scale(1.12); }
+      82% { transform: rotate(-4deg)  scale(1.1); }
+      92% { transform: rotate(4deg)   scale(1.08); }
+    }
+
+    .omikuji-shaking { animation: omikuji-shake 0.75s ease-in-out !important; }
+
+    /* フラッシュ（展開前の閃光） */
+    @keyframes omikuji-flash-out {
+      0%   { filter: drop-shadow(0 0 12px rgba(232,201,106,0.7)); transform: scale(1); opacity: 1; }
+      60%  { filter: drop-shadow(0 0 48px rgba(232,201,106,1)) drop-shadow(0 0 30px rgba(255,255,255,0.9)); transform: scale(1.4); opacity: 1; }
+      100% { filter: drop-shadow(0 0 80px rgba(255,255,255,1)); transform: scale(2.2); opacity: 0; }
+    }
+
+    .omikuji-flashing { animation: omikuji-flash-out 0.45s ease-out forwards !important; }
+
+    /* 背景ホワイトフラッシュ */
+    @keyframes bg-flash {
+      0%   { opacity: 0; }
+      30%  { opacity: 0.85; }
+      100% { opacity: 0; }
+    }
+
+    .tf-flash-overlay {
+      position: absolute; inset: 0; z-index: 10;
+      background: white;
+      pointer-events: none;
+      animation: bg-flash 0.5s ease-out forwards;
+      border-radius: 16px;
+    }
+
+    /* 結果の出現アニメーション */
+    @keyframes result-slide-in {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes label-pop {
+      0%   { opacity: 0; transform: scale(0.15) translateY(10px); }
+      65%  { opacity: 1; transform: scale(1.18) translateY(-4px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    #tfResult { display: none; }
+    #tfResult.reveal { animation: result-slide-in 0.4s ease-out both; }
+    #tfOverall.animate { animation: fade-up 0.45s ease-out both; }
+    #tfOverallLabel.animate { animation: label-pop 0.65s cubic-bezier(0.34,1.56,0.64,1) both; }
+    #tfStarsRow.animate { animation: fade-up 0.45s ease-out both; }
+    #tfMessage.animate { animation: fade-up 0.45s ease-out both; }
+    #tfLucky.animate   { animation: fade-up 0.45s ease-out both; }
+
   </style>
 </head>
 <body>
@@ -1706,10 +1871,10 @@
 <div class="birthday-section">
   <div class="birthday-card">
     <h3><img src="icon_star.png" style="width:24px;height:24px;vertical-align:middle;margin-right:8px;filter:drop-shadow(0 0 6px rgba(232,201,106,0.7));">あなたの生年月日</h3>
+    <p style="font-size:0.82rem;color:var(--muted);margin-bottom:14px;">入力すると全ての占いに反映されます</p>
 
     <!-- 未入力時 -->
     <div class="birthday-set-area" id="bdaySetArea">
-      <p style="font-size:0.85rem;color:var(--muted);margin-bottom:12px;">入力すると全ての占いに自動反映されます</p>
       <div class="datepicker-wrap" id="dpWrap_global" style="max-width:280px;margin:0 auto 12px;">
         <button class="datepicker-btn" onclick="toggleCalendar('global')">
           <span>📅</span><span id="dpLabel_global" class="dp-placeholder">生年月日を選んでください</span>
@@ -1728,15 +1893,30 @@
 
 <!-- ===== 今日の総合運 ===== -->
 <div class="today-fortune" id="todayFortune">
-  <div class="tf-card">
+  <div class="tf-card" style="position:relative;">
     <div class="tf-bg">
       <div class="tf-title"><img src="icon_star.png" alt="">今日の総合運</div>
       <div class="tf-date" id="tfDate"></div>
-      <div class="tf-overall" id="tfOverall"></div>
-      <div class="tf-overall-label" id="tfOverallLabel"></div>
-      <div class="tf-stars-row" id="tfStarsRow"></div>
-      <div class="tf-message" id="tfMessage"></div>
-      <div class="tf-lucky" id="tfLucky"></div>
+
+      <!-- おみくじ前（ボタン表示） -->
+      <div class="omikuji-predraw" id="tfPreDraw">
+        <div class="omikuji-icon-wrap">
+          <img src="icon_fortune_star.png" class="omikuji-star-anim" id="omikujiStarIcon" alt="">
+        </div>
+        <p class="omikuji-hint">タップしておみくじを引いてください</p>
+        <button class="omikuji-draw-btn" id="omikujiDrawBtn" onclick="drawOmikuji()">
+          <img src="icon_star.png" alt="" style="width:16px;height:16px;">おみくじを引く
+        </button>
+      </div>
+
+      <!-- 結果（引いた後に表示） -->
+      <div id="tfResult">
+        <div class="tf-overall" id="tfOverall"></div>
+        <div class="tf-overall-label" id="tfOverallLabel"></div>
+        <div class="tf-stars-row" id="tfStarsRow"></div>
+        <div class="tf-message" id="tfMessage"></div>
+        <div class="tf-lucky" id="tfLucky"></div>
+      </div>
     </div>
   </div>
 </div>
@@ -1752,6 +1932,7 @@
           <p class="section-desc">22枚の中から選んだカードがあなたへのメッセージを伝えます</p>
         </div>
       </div>
+      <button class="btn-go-top" onclick="goTop()"><img src="icon_star.png" alt="">トップページへ<br>（生年月日入力はこちら）</button>
 
       <!-- STEP 1: テーマ選択 -->
       <div class="card tarot-step active" id="tarotStep1">
@@ -1786,7 +1967,6 @@
 
       <!-- 記事内広告 -->
       <div class="ad-banner" style="height:250px;margin-top:20px;">広告エリア (300×250) — AdSense審査通過後に挿入</div>
-      <button class="btn-go-top" onclick="goTop()">↑ トップページへ（生年月日入力はこちら）</button>
     </section>
 
     <!-- ===== 星座占い ===== -->
@@ -1797,6 +1977,7 @@
           <p class="section-desc">生年月日から星座を自動判定、今日の運勢をお届けします</p>
         </div>
       </div>
+      <button class="btn-go-top" onclick="goTop()"><img src="icon_star.png" alt="">トップページへ<br>（生年月日入力はこちら）</button>
 
       <div id="noBday_zodiac" style="display:none;text-align:center;padding:30px 20px;color:var(--muted);">⚠️ トップページで生年月日を入力してください</div>
 
@@ -1822,8 +2003,7 @@
         </div>
       </div>
 
-      <div class="ad-banner" style="height:250px;">広告エリア (300×250) — AdSense審査通過後に挿入</div>
-      <button class="btn-go-top" onclick="goTop()">↑ トップページへ（生年月日入力はこちら）</button>
+      <div class="ad-banner" style="height:250px;margin-top:20px;">広告エリア (300×250) — AdSense審査通過後に挿入</div>
     </section>
 
     <!-- ===== 数秘術 ===== -->
@@ -1834,6 +2014,7 @@
           <p class="section-desc">生年月日から「ライフパスナンバー」を算出します</p>
         </div>
       </div>
+      <button class="btn-go-top" onclick="goTop()"><img src="icon_star.png" alt="">トップページへ<br>（生年月日入力はこちら）</button>
 
       <div id="noBday_numerology" style="display:none;text-align:center;padding:30px 20px;color:var(--muted);">⚠️ トップページで生年月日を入力してください</div>
 
@@ -1865,8 +2046,7 @@
         </div>
       </div>
 
-      <div class="ad-banner" style="height:250px;">広告エリア (300×250) — AdSense審査通過後に挿入</div>
-      <button class="btn-go-top" onclick="goTop()">↑ トップページへ（生年月日入力はこちら）</button>
+      <div class="ad-banner" style="height:250px;margin-top:20px;">広告エリア (300×250) — AdSense審査通過後に挿入</div>
     </section>
 
     <!-- ===== 算命学 ===== -->
@@ -1874,9 +2054,10 @@
       <div class="section-header">
         <div class="section-header-bg" style="background-image:url('bg_sanmei.jpg');">
           <h2 class="section-title"><img src="icon_sanmei.png" class="section-title-icon" alt="">算命学</h2>
-          <p class="section-desc">生年月日から「日干・年干支・五行」を算出し、あなたの宿命を読み解きます</p>
+          <p class="section-desc">生年月日から「日干・年干支・五行」を算出し、<br>あなたの宿命を読み解きます</p>
         </div>
       </div>
+      <button class="btn-go-top" onclick="goTop()"><img src="icon_star.png" alt="">トップページへ<br>（生年月日入力はこちら）</button>
 
       <div id="noBday_sanmei" style="display:none;text-align:center;padding:30px 20px;color:var(--muted);">⚠️ トップページで生年月日を入力してください</div>
 
@@ -1923,7 +2104,6 @@
       </div>
 
       <div class="ad-banner" style="height:250px;margin-top:20px;">広告エリア (300×250) — AdSense審査通過後に挿入</div>
-      <button class="btn-go-top" onclick="goTop()">↑ トップページへ（生年月日入力はこちら）</button>
     </section>
 
     <!-- ===== 0学 ===== -->
@@ -1931,9 +2111,10 @@
       <div class="section-header">
         <div class="section-header-bg" style="background-image:url('bg_zero.jpg');">
           <h2 class="section-title"><img src="icon_zero.png" class="section-title-icon" alt="">0学</h2>
-          <p class="section-desc">生まれ年の数字から0〜9の「ゼロ数」を算出し、あなたの本質を読み解きます</p>
+          <p class="section-desc">生まれ年の数字から0〜9の「ゼロ数」を算出し、<br>あなたの本質を読み解きます</p>
         </div>
       </div>
+      <button class="btn-go-top" onclick="goTop()"><img src="icon_star.png" alt="">トップページへ<br>（生年月日入力はこちら）</button>
 
       <div id="noBday_zerogaku" style="display:none;text-align:center;padding:30px 20px;color:var(--muted);">⚠️ トップページで生年月日を入力してください</div>
 
@@ -1960,7 +2141,6 @@
       </div>
 
       <div class="ad-banner" style="height:250px;margin-top:20px;">広告エリア (300×250) — AdSense審査通過後に挿入</div>
-      <button class="btn-go-top" onclick="goTop()">↑ トップページへ（生年月日入力はこちら）</button>
     </section>
 
     <!-- ===== 西洋占星術 ===== -->
@@ -1968,9 +2148,10 @@
       <div class="section-header">
         <div class="section-header-bg" style="background-image:url('bg_seiyou.jpg');">
           <h2 class="section-title"><img src="icon_seiyou.png" class="section-title-icon" alt="">西洋占星術</h2>
-          <p class="section-desc">生年月日と出生時刻からホロスコープの主要星座を読み解きます</p>
+          <p class="section-desc">生年月日と出生時刻から<br>ホロスコープの主要星座を読み解きます</p>
         </div>
       </div>
+      <button class="btn-go-top" onclick="goTop()"><img src="icon_star.png" alt="">トップページへ<br>（生年月日入力はこちら）</button>
 
       <div class="card">
         <div id="seiyouBdayInfo" style="font-size:0.9rem;color:var(--muted);margin-bottom:16px;text-align:center;"></div>
@@ -2010,7 +2191,6 @@
       </div>
 
       <div class="ad-banner" style="height:250px;margin-top:20px;">広告エリア (300×250) — AdSense審査通過後に挿入</div>
-      <button class="btn-go-top" onclick="goTop()">↑ トップページへ（生年月日入力はこちら）</button>
     </section>
 
   </main>
@@ -3232,21 +3412,22 @@ function resetBirthday() {
 
 function showTodayFortune(year, month, day) {
   const today = new Date();
-  const seed = today.getFullYear() * 10000 + (today.getMonth()+1) * 100 + today.getDate()
-             + year * 7 + (month+1) * 13 + day * 3;
-  const rng = (offset) => ((seed * 1103515245 + 12345 * (offset + 1)) & 0x7fffffff) % 100;
+  const dateNum = today.getFullYear() * 10000 + (today.getMonth()+1) * 100 + today.getDate();
+  const bdayNum = year * 10000 + (month+1) * 100 + day;
 
-  const overallScores = ['大吉','中吉','吉','小吉'];
-  const overallEmojis = ['🌟','✨','⭐','🌙'];
-  const idx = rng(0) % 4;
-  const overall = overallScores[idx];
-  const emoji = overallEmojis[idx];
+  // 32bit整数範囲内でのLCG乱数生成
+  let seed = (dateNum ^ Math.imul(bdayNum, 2654435761)) >>> 0;
+  const rng = () => {
+    seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
+    return seed / 0x100000000;
+  };
+  const randInt = (max) => Math.floor(rng() * max);
+
+  const overallScores = ['大吉','中吉','吉','小吉','末吉','凶'];
+  const overall = overallScores[randInt(overallScores.length)];
 
   const areas = ['恋愛運','仕事運','金運','健康運'];
-  const starsArr = areas.map((_, i) => {
-    const s = Math.floor(rng(i + 1) / 20) + 1;
-    return Math.min(s, 5);
-  });
+  const starsArr = areas.map(() => randInt(5) + 1);
 
   const messages = [
     '星の流れがあなたを後押ししています。積極的な行動が吉です。直感を信じて一歩踏み出しましょう。',
@@ -3256,35 +3437,108 @@ function showTodayFortune(year, month, day) {
     '過去の努力が実を結ぶ兆しがあります。自分を信じて前向きに過ごしましょう。',
     '穏やかな一日になりそうです。好きな人と過ごす時間を大切にしてください。',
     '変化を受け入れることで新たな可能性が開きます。柔軟な姿勢が幸運を呼びます。',
+    '休息を大切にする日。無理をせず、自分のペースで過ごすことが吉につながります。',
+    '慎重さが鍵となる一日。大きな決断は先送りにして、情報収集に努めましょう。',
   ];
-  const message = messages[rng(5) % messages.length];
+  const message = messages[randInt(messages.length)];
 
   const colors = ['ローズゴールド','ラベンダー','ミントグリーン','パールホワイト','スカイブルー','ゴールド','コーラルピンク'];
   const items = ['クリスタル','ハーブティー','白いハンカチ','丸いもの','天然石','新しい文房具'];
-  const luckyColor = colors[rng(6) % colors.length];
-  const luckyItem = items[rng(7) % items.length];
-  const luckyNum = (rng(8) % 9) + 1;
+  const luckyColor = colors[randInt(colors.length)];
+  const luckyItem  = items[randInt(items.length)];
+  const luckyNum   = randInt(9) + 1;
 
   const weekdays = ['日','月','火','水','木','金','土'];
   const todayStr = `${today.getFullYear()}年${today.getMonth()+1}月${today.getDate()}日（${weekdays[today.getDay()]}）`;
 
+  // データ保存（drawOmikujiで使う）
+  window._fortuneData = { overall, starsArr, areas, message, luckyColor, luckyNum, luckyItem };
+
+  // 日付はプリドロー時点で表示
   document.getElementById('tfDate').textContent = todayStr;
-  document.getElementById('tfOverall').innerHTML = `<img src="icon_fortune_star.png" style="width:56px;height:56px;filter:drop-shadow(0 0 12px rgba(232,201,106,0.7));">`;
-  document.getElementById('tfOverallLabel').textContent = overall;
-  document.getElementById('tfStarsRow').innerHTML = areas.map((a, i) => `
-    <div class="tf-star-item">
-      <div class="tf-star-label">${a}</div>
-      <div class="tf-star-val">${'★'.repeat(starsArr[i])}${'☆'.repeat(5 - starsArr[i])}</div>
-    </div>`).join('');
-  document.getElementById('tfMessage').textContent = message;
-  const iconStyle = 'width:18px;height:18px;vertical-align:middle;margin-right:6px;filter:drop-shadow(0 0 4px rgba(232,201,106,0.6));';
-  document.getElementById('tfLucky').innerHTML = `
-    <div><img src="icon_lucky_color.png" style="${iconStyle}">ラッキーカラー：${luckyColor}</div>
-    <div><img src="icon_lucky_number.png" style="${iconStyle}">ラッキーナンバー：${luckyNum}</div>
-    <div><img src="icon_lucky_item.png" style="${iconStyle}">ラッキーアイテム：${luckyItem}</div>
-  `;
+
+  // プリドロー状態にリセット
+  const preDraw = document.getElementById('tfPreDraw');
+  const result  = document.getElementById('tfResult');
+  preDraw.style.display = 'block';
+  result.classList.remove('reveal');
+  result.style.display = 'none';
+  ['tfOverall','tfOverallLabel','tfStarsRow','tfMessage','tfLucky'].forEach(id => {
+    document.getElementById(id).classList.remove('animate');
+  });
+
+  // 星アイコンをパルスアニメに戻す
+  const starIcon = document.getElementById('omikujiStarIcon');
+  starIcon.classList.remove('omikuji-shaking','omikuji-flashing');
+  starIcon.style.animation = '';
+
+  // ボタンを有効化
+  const btn = document.getElementById('omikujiDrawBtn');
+  btn.disabled = false;
 
   document.getElementById('todayFortune').style.display = 'block';
+}
+
+function drawOmikuji() {
+  const data = window._fortuneData;
+  if (!data) return;
+
+  const btn      = document.getElementById('omikujiDrawBtn');
+  const starIcon = document.getElementById('omikujiStarIcon');
+  const preDraw  = document.getElementById('tfPreDraw');
+  const result   = document.getElementById('tfResult');
+  const card     = document.querySelector('.tf-card');
+
+  btn.disabled = true;
+
+  // フェーズ1: シェイク（0〜0.75s）
+  starIcon.style.animation = 'none';
+  void starIcon.offsetWidth; // reflow
+  starIcon.classList.add('omikuji-shaking');
+
+  setTimeout(() => {
+    // フェーズ2: フラッシュアウト（0.75〜1.2s）
+    starIcon.classList.remove('omikuji-shaking');
+    void starIcon.offsetWidth;
+    starIcon.classList.add('omikuji-flashing');
+
+    setTimeout(() => {
+      // フェーズ3: 白フラッシュ + プリドロー非表示
+      const flashEl = document.createElement('div');
+      flashEl.className = 'tf-flash-overlay';
+      card.appendChild(flashEl);
+      setTimeout(() => { if (flashEl.parentNode) flashEl.parentNode.removeChild(flashEl); }, 600);
+
+      preDraw.style.display = 'none';
+
+      // 結果データを書き込む
+      const iconStyle = 'width:18px;height:18px;vertical-align:middle;margin-right:6px;filter:drop-shadow(0 0 4px rgba(232,201,106,0.6));';
+      document.getElementById('tfOverall').innerHTML = `<img src="icon_fortune_star.png" style="width:56px;height:56px;filter:drop-shadow(0 0 12px rgba(232,201,106,0.7));">`;
+      document.getElementById('tfOverallLabel').textContent = data.overall;
+      document.getElementById('tfStarsRow').innerHTML = data.areas.map((a, i) => `
+        <div class="tf-star-item">
+          <div class="tf-star-label">${a}</div>
+          <div class="tf-star-val">${'★'.repeat(data.starsArr[i])}${'☆'.repeat(5 - data.starsArr[i])}</div>
+        </div>`).join('');
+      document.getElementById('tfMessage').textContent = data.message;
+      document.getElementById('tfLucky').innerHTML = `
+        <div><img src="icon_lucky_color.png" style="${iconStyle}">ラッキーカラー：${data.luckyColor}</div>
+        <div><img src="icon_lucky_number.png" style="${iconStyle}">ラッキーナンバー：${data.luckyNum}</div>
+        <div><img src="icon_lucky_item.png" style="${iconStyle}">ラッキーアイテム：${data.luckyItem}</div>
+      `;
+
+      // フェーズ4: 結果を順番に表示
+      result.style.display = 'block';
+      void result.offsetWidth;
+      result.classList.add('reveal');
+
+      const delays = { tfOverall: 80, tfOverallLabel: 250, tfStarsRow: 500, tfMessage: 780, tfLucky: 1000 };
+      Object.entries(delays).forEach(([id, ms]) => {
+        setTimeout(() => document.getElementById(id).classList.add('animate'), ms);
+      });
+
+    }, 420);
+  }, 750);
 }
 
 // ページ読み込み時にlocalStorageから復元
