@@ -156,18 +156,47 @@
     .section { display: none; }
     .section.active { display: block; }
 
+    /* ===== セクションヘッダー ===== */
+    .section-header {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 24px;
+      border: 1px solid rgba(232, 201, 106, 0.4);
+      box-shadow: 0 0 24px rgba(126, 232, 255, 0.08);
+    }
+
+    .section-header-bg {
+      background-size: cover;
+      background-position: center;
+      padding: 28px 20px 22px;
+      position: relative;
+    }
+
+    .section-header-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(4, 5, 18, 0.58);
+    }
+
+    .section-header-bg > * { position: relative; z-index: 1; }
+
     .section-title {
       text-align: center;
       font-size: 1.4rem;
       margin-bottom: 8px;
-      color: var(--gold);
+      color: #fff;
+      text-shadow: 0 0 16px rgba(232, 201, 106, 0.7), 0 2px 8px rgba(0,0,0,0.8);
+      letter-spacing: 0.12em;
     }
 
     .section-desc {
       text-align: center;
-      color: var(--muted);
-      font-size: 0.88rem;
-      margin-bottom: 30px;
+      color: rgba(210, 205, 230, 0.85);
+      font-size: 0.82rem;
+      margin-bottom: 0;
+      letter-spacing: 0.05em;
     }
 
     /* ===== カード共通 ===== */
@@ -1577,8 +1606,12 @@
 
     <!-- ===== タロット ===== -->
     <section id="tarot" class="section">
-      <h2 class="section-title">🃏 タロット占い</h2>
-      <p class="section-desc">22枚の中から選んだカードがあなたへのメッセージを伝えます</p>
+      <div class="section-header">
+        <div class="section-header-bg" style="background-image:url('bg_tarot.jpg');">
+          <h2 class="section-title">🃏 タロット占い</h2>
+          <p class="section-desc">22枚の中から選んだカードがあなたへのメッセージを伝えます</p>
+        </div>
+      </div>
 
       <!-- STEP 1: テーマ選択 -->
       <div class="card tarot-step active" id="tarotStep1">
@@ -1618,8 +1651,12 @@
 
     <!-- ===== 星座占い ===== -->
     <section id="zodiac" class="section">
-      <h2 class="section-title">♈ 星座占い</h2>
-      <p class="section-desc">生年月日から星座を自動判定、今日の運勢をお届けします</p>
+      <div class="section-header">
+        <div class="section-header-bg" style="background-image:url('bg_zodiac.jpg');">
+          <h2 class="section-title">♈ 星座占い</h2>
+          <p class="section-desc">生年月日から星座を自動判定、今日の運勢をお届けします</p>
+        </div>
+      </div>
 
       <div id="noBday_zodiac" style="display:none;text-align:center;padding:30px 20px;color:var(--muted);">⚠️ トップページで生年月日を入力してください</div>
 
@@ -1651,8 +1688,12 @@
 
     <!-- ===== 数秘術 ===== -->
     <section id="numerology" class="section">
-      <h2 class="section-title">🔢 数秘術</h2>
-      <p class="section-desc">生年月日から「ライフパスナンバー」を算出します</p>
+      <div class="section-header">
+        <div class="section-header-bg" style="background-image:url('bg_numerology.jpg');">
+          <h2 class="section-title">🔢 数秘術</h2>
+          <p class="section-desc">生年月日から「ライフパスナンバー」を算出します</p>
+        </div>
+      </div>
 
       <div id="noBday_numerology" style="display:none;text-align:center;padding:30px 20px;color:var(--muted);">⚠️ トップページで生年月日を入力してください</div>
 
@@ -1690,8 +1731,12 @@
 
     <!-- ===== 算命学 ===== -->
     <section id="sanmei" class="section">
-      <h2 class="section-title">☯ 算命学</h2>
-      <p class="section-desc">生年月日から「日干・年干支・五行」を算出し、あなたの宿命を読み解きます</p>
+      <div class="section-header">
+        <div class="section-header-bg" style="background-image:url('bg_sanmei.jpg');">
+          <h2 class="section-title">☯ 算命学</h2>
+          <p class="section-desc">生年月日から「日干・年干支・五行」を算出し、あなたの宿命を読み解きます</p>
+        </div>
+      </div>
 
       <div id="noBday_sanmei" style="display:none;text-align:center;padding:30px 20px;color:var(--muted);">⚠️ トップページで生年月日を入力してください</div>
 
@@ -1743,8 +1788,12 @@
 
     <!-- ===== 0学 ===== -->
     <section id="zerogaku" class="section">
-      <h2 class="section-title">0️⃣ 0学</h2>
-      <p class="section-desc">生まれ年の数字から0〜9の「ゼロ数」を算出し、あなたの本質を読み解きます</p>
+      <div class="section-header">
+        <div class="section-header-bg" style="background-image:url('bg_zero.jpg');">
+          <h2 class="section-title">0️⃣ 0学</h2>
+          <p class="section-desc">生まれ年の数字から0〜9の「ゼロ数」を算出し、あなたの本質を読み解きます</p>
+        </div>
+      </div>
 
       <div id="noBday_zerogaku" style="display:none;text-align:center;padding:30px 20px;color:var(--muted);">⚠️ トップページで生年月日を入力してください</div>
 
@@ -1776,8 +1825,12 @@
 
     <!-- ===== 西洋占星術 ===== -->
     <section id="seiyou" class="section">
-      <h2 class="section-title">♏ 西洋占星術</h2>
-      <p class="section-desc">生年月日と出生時刻からホロスコープの主要星座を読み解きます</p>
+      <div class="section-header">
+        <div class="section-header-bg" style="background-image:url('bg_seiyou.jpg');">
+          <h2 class="section-title">♏ 西洋占星術</h2>
+          <p class="section-desc">生年月日と出生時刻からホロスコープの主要星座を読み解きます</p>
+        </div>
+      </div>
 
       <div class="card">
         <div id="seiyouBdayInfo" style="font-size:0.9rem;color:var(--muted);margin-bottom:16px;text-align:center;"></div>
