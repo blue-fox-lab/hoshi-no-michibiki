@@ -1795,21 +1795,22 @@
     .omikuji-predraw { text-align: center; padding: 8px 0 16px; }
 
     .omikuji-icon-wrap {
-      margin: 16px auto 12px;
-      width: 90px; height: 90px;
+      margin: 20px auto 14px;
+      width: 110px; height: 160px;
       display: flex; align-items: center; justify-content: center;
       position: relative;
     }
 
     .omikuji-star-anim {
-      width: 72px; height: 72px;
-      filter: drop-shadow(0 0 10px rgba(232,201,106,0.6));
-      animation: omikuji-pulse 2.2s ease-in-out infinite;
+      width: 110px; height: 160px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 12px rgba(232,201,106,0.55));
+      animation: omikuji-pulse 2.4s ease-in-out infinite;
     }
 
     @keyframes omikuji-pulse {
-      0%, 100% { filter: drop-shadow(0 0 8px rgba(232,201,106,0.5)); transform: scale(1); }
-      50%       { filter: drop-shadow(0 0 22px rgba(232,201,106,0.95)) drop-shadow(0 0 10px rgba(126,232,255,0.4)); transform: scale(1.08); }
+      0%, 100% { filter: drop-shadow(0 0 10px rgba(232,201,106,0.45)); transform: scale(1) translateY(0); }
+      50%       { filter: drop-shadow(0 0 26px rgba(232,201,106,0.9)) drop-shadow(0 0 12px rgba(126,232,255,0.35)); transform: scale(1.05) translateY(-4px); }
     }
 
     .omikuji-hint {
@@ -1842,17 +1843,17 @@
 
     .omikuji-draw-btn:disabled { opacity: 0.5; cursor: default; }
 
-    /* シェイクアニメーション */
+    /* シェイクアニメーション（おみくじ筒を振る） */
     @keyframes omikuji-shake {
-      0%,100% { transform: rotate(0deg) scale(1); }
-      10% { transform: rotate(-14deg) scale(1.06); }
-      22% { transform: rotate(14deg)  scale(1.06); }
-      34% { transform: rotate(-12deg) scale(1.1); }
-      46% { transform: rotate(12deg)  scale(1.1); }
-      58% { transform: rotate(-8deg)  scale(1.12); }
-      70% { transform: rotate(8deg)   scale(1.12); }
-      82% { transform: rotate(-4deg)  scale(1.1); }
-      92% { transform: rotate(4deg)   scale(1.08); }
+      0%,100% { transform: rotate(0deg) scale(1) translateY(0); }
+      8%  { transform: rotate(-18deg) scale(1.06) translateY(-6px); }
+      20% { transform: rotate(16deg)  scale(1.07) translateY(-8px); }
+      32% { transform: rotate(-20deg) scale(1.10) translateY(-5px); }
+      44% { transform: rotate(18deg)  scale(1.10) translateY(-9px); }
+      56% { transform: rotate(-14deg) scale(1.12) translateY(-6px); }
+      68% { transform: rotate(12deg)  scale(1.11) translateY(-8px); }
+      80% { transform: rotate(-7deg)  scale(1.08) translateY(-4px); }
+      92% { transform: rotate(5deg)   scale(1.05) translateY(-2px); }
     }
 
     .omikuji-shaking { animation: omikuji-shake 0.75s ease-in-out !important; }
@@ -1978,7 +1979,7 @@
       <!-- おみくじ前（ボタン表示） -->
       <div class="omikuji-predraw" id="tfPreDraw">
         <div class="omikuji-icon-wrap">
-          <img src="icon_fortune_star.png" class="omikuji-star-anim" id="omikujiStarIcon" alt="">
+          <img src="icon_omikuji.png" class="omikuji-star-anim" id="omikujiStarIcon" alt="おみくじ">
         </div>
         <p class="omikuji-hint">タップしておみくじを引いてください</p>
         <button class="omikuji-draw-btn" id="omikujiDrawBtn" onclick="drawOmikuji()">
