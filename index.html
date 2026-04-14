@@ -87,33 +87,63 @@
     nav {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
+      gap: 12px;
       padding: 16px 20px;
-      max-width: 400px;
+      max-width: 440px;
       margin: 0 auto;
       position: relative;
       z-index: 1;
     }
 
     .nav-btn {
-      padding: 12px 8px;
+      padding: 0;
       border-radius: 30px;
-      border: 2px solid rgba(180, 180, 220, 0.35);
-      background: rgba(8, 10, 24, 0.75);
-      color: #c8c4d8;
+      border: none;
+      background: none;
       cursor: pointer;
-      font-size: 0.9rem;
-      transition: all 0.25s;
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
+      transition: all 0.3s;
       text-align: center;
+      position: relative;
+      overflow: hidden;
     }
 
-    .nav-btn.active, .nav-btn:hover {
+    .nav-btn-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px 14px;
+      border-radius: 30px;
+      background: linear-gradient(135deg, #2a1a5e 0%, #0d1a4a 50%, #0a2a4a 100%);
+      border: 2px solid var(--gold);
+      box-shadow: 0 0 10px rgba(232,201,106,0.3), inset 0 0 8px rgba(126,232,255,0.05);
+      color: #e8e4f8;
+      font-size: 0.88rem;
+      font-family: 'Shippori Mincho', serif;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      transition: all 0.3s;
+    }
+
+    .nav-btn-icon {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 4px rgba(232,201,106,0.6));
+      flex-shrink: 0;
+    }
+
+    .nav-btn.active .nav-btn-inner,
+    .nav-btn:hover .nav-btn-inner {
+      background: linear-gradient(135deg, #3a2a7e 0%, #1a2a6a 50%, #0a3a6a 100%);
       border-color: var(--accent);
+      box-shadow: 0 0 18px rgba(126,232,255,0.5), 0 0 8px rgba(232,201,106,0.3), inset 0 0 12px rgba(126,232,255,0.1);
       color: #fff;
-      background: rgba(20, 50, 70, 0.85);
-      box-shadow: 0 0 18px rgba(126, 232, 255, 0.45), inset 0 0 10px rgba(126, 232, 255, 0.1);
+    }
+
+    .nav-btn.active .nav-btn-icon,
+    .nav-btn:hover .nav-btn-icon {
+      filter: drop-shadow(0 0 8px rgba(126,232,255,0.8));
     }
 
     /* ===== メインコンテンツ ===== */
@@ -1011,14 +1041,7 @@
       letter-spacing: 0.08em;
     }
 
-    /* ナビボタン */
-    .nav-btn {
-      font-family: 'Shippori Mincho', serif;
-      font-weight: 700;
-      font-size: 0.95rem;
-      letter-spacing: 0.12em;
-      text-shadow: 0 1px 4px rgba(0,0,0,0.7);
-    }
+    /* ナビボタン（フォント設定はnav-btn-innerで管理） */
 
     /* ヘッダーサブテキスト */
     header p {
@@ -1075,13 +1098,7 @@
       filter: drop-shadow(0 0 15px rgba(77, 231, 255, 0.7));
     }
 
-    /* ナビボタンにグロー */
-    .nav-btn.active, .nav-btn:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      background: rgba(77, 231, 255, 0.07);
-      box-shadow: 0 0 12px rgba(77, 231, 255, 0.2);
-    }
+    /* ナビボタングロー（nav-btn-innerで管理） */
 
     /* カードにファンタジーな光縁 */
     .card {
@@ -1257,25 +1274,28 @@
     }
 
     .birthday-card {
-      background: rgba(26, 30, 46, 0.92);
-      border: 1px solid var(--gold);
-      border-radius: 12px;
-      padding: 20px 24px;
+      background: rgba(4, 5, 12, 0.88);
+      border: 1px solid rgba(232, 201, 106, 0.6);
+      border-radius: 14px;
+      padding: 22px 28px;
       text-align: center;
       overflow: visible;
+      box-shadow: 0 0 24px rgba(232, 201, 106, 0.12), inset 0 0 16px rgba(232, 201, 106, 0.03);
     }
 
     .birthday-card h3 {
-      font-size: 1rem;
-      color: var(--gold);
-      margin-bottom: 12px;
-      letter-spacing: 0.08em;
+      font-size: 0.85rem;
+      color: rgba(232, 201, 106, 0.75);
+      margin-bottom: 14px;
+      letter-spacing: 0.25em;
     }
 
     .birthday-display {
-      font-size: 1.2rem;
-      color: var(--text);
-      margin-bottom: 10px;
+      font-size: 1.25rem;
+      color: #f5f0e0;
+      margin-bottom: 14px;
+      letter-spacing: 0.08em;
+      text-shadow: 0 0 12px rgba(232, 201, 106, 0.3);
     }
 
     .birthday-set-area { display: block; }
@@ -1283,16 +1303,16 @@
 
     .btn-reset-bday {
       background: transparent;
-      border: 1px solid var(--border);
+      border: 1px solid rgba(232, 201, 106, 0.35);
       border-radius: 20px;
-      color: var(--muted);
+      color: rgba(232, 201, 106, 0.6);
       font-size: 0.8rem;
       padding: 6px 16px;
       cursor: pointer;
       font-family: inherit;
       transition: all 0.2s;
     }
-    .btn-reset-bday:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-reset-bday:hover { border-color: rgba(232, 201, 106, 0.8); color: var(--gold); }
 
     /* ===== 今日の総合運 ===== */
     .today-fortune {
@@ -1305,58 +1325,94 @@
     }
 
     .tf-card {
-      background: rgba(26, 30, 46, 0.92);
-      border: 1px solid var(--accent);
-      border-radius: 12px;
-      padding: 20px 24px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(232, 201, 106, 0.5);
+      box-shadow: 0 0 28px rgba(126, 232, 255, 0.12), 0 0 16px rgba(232, 201, 106, 0.1);
     }
+
+    .tf-bg {
+      background-image: url('fortune_bg.png');
+      background-size: cover;
+      background-position: center top;
+      padding: 22px 22px 18px;
+      position: relative;
+    }
+
+    .tf-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(5, 4, 20, 0.62);
+    }
+
+    .tf-bg > * { position: relative; z-index: 1; }
 
     .tf-title {
       text-align: center;
       font-size: 1rem;
-      color: var(--accent);
-      letter-spacing: 0.1em;
-      margin-bottom: 14px;
+      color: #fff;
+      letter-spacing: 0.15em;
+      margin-bottom: 6px;
+      text-shadow: 0 0 12px rgba(232, 201, 106, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .tf-title img {
+      width: 22px;
+      height: 22px;
+      filter: drop-shadow(0 0 6px rgba(232,201,106,0.8));
     }
 
     .tf-date {
       text-align: center;
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin-bottom: 14px;
+      font-size: 0.78rem;
+      color: rgba(200, 195, 220, 0.85);
+      margin-bottom: 16px;
+      letter-spacing: 0.1em;
     }
 
     .tf-overall {
       text-align: center;
-      font-size: 2rem;
+      font-size: 2.2rem;
       margin-bottom: 4px;
+      filter: drop-shadow(0 0 8px rgba(255,255,150,0.5));
     }
 
     .tf-overall-label {
       text-align: center;
-      font-size: 0.85rem;
+      font-size: 1rem;
+      font-weight: 700;
       color: var(--gold);
-      margin-bottom: 16px;
+      margin-bottom: 18px;
+      letter-spacing: 0.2em;
+      text-shadow: 0 0 10px rgba(232, 201, 106, 0.5);
     }
 
     .tf-stars-row {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin-bottom: 14px;
+      gap: 8px;
+      margin-bottom: 16px;
     }
 
     .tf-star-item {
-      background: rgba(10,14,26,0.6);
-      border-radius: 8px;
+      background: rgba(5, 4, 20, 0.55);
+      border: 1px solid rgba(232, 201, 106, 0.2);
+      border-radius: 10px;
       padding: 8px 4px;
       text-align: center;
+      backdrop-filter: blur(4px);
     }
 
     .tf-star-label {
       font-size: 0.72rem;
-      color: var(--muted);
+      color: rgba(200, 195, 220, 0.8);
       margin-bottom: 4px;
+      letter-spacing: 0.05em;
     }
 
     .tf-star-val {
@@ -1366,18 +1422,24 @@
 
     .tf-message {
       font-size: 0.88rem;
-      color: var(--text);
-      line-height: 1.8;
-      border-top: 1px solid var(--border);
-      padding-top: 12px;
+      color: rgba(240, 235, 220, 0.92);
+      line-height: 1.85;
+      border-top: 1px solid rgba(232, 201, 106, 0.2);
+      padding-top: 14px;
       margin-top: 4px;
     }
 
     .tf-lucky {
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin-top: 10px;
-      text-align: center;
+      font-size: 0.82rem;
+      color: rgba(200, 195, 220, 0.9);
+      margin-top: 14px;
+      border-top: 1px solid rgba(232, 201, 106, 0.15);
+      padding-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      align-items: flex-start;
+      padding-left: 20px;
     }
 
     /* ===== フッター ===== */
@@ -1444,25 +1506,37 @@
   <div class="hero-img-wrap">
     <img class="hero-img" src="hero_opt.jpg" alt="星の導き">
   </div>
-  <p>タロット・星座・数秘術 — 無料本格占い</p>
+  <p>タロット・星座・数秘術・算命学・0学・西洋占星術 — 無料本格占い</p>
 </header>
 
 <!-- トップ広告 (AdSense挿入場所) -->
 <div class="ad-banner">広告エリア (728×90) — AdSense審査通過後に挿入</div>
 
 <nav style="position:relative;z-index:1;">
-  <button class="nav-btn" onclick="showSection('tarot')">🃏 タロット</button>
-  <button class="nav-btn" onclick="showSection('zodiac')">♈ 星座占い</button>
-  <button class="nav-btn" onclick="showSection('numerology')">🔢 数秘術</button>
-  <button class="nav-btn" onclick="showSection('sanmei')">☯ 算命学</button>
-  <button class="nav-btn" onclick="showSection('zerogaku')">0️⃣ 0学</button>
-  <button class="nav-btn" onclick="showSection('seiyou')">♏ 西洋占星術</button>
+  <button class="nav-btn" onclick="showSection('tarot')">
+    <div class="nav-btn-inner"><img class="nav-btn-icon" src="icon_tarot.png" alt="">タロット</div>
+  </button>
+  <button class="nav-btn" onclick="showSection('zodiac')">
+    <div class="nav-btn-inner"><img class="nav-btn-icon" src="icon_zodiac.png" alt="">星座占い</div>
+  </button>
+  <button class="nav-btn" onclick="showSection('numerology')">
+    <div class="nav-btn-inner"><img class="nav-btn-icon" src="icon_numerology.png" alt="">数秘術</div>
+  </button>
+  <button class="nav-btn" onclick="showSection('sanmei')">
+    <div class="nav-btn-inner"><img class="nav-btn-icon" src="icon_sanmei.png" alt="">算命学</div>
+  </button>
+  <button class="nav-btn" onclick="showSection('zerogaku')">
+    <div class="nav-btn-inner"><img class="nav-btn-icon" src="icon_zero.png" alt="">0学</div>
+  </button>
+  <button class="nav-btn" onclick="showSection('seiyou')">
+    <div class="nav-btn-inner"><img class="nav-btn-icon" src="icon_seiyou.png" alt="">西洋占星術</div>
+  </button>
 </nav>
 
 <!-- ===== グローバル生年月日入力 ===== -->
 <div class="birthday-section">
   <div class="birthday-card">
-    <h3>✨ あなたの生年月日</h3>
+    <h3><img src="icon_star.png" style="width:24px;height:24px;vertical-align:middle;margin-right:8px;filter:drop-shadow(0 0 6px rgba(232,201,106,0.7));">あなたの生年月日</h3>
 
     <!-- 未入力時 -->
     <div class="birthday-set-area" id="bdaySetArea">
@@ -1486,13 +1560,15 @@
 <!-- ===== 今日の総合運 ===== -->
 <div class="today-fortune" id="todayFortune">
   <div class="tf-card">
-    <div class="tf-title">⭐ 今日の総合運</div>
-    <div class="tf-date" id="tfDate"></div>
-    <div class="tf-overall" id="tfOverall"></div>
-    <div class="tf-overall-label" id="tfOverallLabel"></div>
-    <div class="tf-stars-row" id="tfStarsRow"></div>
-    <div class="tf-message" id="tfMessage"></div>
-    <div class="tf-lucky" id="tfLucky"></div>
+    <div class="tf-bg">
+      <div class="tf-title"><img src="icon_star.png" alt="">今日の総合運</div>
+      <div class="tf-date" id="tfDate"></div>
+      <div class="tf-overall" id="tfOverall"></div>
+      <div class="tf-overall-label" id="tfOverallLabel"></div>
+      <div class="tf-stars-row" id="tfStarsRow"></div>
+      <div class="tf-message" id="tfMessage"></div>
+      <div class="tf-lucky" id="tfLucky"></div>
+    </div>
   </div>
 </div>
 
@@ -1749,11 +1825,11 @@
 </div>
 
 <footer style="position:relative;z-index:2;background:#1a1e2e;">
-  <p style="color:#ffffff;">© 2026 星の導き — 占い結果はエンターテインメント目的です</p>
-  <p style="margin-top: 8px;">
-    <a href="privacy.html" style="color: #7ee8ff; text-decoration: underline; font-size:1rem;">プライバシーポリシー</a>
+  <p style="color:#888;font-size:0.6rem;">© 2026 星の導き — 占い結果はエンターテインメント目的です</p>
+  <p style="margin-top: 4px;">
+    <a href="privacy.html" style="color: #7ee8ff; text-decoration: underline; font-size:0.6rem;">プライバシーポリシー</a>
     　｜
-    <a href="contact.html" style="color: #7ee8ff; text-decoration: underline; font-size:1rem;">お問い合わせ</a>
+    <a href="contact.html" style="color: #7ee8ff; text-decoration: underline; font-size:0.6rem;">お問い合わせ</a>
   </p>
 </footer>
 
@@ -2942,7 +3018,7 @@ function applyGlobalBirthday(year, month, day) {
   document.querySelector('.birthday-section').style.display = 'block';
   document.getElementById('bdaySetArea').style.display = 'none';
   document.getElementById('bdayDoneArea').style.display = 'block';
-  document.getElementById('bdayDisplay').textContent = `🎂 ${labelText}`;
+  document.getElementById('bdayDisplay').innerHTML = `<img src="icon_moon.png" style="width:26px;height:26px;vertical-align:middle;margin-right:8px;filter:drop-shadow(0 0 6px rgba(232,201,106,0.6));"> ${labelText}`;
   document.getElementById('todayFortune').style.display = 'none'; // 一旦隠してから表示
 
   // 今日の総合運を表示
@@ -3000,7 +3076,7 @@ function showTodayFortune(year, month, day) {
   const todayStr = `${today.getFullYear()}年${today.getMonth()+1}月${today.getDate()}日（${weekdays[today.getDay()]}）`;
 
   document.getElementById('tfDate').textContent = todayStr;
-  document.getElementById('tfOverall').textContent = emoji;
+  document.getElementById('tfOverall').innerHTML = `<img src="icon_fortune_star.png" style="width:56px;height:56px;filter:drop-shadow(0 0 12px rgba(232,201,106,0.7));">`;
   document.getElementById('tfOverallLabel').textContent = overall;
   document.getElementById('tfStarsRow').innerHTML = areas.map((a, i) => `
     <div class="tf-star-item">
@@ -3008,8 +3084,12 @@ function showTodayFortune(year, month, day) {
       <div class="tf-star-val">${'★'.repeat(starsArr[i])}${'☆'.repeat(5 - starsArr[i])}</div>
     </div>`).join('');
   document.getElementById('tfMessage').textContent = message;
-  document.getElementById('tfLucky').innerHTML =
-    `🍀 ラッキーカラー：${luckyColor}　🔢 ラッキーナンバー：${luckyNum}　🎁 ラッキーアイテム：${luckyItem}`;
+  const iconStyle = 'width:18px;height:18px;vertical-align:middle;margin-right:6px;filter:drop-shadow(0 0 4px rgba(232,201,106,0.6));';
+  document.getElementById('tfLucky').innerHTML = `
+    <div><img src="icon_lucky_color.png" style="${iconStyle}">ラッキーカラー：${luckyColor}</div>
+    <div><img src="icon_lucky_number.png" style="${iconStyle}">ラッキーナンバー：${luckyNum}</div>
+    <div><img src="icon_lucky_item.png" style="${iconStyle}">ラッキーアイテム：${luckyItem}</div>
+  `;
 
   document.getElementById('todayFortune').style.display = 'block';
 }
