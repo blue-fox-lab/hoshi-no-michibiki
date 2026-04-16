@@ -1,0 +1,14 @@
+icons_original/
+*.png.png
+bg.png
+bg_compressed.jpg
+bg_numerology.png
+bg_sanmei.png
+bg_seiyou.png
+bg_tarot.png
+bg_zero.png
+bg_zodiac.png
+fortune_bg.png
+hero.jpg
+tarot_*.png
+.claude/
