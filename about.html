@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>運営者情報・このサイトについて | 星の導き</title>
+  <meta name="description" content="「星の導き」の運営方針、サイトの目的、占いコンテンツの扱いについて紹介しています。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg:#0a0e1a; --card:#1a1e2e; --accent:#7ee8ff; --gold:#e8c96a; --text:#f0eede; --muted:#b0aec8; --border:#3a3a5a; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { background-color:#0a0e1a; background-image:url('bg.jpg'); background-size:cover; background-position:center; color:var(--text); font-family:'Shippori Mincho','Hiragino Mincho ProN','Yu Mincho',serif; min-height:100vh; line-height:1.85; }
+    .overlay { position:fixed; inset:0; background:rgba(5,8,20,0.82); z-index:0; pointer-events:none; }
+    header { position:relative; z-index:1; text-align:center; padding:40px 20px 20px; }
+    header h1 { font-size:1.6rem; color:var(--gold); letter-spacing:0.1em; }
+    header p { margin-top:8px; }
+    header a { color:var(--accent); text-decoration:none; font-size:0.9rem; }
+    header a:hover { text-decoration:underline; }
+    main { position:relative; z-index:1; max-width:780px; margin:0 auto; padding:40px 20px 80px; }
+    .card { background:rgba(26,30,46,0.92); border:1px solid var(--border); border-radius:12px; padding:40px; }
+    h2 { font-size:1.25rem; color:var(--gold); margin:32px 0 12px; padding-bottom:8px; border-bottom:1px solid var(--border); }
+    h2:first-child { margin-top:0; }
+    p { font-size:0.95rem; margin-bottom:14px; }
+    ul { padding-left:1.5em; margin-bottom:14px; }
+    li { font-size:0.95rem; margin-bottom:6px; }
+    footer { position:relative; z-index:1; text-align:center; padding:20px; color:var(--muted); font-size:0.8rem; }
+    footer a { color:var(--accent); }
+    .guide-links { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:10px; margin:16px 0; }
+    .guide-links a { display:block; background:rgba(10,14,26,0.6); border:1px solid var(--border); border-radius:8px; padding:12px; color:var(--accent); text-decoration:none; text-align:center; font-size:0.9rem; }
+    .guide-links a:hover { border-color:var(--gold); color:var(--gold); }
+  </style>
+</head>
+<body>
+<div class="overlay"></div>
+
+<header>
+  <h1>このサイトについて</h1>
+  <p><a href="index.html">← 星の導き トップへ戻る</a></p>
+</header>
+
+<main>
+  <div class="card">
+
+    <h2>サイトの目的</h2>
+    <p>「星の導き」は、古今東西に伝わる占術をだれでも気軽に、そして完全無料で楽しめる日本語の占いサイトです。タロット・数秘術・算命学・0学・西洋占星術・星座占いという6種類の占いを、生年月日を入力するだけで一括して体験できるようにまとめました。</p>
+    <p>忙しい日々の中で、ふと「今日の自分はどんな気分なんだろう」「どんな選択が自分らしいんだろう」と立ち止まりたくなる瞬間があります。そんなときに、星や数字、カードからの小さなヒントが、あなたの背中をそっと押してくれることを願って、このサイトを作りました。</p>
+
+    <h2>運営方針</h2>
+    <ul>
+      <li><strong>完全無料</strong>：すべての占い機能を登録不要・課金なしで提供します</li>
+      <li><strong>個人情報を集めない</strong>：生年月日は端末内（localStorage）に保存され、当サイトのサーバーや第三者に送信されることはありません</li>
+      <li><strong>エンタメ目的</strong>：占いはあくまで日々のセルフチェックや気分転換のためのツールです。結果を絶対視せず、参考情報としてお楽しみください</li>
+      <li><strong>広告について</strong>：サイト運営維持のため、Google AdSense による広告を掲載することがあります</li>
+    </ul>
+
+    <h2>占い結果の扱いについて</h2>
+    <p>当サイトの占い結果は、古典的な占術理論と独自のアルゴリズムに基づいて算出されています。同じ生年月日であれば、同じ日に同じ結果が表示されるように設計されていますが、毎日少しずつ変化するメッセージを返すようになっています。</p>
+    <p>結果はあくまでエンターテインメント目的であり、医学的・法的・経済的な判断の根拠としてご利用いただくものではありません。人生の重要な決断は、必ずご自身の判断と専門家の助言に基づいて行ってください。</p>
+
+    <h2>占いコンテンツ一覧</h2>
+    <p>当サイトでは、以下の占いの解説ページを用意しています。それぞれの占いの歴史や象徴体系について、より深く知りたいかたはぜひご覧ください。</p>
+
+    <div class="guide-links">
+      <a href="tarot-guide.html">タロット占いとは</a>
+      <a href="numerology-guide.html">数秘術とは</a>
+      <a href="sanmei-guide.html">算命学とは</a>
+      <a href="zero-guide.html">0学占いとは</a>
+      <a href="seiyou-guide.html">西洋占星術とは</a>
+    </div>
+
+    <h2>運営者情報</h2>
+    <p>当サイトは、個人の占い愛好者が運営する日本語の占いポータルです。運営者は長年さまざまな占術に親しんできた経験をもとに、初心者のかたでも迷わずに使えるシンプルな占いサイトを目指して制作しました。</p>
+    <p>サイト名：星の導き（ほしのみちびき）<br>
+    運営開始：2026年4月<br>
+    お問い合わせ：<a href="contact.html" style="color:var(--accent);">お問い合わせページ</a>よりお願いいたします</p>
+
+    <h2>免責事項</h2>
+    <p>当サイトに掲載された情報は、可能な限り正確を期していますが、内容の正確性・安全性・有用性についていかなる保証も行うものではありません。当サイトの利用により生じたいかなる損害についても、運営者は責任を負いかねます。</p>
+
+    <h2>関連ページ</h2>
+    <ul>
+      <li><a href="privacy.html" style="color:var(--accent);">プライバシーポリシー</a></li>
+      <li><a href="contact.html" style="color:var(--accent);">お問い合わせ</a></li>
+    </ul>
+
+    <p style="text-align:center; margin-top:32px;"><a href="index.html" style="color:var(--gold); font-size:1rem;">→ 占いを体験してみる</a></p>
+
+  </div>
+</main>
+
+<footer>
+  <p>&copy; 2026 星の導き</p>
+  <p style="margin-top:6px;"><a href="index.html">トップ</a> ｜ <a href="privacy.html">プライバシーポリシー</a> ｜ <a href="contact.html">お問い合わせ</a></p>
+</footer>
+
+</body>
+</html>
