@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>タロットスプレッド入門 - 1枚引き・3枚引き・ケルト十字の使い方 | 星の導き</title>
+  <meta name="description" content="タロット占いで使われる代表的なスプレッド（カードの並べ方）を初心者向けに解説。1枚引き・3枚引き・ヘキサグラム・ケルト十字など、目的別の使い分けを紹介します。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg:#0a0e1a; --card:#1a1e2e; --accent:#7ee8ff; --gold:#e8c96a; --text:#f0eede; --muted:#b0aec8; --border:#3a3a5a; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { background-color:#0a0e1a; background-image:url('bg.jpg'); background-size:cover; background-position:center; color:var(--text); font-family:'Shippori Mincho','Hiragino Mincho ProN','Yu Mincho',serif; min-height:100vh; line-height:1.85; }
+    .overlay { position:fixed; inset:0; background:rgba(5,8,20,0.82); z-index:0; pointer-events:none; }
+    header { position:relative; z-index:1; text-align:center; padding:40px 20px 20px; }
+    header h1 { font-size:1.6rem; color:var(--gold); letter-spacing:0.08em; }
+    header p { margin-top:8px; }
+    header a { color:var(--accent); text-decoration:none; font-size:0.9rem; }
+    header a:hover { text-decoration:underline; }
+    main { position:relative; z-index:1; max-width:820px; margin:0 auto; padding:40px 20px 80px; }
+    .card { background:rgba(26,30,46,0.92); border:1px solid var(--border); border-radius:12px; padding:40px; }
+    h2 { font-size:1.25rem; color:var(--gold); margin:36px 0 14px; padding-bottom:8px; border-bottom:1px solid var(--border); }
+    h2:first-child { margin-top:0; }
+    h3 { font-size:1.05rem; color:var(--accent); margin:22px 0 8px; }
+    p { font-size:0.95rem; margin-bottom:14px; }
+    ul, ol { padding-left:1.5em; margin-bottom:14px; }
+    li { font-size:0.95rem; margin-bottom:6px; }
+    .spread-box { border-left:3px solid var(--gold); padding:14px 18px; background:rgba(10,14,26,0.6); border-radius:4px; margin:14px 0; }
+    .spread-name { color:var(--gold); font-weight:700; font-size:1.05rem; margin-bottom:8px; }
+    .position-list { list-style:none; padding-left:0; margin:10px 0; }
+    .position-list li { padding:6px 0; border-bottom:1px dashed var(--border); font-size:0.9rem; }
+    .position-list li:last-child { border-bottom:none; }
+    .position-num { color:var(--accent); font-weight:700; margin-right:8px; }
+    footer { position:relative; z-index:1; text-align:center; padding:20px; color:var(--muted); font-size:0.8rem; }
+    footer a { color:var(--accent); }
+  </style>
+</head>
+<body>
+<div class="overlay"></div>
+
+<header>
+  <h1>タロットスプレッド入門</h1>
+  <p><a href="index.html">← 星の導き トップへ戻る</a></p>
+</header>
+
+<main>
+  <div class="card">
+
+    <h2>スプレッドとは</h2>
+    <p>「スプレッド」とは、タロットカードを占う際の <strong>カードの並べ方の決まりごと</strong> のことです。一枚一枚のカードがどの位置に置かれるかによって、それぞれ異なる意味を持ち、組み合わせることでより深く具体的な答えが導き出されます。</p>
+    <p>スプレッドには数え切れないほどの種類がありますが、ここでは初心者から経験者まで広く使われている代表的なものを紹介します。質問の内容や深さに応じて使い分けるのがコツです。</p>
+
+    <h2>1. ワンオラクル（1枚引き）</h2>
+
+    <div class="spread-box">
+      <div class="spread-name">ワンオラクル</div>
+      <p style="margin:0;">最もシンプルな占い方で、カード1枚だけで答えを得ます。「今日の運勢」「今このタイミングで自分が知るべきこと」など、シンプルな質問にぴったり。</p>
+    </div>
+
+    <p>当サイトの「星の導き」では、毎日変わるワンオラクルを楽しめます。複雑なスプレッドを学ぶ前の練習にも最適です。</p>
+    <p><strong>向いている質問例：</strong></p>
+    <ul>
+      <li>今日の私はどんな一日になる？</li>
+      <li>今、私が大切にすべきことは？</li>
+      <li>このまま進んでいいの？</li>
+    </ul>
+
+    <h2>2. スリーカード（3枚引き）</h2>
+
+    <div class="spread-box">
+      <div class="spread-name">スリーカード（時系列）</div>
+      <p style="margin-bottom:8px;">3枚を左から右へ並べ、それぞれ「過去・現在・未来」を表します。物事の流れを掴みやすい王道スプレッド。</p>
+      <ul class="position-list">
+        <li><span class="position-num">①</span>過去 — 今に至るまでの背景</li>
+        <li><span class="position-num">②</span>現在 — 今のあなたの状況や心境</li>
+        <li><span class="position-num">③</span>未来 — このまま進んだ場合の予測</li>
+      </ul>
+    </div>
+
+    <p>位置の意味は変えることもできます。たとえば「原因・現状・対策」「心・体・行動」「自分・相手・関係性」など、質問に合わせて柔軟に応用できるのが3枚引きの良いところです。</p>
+
+    <h2>3. ヘキサグラムスプレッド（6枚＋1枚）</h2>
+
+    <div class="spread-box">
+      <div class="spread-name">ヘキサグラム（六芒星）</div>
+      <p style="margin-bottom:8px;">六芒星の形に6枚を配置し、中央に総合を示す1枚を加える、計7枚のスプレッド。バランスの良い分析ができます。</p>
+      <ul class="position-list">
+        <li><span class="position-num">①</span>過去</li>
+        <li><span class="position-num">②</span>現在</li>
+        <li><span class="position-num">③</span>未来</li>
+        <li><span class="position-num">④</span>あなたの気持ち</li>
+        <li><span class="position-num">⑤</span>相手の気持ち（または周囲の状況）</li>
+        <li><span class="position-num">⑥</span>対策・アドバイス</li>
+        <li><span class="position-num">⑦</span>最終結果</li>
+      </ul>
+    </div>
+
+    <p>恋愛や仕事など、関係性や流れを多角的に見たいときに向いています。3枚引きでは物足りないけれど、いきなり10枚は難しい——という人にちょうどいい中級スプレッド。</p>
+
+    <h2>4. ケルト十字スプレッド（10枚）</h2>
+
+    <div class="spread-box">
+      <div class="spread-name">ケルト十字</div>
+      <p style="margin-bottom:8px;">タロット史上もっとも有名で奥深いスプレッド。10枚を使って質問の核心を多面的に読み解きます。</p>
+      <ul class="position-list">
+        <li><span class="position-num">①</span>現在の状況</li>
+        <li><span class="position-num">②</span>障害・課題</li>
+        <li><span class="position-num">③</span>顕在意識（自覚していること）</li>
+        <li><span class="position-num">④</span>潜在意識（無意識にあるもの）</li>
+        <li><span class="position-num">⑤</span>過去の影響</li>
+        <li><span class="position-num">⑥</span>近い未来</li>
+        <li><span class="position-num">⑦</span>本人の立場・姿勢</li>
+        <li><span class="position-num">⑧</span>周囲の影響・他者の視点</li>
+        <li><span class="position-num">⑨</span>希望と恐れ</li>
+        <li><span class="position-num">⑩</span>最終結果</li>
+      </ul>
+    </div>
+
+    <p>大きな決断や人生のターニングポイントなど、深い洞察が必要な質問に向いています。ただし読み解きにはある程度の経験が必要で、慣れるまで時間がかかります。</p>
+
+    <h2>5. ホースシュースプレッド（馬蹄形・7枚）</h2>
+
+    <div class="spread-box">
+      <div class="spread-name">ホースシュー</div>
+      <p style="margin-bottom:8px;">7枚を馬蹄（U字）形に並べる、見通しを立てたいときに便利なスプレッド。</p>
+      <ul class="position-list">
+        <li><span class="position-num">①</span>過去</li>
+        <li><span class="position-num">②</span>現在</li>
+        <li><span class="position-num">③</span>近い未来</li>
+        <li><span class="position-num">④</span>取るべき行動</li>
+        <li><span class="position-num">⑤</span>周囲の状況</li>
+        <li><span class="position-num">⑥</span>障害</li>
+        <li><span class="position-num">⑦</span>最終結果</li>
+      </ul>
+    </div>
+
+    <p>ケルト十字より少しシンプルで、「これからどう動くべきか」を考えるときに使いやすいスプレッドです。</p>
+
+    <h2>スプレッドの選び方</h2>
+    <p>スプレッド選びに迷ったら、以下を目安にしてみてください。</p>
+    <ul>
+      <li><strong>シンプルな日常の問い</strong> → ワンオラクル</li>
+      <li><strong>流れを知りたい</strong> → スリーカード</li>
+      <li><strong>多角的に見たい</strong> → ヘキサグラム</li>
+      <li><strong>大きな決断・深い悩み</strong> → ケルト十字</li>
+      <li><strong>これから取るべき行動が知りたい</strong> → ホースシュー</li>
+    </ul>
+
+    <h2>占うときのコツ</h2>
+    <ol>
+      <li><strong>質問を具体的にする</strong>：「恋愛運は？」より「Aさんとの関係はこれからどうなる？」のように絞り込む</li>
+      <li><strong>同じ質問を繰り返さない</strong>：納得いかなくても、すぐに引き直さない（メッセージが曖昧になる）</li>
+      <li><strong>カードを引く前に深呼吸</strong>：心を静めてから集中する</li>
+      <li><strong>直感を大切に</strong>：意味の本に書いてあることだけに頼らず、カードを見て感じたことも大切に</li>
+      <li><strong>記録をつける</strong>：その日に引いたカードと感じたことをノートに残すと、自分なりの解釈が育っていきます</li>
+    </ol>
+
+    <h2>当サイトでのタロット体験</h2>
+    <p>「星の導き」では、毎日のワンオラクルを気軽に楽しめます。スプレッドはまだ実装されていませんが、まずは1枚引きから始めて、タロットに親しんでいただければ嬉しいです。</p>
+
+    <p style="text-align:center; margin-top:32px;"><a href="index.html" style="color:var(--gold); font-size:1rem;">→ 今日のタロットを引いてみる</a></p>
+
+  </div>
+</main>
+
+<footer>
+  <p style="margin-bottom:12px;"><a href="index.html" style="color:var(--gold);font-size:0.95rem;">← 星の導き トップへ戻る</a></p>
+  <p>&copy; 2026 星の導き</p>
+  <p style="margin-top:6px;"><a href="about.html">このサイトについて</a> ｜ <a href="privacy.html">プライバシーポリシー</a> ｜ <a href="contact.html">お問い合わせ</a></p>
+</footer>
+
+</body>
+</html>
